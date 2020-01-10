@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ClubRoutingModule } from './club-routing.module';
+
 import { ClubComponent } from './club.component';
 
 @NgModule({
@@ -9,8 +10,8 @@ import { ClubComponent } from './club.component';
     ClubComponent
   ],
   imports: [
-    CommonModule,
-    ClubRoutingModule
+    ClubRoutingModule,
+    SharedModule
   ]
 })
 export class ClubModule { }

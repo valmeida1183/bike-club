@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ShoppingRouterModule} from './shopping-router.module';
+
 import { ShoppingComponent } from './shopping.component';
 
 @NgModule({
@@ -9,7 +10,7 @@ import { ShoppingComponent } from './shopping.component';
     ShoppingComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     ShoppingRouterModule
   ]
 })

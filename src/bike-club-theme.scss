@@ -1,0 +1,91 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+
+$mat-bike-club-blue-gray: (
+  50: #e6e9ed,
+  100: #c0c8d3,
+  200: #98a4b5,
+  300: #738197,
+  400: #566783,
+  500: #394f72,
+  600: #33486a,
+  700: #2b3e5f,
+  800: #253552,
+  900: #162541,
+  A100: #a9b6fc,
+  A200: #8b9bf8,
+  A400: #637afd,
+  A700: #4b62e7,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$mat-bike-club-red: (
+  50: #f8e9e8,
+  100: #faccbf,
+  200: #f7ac96,
+  300: #f48c6c,
+  400: #f3744d,
+  500: #f25e30,
+  600: #e7582c,
+  700: #d95128,
+  800: #cb4b25,
+  900: #b0401f,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$bike-club-primary: mat-palette($mat-bike-club-blue-gray);
+$bike-club-accent:  mat-palette($mat-bike-club-red);
+// The warn palette is optional (defaults to red).
+$bike-club-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$bike-club-theme: mat-light-theme($bike-club-primary, $bike-club-accent, $bike-club-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+
+@include angular-material-theme($bike-club-theme);

@@ -1,0 +1,81 @@
+@import '../../colors';
+
+/* .auth-container {
+    height: 100%;
+    padding: 20px;
+
+    .auth-content {
+        border: solid 5px $primary;
+        background-color: white;
+        border-radius: 10px; 
+        padding: 20px;
+        min-height: 500px;
+        position: relative; 
+    }   
+
+    .auth-logo-container { 
+        img.auth-logo {
+            position: absolute;
+            top: -155px;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}
+
+@media(max-width: 599px) {
+    .auth-container {
+        padding: 0;
+        padding-top: 35%;
+
+        .auth-content {
+            border: none;
+            border-top: solid 5px $primary;
+            border-radius: 0;
+            padding: 10px;
+            min-height: 100%;
+        }
+
+        .auth-logo-container { 
+            img.auth-logo {
+                position: absolute;
+                top: -155px;
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    }
+} */
+
+.toolbar-logo{
+    width: 250px;
+    height: 250px;
+    position: relative;
+    top: 115px;
+    left: 25px;
+    -webkit-filter: drop-shadow(0 0 0.35rem #222);
+    filter: drop-shadow(0 0 0.35rem #222);
+    z-index: 1;
+}
+
+.toolbar-logo-text {
+    font-family: Seaweed Script;
+    font-size: 1.8em;
+    color: $background;
+    text-shadow: 2px 4px 5px rgba(15,6,4,0.6);
+}
+
+.toolbar-second-row {
+    background-color: $secondary;
+    border-top: dotted 3px white;
+    border-bottom: dotted 3px white;
+}
+
+.toolbar-third-row {
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+

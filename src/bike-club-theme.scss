@@ -73,13 +73,46 @@ $mat-bike-club-red: (
   )
 );
 
+$mat-bike-club-dark-red: (
+  50: #fce9ec,
+  100: #f7c8cd,
+  200: #e29192,
+  300: #d36869,
+  400: #da4646,
+  500: #dc322c,
+  600: #cd282b,
+  700: #bc1e26,
+  800: #af161f,
+  900: #a00714,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $bike-club-primary: mat-palette($mat-bike-club-blue-gray);
 $bike-club-accent:  mat-palette($mat-bike-club-red);
 // The warn palette is optional (defaults to red).
-$bike-club-warn:    mat-palette($mat-red);
+$bike-club-warn:    mat-palette($mat-bike-club-dark-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $bike-club-theme: mat-light-theme($bike-club-primary, $bike-club-accent, $bike-club-warn);

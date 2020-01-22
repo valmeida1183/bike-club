@@ -1,12 +1,4 @@
 <router-outlet></router-outlet> 
-
-<!-- <div fxLayout="row" 
-     fxLayout.xs="column" 
-     fxLayoutAlign="start start" 
-     fxLayoutAlign.xs="center start">
-    <router-outlet></router-outlet>    
-</div> -->
-
-<!-- <button mat-raised-button color="primary">Click Me</button>
-<button mat-raised-button color="accent">Click Me</button>
-<button mat-raised-button color="warn">Click Me</button> -->
+<div class="backdrop" *ngIf="isLoading" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+</div> 

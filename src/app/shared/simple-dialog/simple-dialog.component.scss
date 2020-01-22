@@ -1,0 +1,52 @@
+@import '../../../variables';
+
+.simple-dialog {
+    .mat-dialog-container {
+        border: double 5px;
+        border-radius: 10px;
+
+        .mat-dialog-title {
+            font-family: $default-font;;
+        }
+
+        .mat-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 40px;
+        }
+
+        h3 {
+            margin: 0 15px;
+        }
+    }
+}
+
+.error-dialog {
+    .mat-dialog-container {
+       border-color: $warn;
+
+        .mat-icon {
+            color: $warn;           
+        }
+    }
+}
+
+.warning-dialog {
+    .mat-dialog-container {
+        border-color: $warning;
+
+        .mat-icon {
+            color: $warning;           
+        }
+    }
+}
+
+.info-dialog {
+    .mat-dialog-container {
+        border-color: $primary;
+
+        .mat-icon {
+            color: $primary;           
+        }
+    }
+}

@@ -1,48 +1,21 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <div fxHide.lt-sm="true">
+    <mat-toolbar-row class="grain" fxLayoutAlign="center flex-start" fxLayoutAlign.lt-md="center center">
+        <div fxHide.lt-md="true" fxFlex="0 1 0">
             <img class="toolbar-logo" src="../../assets/images/BikeClub_Logo_small.png" alt="Logo">
         </div>
-        <div class="toolbar-logo-text" fxHide.gt-xs="true">
+        <div class="toolbar-logo-text" fxHide.gt-sm="true">
             <span>Bike Club</span>
-        </div>
-        
+        </div>        
     </mat-toolbar-row>
-    <mat-toolbar-row class="toolbar-second-row grain" fxLayout="row" fxLayoutAlign.lt-sm="center center" fxLayoutAlign="flex-end center">        
+    <mat-toolbar-row class="toolbar-second-row grain" fxLayout="row" fxLayoutAlign.lt-md="center center" fxLayoutAlign="flex-end center">        
         <span>
-          <a mat-button mat-raised-button routerLink="login" routerLinkActive="active">Log in</a>
-          <a mat-button mat-raised-button color="primary" routerLink="register" routerLinkActive="active">Register</a>
+          <a mat-button mat-raised-button color="primary" routerLink="/login" routerLinkActive="mat-accent">Login</a>
+          <a mat-button mat-raised-button color="primary" routerLink="/register" routerLinkActive="mat-accent">Register</a>
         </span>
     </mat-toolbar-row>
-    <mat-toolbar-row class="toolbar-third-row dot-background">
+    <mat-toolbar-row class="toolbar-third-row grain">
     </mat-toolbar-row>
-  </mat-toolbar>
+  </mat-toolbar>  
   <div>
     <router-outlet></router-outlet>
   </div>
-  
-
-<!-- <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-
-https://www.positronx.io/create-login-ui-template-with-angular-8-material-design/
-
-    <mat-card class="box">
-      <mat-card-header>
-        <mat-card-title>Log in</mat-card-title>
-      </mat-card-header>
-  
-      <form class="example-form">
-        <mat-card-content>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username">
-          </mat-form-field>
-  
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password">
-          </mat-form-field>
-        </mat-card-content>
-        <button mat-stroked-button color="accent" class="btn-block">Log in</button>
-      </form>
-    </mat-card>
-  
-  </div> -->

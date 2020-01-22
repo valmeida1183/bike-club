@@ -4,16 +4,16 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/main', pathMatch: 'full'},
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'main',
     component: MainComponent,
     children: [
       // Para ativar o lazy load é preciso apontar a rota e o path do arquivo do módulo que será carregado
-      { path: 'club', loadChildren: './main/main-nav/club/club.module#ClubModule' },
-      { path: 'shopping', loadChildren: './main/main-nav/shopping/shopping.module#ShoppingModule' },
+      { path: 'club', loadChildren: () => import('./main/main-nav/club/club.module').then(m => m.ClubModule) },
+      { path: 'shopping', loadChildren: () => import('./main/main-nav/shopping/shopping.module').then(m => m.ShoppingModule) }
     ]
   },
-  { path: 'auth', loadChildren: './auth/auth.module#AuthModule' }
+  { path: '', loadChildren: './auth/auth.module#AuthModule' }
 ];
 
 @NgModule({

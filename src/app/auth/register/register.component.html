@@ -47,7 +47,7 @@
                     <mat-label>Gender</mat-label>
                     <mat-select ngModel required #gender="ngModel" name="gender">
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let gender of genders" value="gender.gender">
+                        <mat-option *ngFor="let gender of genders" [value]="gender.gender">
                             {{gender.description}}
                         </mat-option>
                     </mat-select>

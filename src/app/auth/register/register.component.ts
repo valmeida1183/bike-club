@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import { User } from 'src/app/models/user.model';
 import { AuthService } from '../auth.service';
@@ -21,7 +22,10 @@ export class RegisterComponent implements OnInit {
     { gender: 'F', description: 'Female'}
   ];
 
-  constructor(private authService: AuthService, private dialog: MatDialog, private spinnerService: SpinnerService) { }
+  constructor(private authService: AuthService,
+              private dialog: MatDialog,
+              private router: Router,
+              private spinnerService: SpinnerService) { }
 
   ngOnInit() {
   }
@@ -33,12 +37,12 @@ export class RegisterComponent implements OnInit {
 
     this.spinnerService.showSpinner();
     const { name, lastName, email, password, gender, phone } = this.form.value;
-    const user = new User(null, name, lastName, email, password, gender, phone, 'Client');
+    const user = new User(null, name, lastName, email, password, gender, phone, 'Biker');
 
     this.authService.signup(user).subscribe(response => {
       console.log(response);
-      // TODO criar a entidade user no banco e redirecionar para a main
       this.spinnerService.hideSpinner();
+      this.router.navigate(['/main']);
     }, errorMessage => {
       this.openErrorDialog(errorMessage);
       this.spinnerService.hideSpinner();

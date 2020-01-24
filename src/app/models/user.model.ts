@@ -8,9 +8,7 @@ export class User {
                 public password: string,
                 public gender: string,
                 public phone: string,
-                public userType: string,
-                private token?: string,
-                private tokenExpirationDate?: Date) { }
+                public userType: string) { }
 
     get address() {
         return this.address;
@@ -20,7 +18,7 @@ export class User {
         this.address = value;
     }
 
-    get currentToken() {
+    /* get currentToken() {
         if (!this.tokenExpirationDate || new Date() > this.tokenExpirationDate) {
             return null;
         }
@@ -34,5 +32,5 @@ export class User {
 
     set currentTokenExpirationDate(value: Date) {
         this.tokenExpirationDate = value;
-    }
+    } */
 }

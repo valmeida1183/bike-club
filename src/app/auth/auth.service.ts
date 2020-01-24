@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError, Subject } from 'rxjs';
+import { catchError, tap, map, switchMap, concatMap, mergeMap } from 'rxjs/operators';
+import { throwError, Subject, forkJoin } from 'rxjs';
 
 import { IAuthResponseData } from '../models/auth/IAuthResponseData';
 import { AuthRequestData } from '../models/auth/authRequestData';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
+import { AuthUserData } from '../models/auth/authUserData';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  user = new Subject<User>();
+  authUserDataSubject = new Subject<AuthUserData>();
   private singUpUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseApiKey}`;
   private signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseApiKey}`;
+  private userUrl = `https://bike-club-cf635.firebaseio.com/users.json`;
 
   constructor(private http: HttpClient) { }
 
@@ -22,30 +24,50 @@ export class AuthService {
       new AuthRequestData(user.email, user.password, true)
     ).pipe(
       catchError(this.handleAuthError),
-      tap(response => {
-        this.handleAuthentication(response, user);
+      tap(authResponseData => {
+        this.createUser(user);
+        this.handleAuthentication(authResponseData, user);
       })
     );
   }
 
   signIn(email: string, password: string) {
-    return this.http.post<IAuthResponseData>(
+    const signIn$ = this.http.post<IAuthResponseData>(this.signInUrl, new AuthRequestData(email, password, true));
+    const user$ = signIn$.pipe(switchMap(authResponseData => this.getUser(authResponseData.email)));
+
+    // Vai unir os dois observables passará para o stream de dados um array contendo os dois responses de cada observable.
+    return forkJoin(signIn$, user$).pipe(
+      catchError(this.handleAuthError),
+      tap(multipleResponse => {
+        this.handleAuthentication(multipleResponse[0], multipleResponse[1]);
+      })
+    );
+
+    /* return this.http.post<IAuthResponseData>(
       this.signInUrl,
       new AuthRequestData(email, password, true)
     ).pipe(
-      catchError(this.handleAuthError)
-    );
+      catchError(this.handleAuthError),
+      mergeMap(authResponseData => {
+        return this.getUser(authResponseData.email);
+      }),
+      tap(authResponseData => {
+        console.log(authResponseData);
+        // this.handleAuthentication(authResponseData);
+      }),
+     /*  switchMap(authResponseData => {
+        return this.getUser(authResponseData.email);
+      }),
+    ); */
   }
 
-  private handleAuthentication(responseData: IAuthResponseData, user: User) {
+  private handleAuthentication(authResponseData: IAuthResponseData, user: User) {
     const currentTime = new Date().getTime();
-    const expirationDate = new Date(currentTime + (+responseData.expiresIn * 1000));
+    const expirationDate = new Date(currentTime + (+authResponseData.expiresIn * 1000));
+    const authUserData = new AuthUserData(authResponseData.email,
+      authResponseData.localId, user.userType, authResponseData.idToken, expirationDate);
 
-    user.userId = responseData.localId;
-    user.currentToken = responseData.idToken;
-    user.currentTokenExpirationDate = expirationDate;
-
-    this.user.next(user);
+    this.authUserDataSubject.next(authUserData);
   }
 
   private handleAuthError(errorResponse: HttpErrorResponse) {
@@ -70,23 +92,13 @@ export class AuthService {
     return throwError(handledErrorMessage);
   }
 
-  /*  signup(email: string, password: string) {
-    return this.http.post<AuthResponseData>(
-      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseApiKey}`,
-      {
-        email,
-        password,
-        returnSecureToken: true
-      }
-    ).pipe(
-      // usando o operador catchError para capturar erros
-      catchError(this.handleError),
-      // Relembrando... o operador tap não interrompe, bloqueia ou altera o "observable chain",
-      ele simplesmente permite rodar algum código com os dados retornados do observalbe./
-      tap(responseData => {
-        this.handleAuthentication(responseData);
-      })
-    );
+  private createUser(user: User) {
+    this.http.post(this.userUrl, user).subscribe(response => {
+      console.log(response);
+    });
   }
-  */
+
+  private getUser(email: string) {
+    return this.http.get<User>(`${this.userUrl}?orderBy="email"&equalTo="${email}"`);
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
@@ -15,7 +16,10 @@ export class LoginComponent implements OnInit {
   @ViewChild('form', { static: false }) form: NgForm;
   isLoading = false;
 
-  constructor(private authService: AuthService, private dialog: MatDialog, private spinnerService: SpinnerService) { }
+  constructor(private authService: AuthService,
+              private dialog: MatDialog,
+              private router: Router,
+              private spinnerService: SpinnerService) { }
 
   ngOnInit() {
   }
@@ -30,6 +34,7 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(email, password).subscribe(response => {
       console.log(response);
       this.spinnerService.hideSpinner();
+      this.router.navigate(['/main']);
     }, errorMessage => {
       this.openErrorDialog(errorMessage);
       this.spinnerService.hideSpinner();

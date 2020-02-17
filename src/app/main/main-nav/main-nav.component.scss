@@ -1,5 +1,8 @@
+@import '../../../variables';
+
 .sidenav-container {
   height: 100%;
+  z-index: 0;
 }
 
 .sidenav {
@@ -14,4 +17,30 @@
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.toolbar-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;  
+}
+
+.toolbar-second-row {  
+  background-color: $secondary;
+  border-bottom: double 5px white;
+  border-top: double 5px white;  
+  box-shadow: $container-shadow;
+  height: 40px;  
+}
+
+.main-logo {
+  margin-top: 100px;
+  -webkit-filter: $logo-shadow;
+  filter: $logo-shadow; 
+  z-index: 1;
+}
+
+.flex-spacer {
+  flex-grow: 1;
 }

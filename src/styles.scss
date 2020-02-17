@@ -2,24 +2,30 @@
 //@import '~bootstrap/dist/css/bootstrap.min.css'; 
 @import './variables';
 
-
-
 html, body { height: 100%; }
 body { 
     margin: 0; 
-    font-family: $default-font;
-    background-color: $background;
+    font-family: $default-font;    
     @extend .dot-background;   
 }
 
 /* background textures */
 .dot-background {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23566783' fill-opacity='0.63' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    background-color: $background;
+    background-image: $dotted-image;
 }
 
 .grain {
     background-image: url("assets/images/grain.png");
     background-repeat: repeat;
+}
+
+/* Logo text */
+.logo-text {
+    font-family: $logo-font;
+    font-size: 2.25em;
+    color: $background;
+    text-shadow: 2px 4px 5px rgba(15,6,4,0.6);
 }
 
 /* Inputs and Forms */

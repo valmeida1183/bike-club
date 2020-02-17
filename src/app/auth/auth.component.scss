@@ -2,15 +2,8 @@
 
 .toolbar-logo{
     padding-top: 25px;
-    -webkit-filter: drop-shadow(0 0 0.35rem #222);
-    filter: drop-shadow(0 0 0.35rem #222);    
-}
-
-.toolbar-logo-text {
-    font-family: Seaweed Script;
-    font-size: 2.25em;
-    color: $background;
-    text-shadow: 2px 4px 5px rgba(15,6,4,0.6);
+    -webkit-filter: $logo-shadow;
+    filter: $logo-shadow;    
 }
 
 .toolbar-second-row {

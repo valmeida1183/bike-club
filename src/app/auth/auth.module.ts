@@ -7,6 +7,8 @@ import { AuthComponent } from './auth.component';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,9 @@ import { RegisterComponent } from './register/register.component';
     CommonModule,
     FormsModule,
     SharedModule
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

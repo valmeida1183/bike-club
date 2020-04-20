@@ -1,0 +1,11 @@
+@import "../../../variables";
+
+h1.screen-title {
+    font-size: 2em;
+    color: $primary;
+    text-shadow: 2px 4px 5px #fff;
+}
+
+hr.title-spacer {
+    border: solid 2px $secondary;
+}

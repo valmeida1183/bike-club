@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap, map, switchMap, concatMap, mergeMap } from 'rxjs/operators';
-import { throwError, Subject, forkJoin } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { catchError, tap, switchMap, map } from 'rxjs/operators';
+import { throwError, Subject, forkJoin, BehaviorSubject } from 'rxjs';
 
 import { IAuthResponseData } from '../models/auth/IAuthResponseData';
 import { AuthRequestData } from '../models/auth/authRequestData';
@@ -11,21 +12,24 @@ import { AuthUserData } from '../models/auth/authUserData';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  authUserDataSubject = new Subject<AuthUserData>();
+  authUserDataSubject = new BehaviorSubject<AuthUserData>(null);
+  userSubject = new BehaviorSubject<User>(null);
+
   private singUpUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseApiKey}`;
   private signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseApiKey}`;
   private userUrl = `https://bike-club-cf635.firebaseio.com/users.json`;
+  private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  signup(user: User) {
+  signUp(user: User) {
     return this.http.post<IAuthResponseData>(
       this.singUpUrl,
       new AuthRequestData(user.email, user.password, true)
     ).pipe(
       catchError(this.handleAuthError),
       tap(authResponseData => {
-        this.createUser(user);
+        this.createUser(user, authResponseData.idToken);
         this.handleAuthentication(authResponseData, user);
       })
     );
@@ -33,7 +37,7 @@ export class AuthService {
 
   signIn(email: string, password: string) {
     const signIn$ = this.http.post<IAuthResponseData>(this.signInUrl, new AuthRequestData(email, password, true));
-    const user$ = signIn$.pipe(switchMap(authResponseData => this.getUser(authResponseData.email)));
+    const user$ = signIn$.pipe(switchMap(authResponseData => this.getUser(authResponseData.email, authResponseData.idToken)));
 
     // Vai unir os dois observables passará para o stream de dados um array contendo os dois responses de cada observable.
     return forkJoin(signIn$, user$).pipe(
@@ -42,32 +46,68 @@ export class AuthService {
         this.handleAuthentication(multipleResponse[0], multipleResponse[1]);
       })
     );
+  }
 
-    /* return this.http.post<IAuthResponseData>(
-      this.signInUrl,
-      new AuthRequestData(email, password, true)
-    ).pipe(
-      catchError(this.handleAuthError),
-      mergeMap(authResponseData => {
-        return this.getUser(authResponseData.email);
-      }),
-      tap(authResponseData => {
-        console.log(authResponseData);
-        // this.handleAuthentication(authResponseData);
-      }),
-     /*  switchMap(authResponseData => {
-        return this.getUser(authResponseData.email);
-      }),
-    ); */
+  autoSignIn() {
+    const storedUserData = JSON.parse(localStorage.getItem('bikeClubAuthUserData'));
+
+    if (!storedUserData) {
+      return;
+    }
+
+    const authUserData = new AuthUserData(storedUserData.email, storedUserData.id,
+      storedUserData.role, storedUserData.token, new Date(storedUserData.tokenExpirationDate));
+
+    if (authUserData.currentToken) {
+      this.authUserDataSubject.next(authUserData);
+      this.getUser(authUserData.email, authUserData.currentToken).subscribe(user => {
+        this.userSubject.next(user);
+      });
+
+      // caulcula o tempo restante que o token do user do localstorage está válido. (pois pode ter se logado a bastante tempo).
+      const expirationDuration =
+        new Date(storedUserData.tokenExpirationDate).getTime() -
+        new Date().getTime();
+
+      this.autoLogout(expirationDuration);
+
+      if (this.router.url === '/') {
+        this.router.navigate(['/shopping']);
+      }
+    }
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
+  logout() {
+    this.authUserDataSubject.next(null);
+    this.userSubject.next(null);
+
+    this.router.navigate(['/login']);
+
+    localStorage.removeItem('bikeClubAuthUserData');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
   }
 
   private handleAuthentication(authResponseData: IAuthResponseData, user: User) {
     const currentTime = new Date().getTime();
     const expirationDate = new Date(currentTime + (+authResponseData.expiresIn * 1000));
     const authUserData = new AuthUserData(authResponseData.email,
-      authResponseData.localId, user.userType, authResponseData.idToken, expirationDate);
+      authResponseData.localId, user.role, authResponseData.idToken, expirationDate);
 
     this.authUserDataSubject.next(authUserData);
+    this.userSubject.next(user);
+
+    this.autoLogout(+authResponseData.expiresIn * 1000);
+
+    localStorage.setItem('bikeClubAuthUserData', JSON.stringify(authUserData));
   }
 
   private handleAuthError(errorResponse: HttpErrorResponse) {
@@ -92,13 +132,25 @@ export class AuthService {
     return throwError(handledErrorMessage);
   }
 
-  private createUser(user: User) {
-    this.http.post(this.userUrl, user).subscribe(response => {
+  private createUser(user: User, token: string) {
+    this.http.post(
+      this.userUrl,
+      user,
+      { params: new HttpParams().set('auth', token) }
+    ).subscribe(response => {
       console.log(response);
     });
   }
 
-  private getUser(email: string) {
-    return this.http.get<User>(`${this.userUrl}?orderBy="email"&equalTo="${email}"`);
+  private getUser(email: string, token: string) {
+    return this.http.get<User>(
+      `${this.userUrl}?orderBy="email"&equalTo="${email}"`,
+      { params: new HttpParams().set('auth', token) })
+      .pipe(
+        map(user => {
+          const userId = Object.keys(user)[0];
+          return user[userId];
+        })
+      );
   }
 }

@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from '../auth.service';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { SpinnerService } from 'src/app/shared/spinner.service';
+import { Role } from 'src/app/models/auth/role.model';
 
 @Component({
   selector: 'bc-register',
@@ -37,12 +38,12 @@ export class RegisterComponent implements OnInit {
 
     this.spinnerService.showSpinner();
     const { name, lastName, email, password, gender, phone } = this.form.value;
-    const user = new User(null, name, lastName, email, password, gender, phone, 'Biker');
+    const user = new User(null, name, lastName, email, password, gender, phone, Role.Biker);
 
-    this.authService.signup(user).subscribe(response => {
+    this.authService.signUp(user).subscribe(response => {
       console.log(response);
       this.spinnerService.hideSpinner();
-      this.router.navigate(['/main']);
+      this.router.navigate(['/shopping']);
     }, errorMessage => {
       this.openErrorDialog(errorMessage);
       this.spinnerService.hideSpinner();

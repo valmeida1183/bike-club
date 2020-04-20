@@ -25,11 +25,13 @@ import {
   MAT_DIALOG_DEFAULT_OPTIONS
 } from '@angular/material';
 import { SimpleDialogComponent } from './simple-dialog/simple-dialog.component';
+import { TitleComponent } from './title/title.component';
 
 @NgModule({
-  declarations: [SimpleDialogComponent],
+  declarations: [SimpleDialogComponent, TitleComponent],
   entryComponents: [
-    SimpleDialogComponent
+    SimpleDialogComponent,
+    TitleComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { SimpleDialogComponent } from './simple-dialog/simple-dialog.component';
     MatTooltipModule,
     MatTableModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TitleComponent
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS,

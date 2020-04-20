@@ -23,7 +23,22 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;  
+  right: 0;
+  
+  .header-link {
+    color: white;
+    cursor: pointer;
+    background-color: transparent;
+
+    &:hover {
+      color: $secondary;      
+    }
+    
+    &.header-link-active {
+      border: 1px solid white;
+      color: $secondary;
+    }
+  }
 }
 
 .toolbar-second-row {  

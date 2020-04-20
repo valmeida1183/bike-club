@@ -20,6 +20,9 @@ body {
     background-repeat: repeat;
 }
 
+.simple-background {
+    background-color: $background;
+}
 /* Logo text */
 .logo-text {
     font-family: $logo-font;
@@ -40,6 +43,15 @@ form {
     }
 }
 
+// Commom Screen Classes 
+.main-container {
+    padding: 25px;
+}
+
+.main-content {
+    //@extend .simple-background;
+    background-color: rgb(255, 255, 255, 0.5);
+}
 // Material desgin personalizations -- // Todo passar para um arquivo scss separado.
 
 .mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button, .mat-fab, .mat-mini-fab {

@@ -10,7 +10,7 @@ import { SpinnerService } from 'src/app/shared/spinner.service';
 @Component({
   selector: 'bc-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss', '../auth.component.scss']
+  styleUrls: ['../auth.component.scss']
 })
 export class LoginComponent implements OnInit {
   @ViewChild('form', { static: false }) form: NgForm;
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(email, password).subscribe(response => {
       console.log(response);
       this.spinnerService.hideSpinner();
-      this.router.navigate(['/main']);
+      this.router.navigate(['/shopping']);
     }, errorMessage => {
       this.openErrorDialog(errorMessage);
       this.spinnerService.hideSpinner();

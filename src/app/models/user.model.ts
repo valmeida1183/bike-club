@@ -1,4 +1,5 @@
 import { Address } from './address.model';
+import { Role } from './auth/role.model';
 
 export class User {
     constructor(public userId: string,
@@ -8,7 +9,7 @@ export class User {
                 public password: string,
                 public gender: string,
                 public phone: string,
-                public userType: string) { }
+                public role: Role) { }
 
     get address() {
         return this.address;
@@ -17,20 +18,4 @@ export class User {
     set address(value: Address) {
         this.address = value;
     }
-
-    /* get currentToken() {
-        if (!this.tokenExpirationDate || new Date() > this.tokenExpirationDate) {
-            return null;
-        }
-
-        return this.token;
-    }
-
-    set currentToken(value: string) {
-        this.token = value;
-    }
-
-    set currentTokenExpirationDate(value: Date) {
-        this.tokenExpirationDate = value;
-    } */
 }

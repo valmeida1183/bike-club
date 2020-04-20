@@ -1,7 +1,9 @@
+import { Role } from './role.model';
+
 export class AuthUserData {
     constructor(public email: string,
                 public id: string,
-                public userType: string,
+                public role: Role,
                 private token: string,
                 private tokenExpirationDate: Date) { }
 

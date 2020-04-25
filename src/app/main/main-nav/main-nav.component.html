@@ -7,13 +7,13 @@
     <div class="logo-text" fxHide.gt-sm>
       <span>Bike Club</span>
     </div>
-    <div>
+    <div fxHide.lt-md>
       <a class="header-link" mat-flat-button routerLink="/shopping" routerLinkActive="header-link-active">Shopp</a>
       <a class="header-link" mat-flat-button routerLink="/club" routerLinkActive="header-link-active">Club</a>
       <a class="header-link" mat-flat-button routerLink="/about" routerLinkActive="header-link-active">About</a>
     </div>    
-    <div class="flex-spacer" fxHide.lt-md></div>
-    <div>
+    <div class="flex-spacer"></div>
+    <div fxHide.lt-md>
       <a class="header-link" type="button" aria-label="Profile" mat-icon-button routerLink="/about" title="Profile">
         <mat-icon>person</mat-icon>        
       </a>    

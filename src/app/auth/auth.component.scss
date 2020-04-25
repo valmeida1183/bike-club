@@ -3,7 +3,9 @@
 .toolbar-logo{
     padding-top: 25px;
     -webkit-filter: $logo-shadow;
-    filter: $logo-shadow;    
+    filter: $logo-shadow;
+    width: 325px;
+    height: 325px;    
 }
 
 .toolbar-second-row {

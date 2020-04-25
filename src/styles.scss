@@ -26,7 +26,7 @@ body {
 /* Logo text */
 .logo-text {
     font-family: $logo-font;
-    font-size: 2.25em;
+    font-size: 2.1em;
     color: $background;
     text-shadow: 2px 4px 5px rgba(15,6,4,0.6);
 }
@@ -50,7 +50,7 @@ form {
 
 .main-content {
     //@extend .simple-background;
-    background-color: rgb(255, 255, 255, 0.5);
+    background-color: rgb(255, 255, 255, 0.7);
 }
 // Material desgin personalizations -- // Todo passar para um arquivo scss separado.
 

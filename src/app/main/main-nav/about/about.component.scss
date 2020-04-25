@@ -1,16 +1,30 @@
-.about-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+@import "../../../../variables";
 
-    * {
+.about-container {
+    /* display: flex;
+    flex-direction: row;
+    align-items: flex-start; */    
+        
+    > * {
         margin: 10px;
         padding: 20px;
     }
     
-    img.about-banner {
-        max-width: 300px;
-        width: 100%;
-        height: auto;        
+    figure {
+        margin: 0;
+        border: solid 2px $secondary;
+        .about-banner {
+           max-width: 100%;
+           max-height: 100%;
+           object-fit: contain;   
+        }
+        figcaption {
+            text-align: center;
+            color: $secondary;
+        } 
+    }    
+    
+    p {
+      width: 75%;
     }
 }

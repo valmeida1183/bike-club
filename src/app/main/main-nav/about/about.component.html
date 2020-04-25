@@ -1,8 +1,14 @@
 <div class="main-container">
     <bc-title [title]="'About'"></bc-title>
     <div class="main-content">
-        <div class="about-container">
-            <img class="about-banner" src="../../../../assets/images/Art_Background.jpg" alt="banner">
+        <div class="about-container" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start start">
+            <div>
+                <figure fxflex="25%">
+                     <img class="about-banner" src="../../../../assets/images/Art_Background.jpg" alt="banner">
+                    <figcaption>Bike Art</figcaption>
+                </figure>
+            </div>
+           
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla porro aut, quo ullam illum corrupti 
                officia praesentium saepe ut officiis ducimus dolore libero sint ratione fugit non esse quos facilis 
                obcaecati harum nobis dicta? Repellendus sapiente optio non eaque ipsam natus, ea aliquid omnis perferendis 
@@ -18,8 +24,6 @@
                Provident voluptate magni corrupti odit tempora eligendi incidunt maiores.
             </p>
         </div>
-        
-
     </div>
 </div>
 

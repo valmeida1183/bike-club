@@ -1,9 +1,9 @@
 <mat-toolbar color="primary" class="toolbar-header">
-  <mat-toolbar-row class="grain" fxLayoutAlign="flex-start center" fxLayoutGap="20px">
-    <img class="main-logo" src="../../assets/images/BikeClub_Logo_small.png" alt="Logo" width="150px" height="150px" fxHide.lt-md>
+  <mat-toolbar-row class="grain" fxLayoutAlign="flex-start center" fxLayoutGap="20px">    
     <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-    </button>     
+    </button>
+    <img class="main-logo" src="../../assets/images/BikeClub_Logo_small.png" alt="Logo" width="150px" height="150px" fxHide.lt-md>     
     <div class="logo-text" fxHide.gt-sm>
       <span>Bike Club</span>
     </div>

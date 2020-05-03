@@ -1,0 +1,12 @@
+@import "../../../variables";
+
+.mat-expansion-panel {
+    border: double 4px $primary;
+
+    h2.panel-title {
+        font-size: 1.3em;
+        font-family: $default-font;
+        color: $secondary;
+    }
+}
+

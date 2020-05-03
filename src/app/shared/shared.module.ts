@@ -22,13 +22,17 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
-  MAT_DIALOG_DEFAULT_OPTIONS
+  MatExpansionModule,
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatExpansionPanel,
+  MatExpansionPanelTitle,
 } from '@angular/material';
 import { SimpleDialogComponent } from './simple-dialog/simple-dialog.component';
 import { TitleComponent } from './title/title.component';
+import { PanelComponent } from './panel/panel.component';
 
 @NgModule({
-  declarations: [SimpleDialogComponent, TitleComponent],
+  declarations: [SimpleDialogComponent, TitleComponent, PanelComponent],
   entryComponents: [
     SimpleDialogComponent,
     TitleComponent
@@ -38,7 +42,8 @@ import { TitleComponent } from './title/title.component';
     FlexLayoutModule,
     MatButtonModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -63,7 +68,9 @@ import { TitleComponent } from './title/title.component';
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    TitleComponent
+    MatExpansionModule,
+    TitleComponent,
+    PanelComponent
   ],
   providers: [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS,

@@ -56,7 +56,15 @@ form {
 
 .mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button, .mat-fab, .mat-mini-fab {
     font-family: $default-font;
-    font-size: 18px;    
+    font-size: 18px;
+    
+    &:hover {
+        color: $secondary;             
+    }
+
+    &.form-button {
+        min-width: 100px; 
+    }
 }
 
 .mat-form-field {

@@ -15,7 +15,7 @@ import { Role } from 'src/app/models/auth/role.model';
   styleUrls: ['../auth.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('form', {static: false}) form: NgForm;
+  @ViewChild('form') form: NgForm;
 
   // TODO buscar do BE e colocar em  um resolve antes de acessar a rota
   genders = [

@@ -13,7 +13,7 @@ import { MatSidenav } from '@angular/material';
   styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent implements OnInit, OnDestroy {
-  @ViewChild('drawer', {static: false}) drawer: MatSidenav;
+  @ViewChild('drawer') drawer: MatSidenav;
   role: Role;
   userName: string;
 

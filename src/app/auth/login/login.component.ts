@@ -13,7 +13,7 @@ import { SpinnerService } from 'src/app/shared/spinner.service';
   styleUrls: ['../auth.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('form', { static: false }) form: NgForm;
+  @ViewChild('form') form: NgForm;
   isLoading = false;
 
   constructor(private authService: AuthService,

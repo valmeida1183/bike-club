@@ -5,7 +5,7 @@ import { map, shareReplay, tap } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/auth/auth.service';
 import { Role } from 'src/app/models/auth/role.model';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'bc-main-nav',

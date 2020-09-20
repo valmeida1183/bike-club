@@ -14,7 +14,6 @@ import { SpinnerService } from 'src/app/shared/spinner.service';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('form') form: NgForm;
-  isLoading = false;
 
   constructor(private authService: AuthService,
               private dialog: MatDialog,

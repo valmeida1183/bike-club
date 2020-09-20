@@ -26,7 +26,7 @@
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="false"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="over"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" mode="over"
     [opened]="false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>

@@ -12,7 +12,7 @@ export class ShoppFilterComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSearch() {
+  onSearch(event: any) {
     console.log('Submitted!!!');
   }
 }

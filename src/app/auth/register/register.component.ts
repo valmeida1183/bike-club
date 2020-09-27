@@ -4,10 +4,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 import { User } from 'src/app/models/user.model';
-import { AuthService } from '../auth.service';
+import { AuthWebService } from '../auth-web.service';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { SpinnerService } from 'src/app/shared/spinner.service';
-import { Role } from 'src/app/models/auth/role.model';
 
 @Component({
   selector: 'bc-register',
@@ -23,7 +22,7 @@ export class RegisterComponent implements OnInit {
     { gender: 'F', description: 'Female'}
   ];
 
-  constructor(private authService: AuthService,
+  constructor(private authWebService: AuthWebService,
               private dialog: MatDialog,
               private router: Router,
               private spinnerService: SpinnerService) { }
@@ -38,9 +37,9 @@ export class RegisterComponent implements OnInit {
 
     this.spinnerService.showSpinner();
     const { name, lastName, email, password, gender, phone } = this.form.value;
-    const user = new User(null, name, lastName, email, password, gender, phone, Role.Biker);
+    const user = new User(0, name, lastName, email, password, gender, phone, null);
 
-    this.authService.signUp(user).subscribe(response => {
+    this.authWebService.signUp(user).subscribe(response => {
       console.log(response);
       this.spinnerService.hideSpinner();
       this.router.navigate(['/shopping']);

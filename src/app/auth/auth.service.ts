@@ -64,7 +64,7 @@ export class AuthService {
         this.userSubject.next(user);
       });
 
-      // caulcula o tempo restante que o token do user do localstorage está válido. (pois pode ter se logado a bastante tempo).
+      // calcula o tempo restante que o token do user do localstorage está válido. (pois pode ter se logado a bastante tempo).
       const expirationDuration =
         new Date(storedUserData.tokenExpirationDate).getTime() -
         new Date().getTime();
@@ -100,7 +100,7 @@ export class AuthService {
     const currentTime = new Date().getTime();
     const expirationDate = new Date(currentTime + (+authResponseData.expiresIn * 1000));
     const authUserData = new AuthUserData(authResponseData.email,
-      authResponseData.localId, user.role, authResponseData.idToken, expirationDate);
+      authResponseData.localId, user.roleName, authResponseData.idToken, expirationDate);
 
     this.authUserDataSubject.next(authUserData);
     this.userSubject.next(user);

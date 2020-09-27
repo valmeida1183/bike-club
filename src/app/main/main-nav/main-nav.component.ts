@@ -6,6 +6,7 @@ import { map, shareReplay, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Role } from 'src/app/models/auth/role.model';
 import { MatSidenav } from '@angular/material/sidenav';
+import { AuthWebService } from 'src/app/auth/auth-web.service';
 
 @Component({
   selector: 'bc-main-nav',
@@ -16,9 +17,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') drawer: MatSidenav;
   role: Role;
   userName: string;
-
-  private authUserDataSubscription: Subscription;
-  private userSubscription: Subscription;
+  private authWebUserDataSubscription: Subscription;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -32,28 +31,30 @@ export class MainNavComponent implements OnInit, OnDestroy {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private authWebService: AuthWebService) { }
 
   //#region Life Cicle Events
   ngOnInit(): void {
-    this.authUserDataSubscription = this.authService.authUserDataSubject
-      .subscribe(authUserData => {
-        this.role = authUserData ? authUserData.role : null;
-      });
+    this.authWebUserDataSubscription = this.authWebService.authWebUserDataSubject
+      .subscribe(authWebUserData => {
+        if (authWebUserData && authWebUserData.user) {
+          const { user } = authWebUserData;
 
-    this.userSubscription = this.authService.userSubject.subscribe(user => {
-      this.userName = user ? `${user.name} ${user.lastName}` : null;
-    });
+          this.role = user.roleName;
+          this.userName = `${user.name} ${user.lastName}`;
+        }
+      });
   }
 
   ngOnDestroy(): void {
-    this.authUserDataSubscription.unsubscribe();
+    this.authWebUserDataSubscription.unsubscribe();
   }
   //#endregion
 
   //#region Events
   onLogout() {
-    this.authService.logout();
+    this.authWebService.logout();
   }
   //#endregion
 }

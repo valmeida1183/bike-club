@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
+import { AuthWebService } from '../auth-web.service';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { SpinnerService } from 'src/app/shared/spinner.service';
 
@@ -15,7 +16,7 @@ import { SpinnerService } from 'src/app/shared/spinner.service';
 export class LoginComponent implements OnInit {
   @ViewChild('form') form: NgForm;
 
-  constructor(private authService: AuthService,
+  constructor(private authWebService: AuthWebService,
               private dialog: MatDialog,
               private router: Router,
               private spinnerService: SpinnerService) { }
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.spinnerService.showSpinner();
     const { email, password } = this.form.value;
 
-    this.authService.signIn(email, password).subscribe(response => {
+    this.authWebService.signIn(email, password).subscribe(response => {
       console.log(response);
       this.spinnerService.hideSpinner();
       this.router.navigate(['/shopping']);

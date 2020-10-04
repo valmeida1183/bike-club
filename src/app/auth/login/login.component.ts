@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
-import { AuthService } from '../auth.service';
 import { AuthWebService } from '../auth-web.service';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { SpinnerService } from 'src/app/shared/spinner.service';

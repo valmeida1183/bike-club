@@ -40,7 +40,7 @@ export class AuthWebService {
     const loginUrl = `${environment.apiUrl}/${environment.apiVersion}/accounts/login`;
 
     return this.http.post<AuthWebUserData>(
-        loginUrl, new AuthRequestData(email, password, true)
+        loginUrl, new AuthRequestData(email, password)
       ).pipe(
         catchError(this.handleAuthError),
         tap(authWebUserData => {

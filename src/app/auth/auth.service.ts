@@ -25,7 +25,7 @@ export class AuthService {
   signUp(user: User) {
     return this.http.post<IAuthResponseData>(
       this.singUpUrl,
-      new AuthRequestData(user.email, user.password, true)
+      new AuthRequestData(user.email, user.password)
     ).pipe(
       catchError(this.handleAuthError),
       tap(authResponseData => {
@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   signIn(email: string, password: string) {
-    const signIn$ = this.http.post<IAuthResponseData>(this.signInUrl, new AuthRequestData(email, password, true));
+    const signIn$ = this.http.post<IAuthResponseData>(this.signInUrl, new AuthRequestData(email, password));
     const user$ = signIn$.pipe(switchMap(authResponseData => this.getUser(authResponseData.email, authResponseData.idToken)));
 
     // Vai unir os dois observables passará para o stream de dados um array contendo os dois responses de cada observable.

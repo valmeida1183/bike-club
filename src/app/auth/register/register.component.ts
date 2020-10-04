@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute , Router } from '@angular/router';
 
 import { User } from 'src/app/models/user.model';
 import { AuthWebService } from '../auth-web.service';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { SpinnerService } from 'src/app/shared/spinner.service';
+import { SelectOptionsService } from 'src/app/shared/select-options.service';
+import { Gender } from 'src/app/models/gender.model';
 
 @Component({
   selector: 'bc-register',
@@ -17,17 +19,17 @@ export class RegisterComponent implements OnInit {
   @ViewChild('form') form: NgForm;
 
   // TODO buscar do BE e colocar em  um resolve antes de acessar a rota
-  genders = [
-    { gender: 'M', description: 'Male'},
-    { gender: 'F', description: 'Female'}
-  ];
+  genders: Gender[];
 
-  constructor(private authWebService: AuthWebService,
+  constructor(private activatedRoute: ActivatedRoute ,
+              private authWebService: AuthWebService,
               private dialog: MatDialog,
               private router: Router,
+              private selectOptionsService: SelectOptionsService,
               private spinnerService: SpinnerService) { }
 
   ngOnInit() {
+    this.genders = this.activatedRoute.snapshot.data.genders;
   }
 
   onSubmit(): void {
@@ -49,6 +51,12 @@ export class RegisterComponent implements OnInit {
     });
 
     this.form.resetForm();
+  }
+
+  private loadSelectOptions() {
+    this.selectOptionsService.getGenderSelectOption().subscribe(response => {
+      console.log(response);
+    });
   }
 
   private openErrorDialog(errorMessage): void {

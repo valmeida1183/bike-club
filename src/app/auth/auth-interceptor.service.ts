@@ -3,21 +3,25 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpParams } from '@angular/
 import { take, exhaustMap } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
+import { AuthWebService } from './auth-web.service';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor(private authService: AuthService) { }
+  constructor(private authWebService: AuthWebService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
-    return this.authService.authUserDataSubject.pipe(
+    return this.authWebService.authWebUserDataSubject.pipe(
       take(1),
-      exhaustMap(authUserData => {
-        if (!authUserData) {
+      exhaustMap(authWebUserData => {
+        if (!authWebUserData) {
           return next.handle(request);
         }
 
         const modifedRequest = request.clone({
-          params: new HttpParams().set('auth', authUserData.currentToken)
+          setHeaders: {
+            Authorization: `Bearer ${authWebUserData.currentToken}`
+          }
+          /* params: new HttpParams().set('auth', authWebUserData.currentToken) */
         });
 
         return next.handle(modifedRequest);

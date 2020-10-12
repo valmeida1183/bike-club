@@ -7,6 +7,8 @@ import { SelectOptionsService } from 'src/app/shared/select-options.service';
 export class RegisterResolver implements Resolve<Gender[]> {
     constructor(private selectOptionsService: SelectOptionsService) {}
 
+    // os parâmetros não sou usados, mas estão como exemplo do que pode ser passado
+    // são usados para pegar parâmetros da state ex: querystring, route params...
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return this.selectOptionsService.getGenderSelectOption();
     }

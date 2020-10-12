@@ -19,9 +19,8 @@ export class AuthInterceptorService implements HttpInterceptor {
 
         const modifedRequest = request.clone({
           setHeaders: {
-            Authorization: `Bearer ${authWebUserData.currentToken}`
+            Authorization: `Bearer ${authWebUserData.currentToken()}`
           }
-          /* params: new HttpParams().set('auth', authWebUserData.currentToken) */
         });
 
         return next.handle(modifedRequest);

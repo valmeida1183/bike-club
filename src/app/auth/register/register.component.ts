@@ -25,11 +25,11 @@ export class RegisterComponent implements OnInit {
               private authWebService: AuthWebService,
               private dialog: MatDialog,
               private router: Router,
-              private selectOptionsService: SelectOptionsService,
               private spinnerService: SpinnerService) { }
 
   ngOnInit() {
     this.genders = this.activatedRoute.snapshot.data.genders;
+    console.log(this.genders);
   }
 
   onSubmit(): void {
@@ -53,13 +53,7 @@ export class RegisterComponent implements OnInit {
     this.form.resetForm();
   }
 
-  private loadSelectOptions() {
-    this.selectOptionsService.getGenderSelectOption().subscribe(response => {
-      console.log(response);
-    });
-  }
-
-  private openErrorDialog(errorMessage): void {
+  private openErrorDialog(errorMessage: any): void {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.panelClass = ['simple-dialog', 'error-dialog'];

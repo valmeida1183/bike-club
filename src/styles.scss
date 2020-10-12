@@ -36,10 +36,16 @@ body {
 form {
     display: flex;
     flex-flow: column wrap;
-    width: 100%;
+    width: 100%;    
 
     mat-form-field {
-        width: 100%;
+        width: 100%;        
+    }    
+}
+
+.form-group {
+    mat-form-field + mat-form-field {
+        margin-left: 1em;
     }
 }
 
@@ -69,7 +75,7 @@ form {
 
 .mat-form-field {
     font-family: $default-font;
-    margin-top: 0.7em;
+    margin-top: 0.7em;    
 }
 
 .mat-option, .mat-select {

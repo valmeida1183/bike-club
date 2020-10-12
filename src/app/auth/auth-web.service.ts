@@ -17,21 +17,13 @@ export class AuthWebService {
   constructor(private http: HttpClient, private router: Router) { }
 
   signUp(user: User) {
-    const registerUrl = `${environment.apiUrl}/${environment.apiVersion}/accounts/register`;
-    /* const userData = {
-      email: user.email,
-      password: user.password,
-      phone: user.phone,
-      name: user.name,
-      lastName: user.lastName,
-      genderCode: user.genderCode
-    }; */
+    const registerUrl = `${environment.baseApiUrl}/accounts/register`;
 
     return this.http.post<AuthWebUserData>(registerUrl, user)
     .pipe(
       catchError(this.handleAuthError),
-      tap(authWebUserData => {
-        this.handleAuthentication(authWebUserData);
+      tap(response => {
+        this.handleAuthentication(response);
       })
     );
   }
@@ -43,8 +35,8 @@ export class AuthWebService {
         loginUrl, new AuthRequestData(email, password)
       ).pipe(
         catchError(this.handleAuthError),
-        tap(authWebUserData => {
-          this.handleAuthentication(authWebUserData);
+        tap(response => {
+          this.handleAuthentication(response);
         })
       );
   }
@@ -59,7 +51,7 @@ export class AuthWebService {
     const authWebUserData = new AuthWebUserData(
       storedUserData.user, new Date(storedUserData.expiresIn), storedUserData.token);
 
-    if (authWebUserData.currentToken) {
+    if (authWebUserData.currentToken()) {
       this.authWebUserDataSubject.next(authWebUserData);
 
       this.autoLogout(new Date(storedUserData.expiresIn));
@@ -90,7 +82,10 @@ export class AuthWebService {
     }, expirationDuration);
   }
 
-  private handleAuthentication(authWebUserData: AuthWebUserData) {
+  private handleAuthentication(response: any) {
+    const authWebUserData = new AuthWebUserData(
+      response.user, new Date(response.expiresIn), response.token);
+
     const expirationDate = new Date(authWebUserData.expiresIn);
 
     this.authWebUserDataSubject.next(authWebUserData);

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ShoppingRouterModule} from './shopping-router.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ShoppingComponent } from './shopping.component';
 import { ShoppListComponent } from './shopp-list/shopp-list.component';
@@ -15,7 +16,8 @@ import { ShoppFilterComponent } from './shopp-filter/shopp-filter.component';
   ],
   imports: [
     SharedModule,
-    ShoppingRouterModule
+    ShoppingRouterModule,
+    ReactiveFormsModule
   ]
 })
 export class ShoppingModule { }

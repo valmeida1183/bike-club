@@ -2,11 +2,15 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const apiUrl = 'https://localhost:5001';
+const apiVersion = 'v1';
+
 export const environment = {
   production: false,
   firebaseApiKey: 'AIzaSyAzPmvGAZOxtMFQFIPv2gdkG2HDqVAvcyU',
-  apiUrl: 'https://localhost:5001',
-  apiVersion: 'v1'
+  apiUrl,
+  apiVersion,
+  baseApiUrl: `${apiUrl}/${apiVersion}`
 };
 
 /*

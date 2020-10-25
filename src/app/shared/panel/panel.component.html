@@ -1,4 +1,4 @@
-<mat-expansion-panel [expanded]="true">
+<mat-expansion-panel [expanded]="expanded">
     <mat-expansion-panel-header>
         <mat-panel-title>
             <h2 class="panel-title">{{title}}</h2>          
@@ -9,6 +9,13 @@
       </mat-expansion-panel-header>    
       <ng-content></ng-content>      
       <mat-action-row>
-        <button class="form-button" mat-button mat-raised-button color="primary" (click)="onSubmit()">{{submitText}}</button>
+        <button class="form-button" 
+                mat-button 
+                mat-raised-button 
+                color="primary" 
+                (click)="onSubmit()"
+                [disabled]="submitDisabled">
+                {{submitText}}
+        </button>
       </mat-action-row>
 </mat-expansion-panel>

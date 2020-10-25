@@ -1,8 +1,16 @@
 <div class="main-content">
-    <bc-panel [title]="'Search for Bicycles'"              
+    <bc-panel [expanded]="true"
+              [title]="'Search for Bicycles'"              
               [submitText]="'Search'"
+              [submitDisabled]="shopForm.invalid"
               (actionPanel)= "onSearch($event)">
         <p>Please fill in the fields below to search for the bikes you want.</p>
+        <p>
+            Form Status: {{ shopForm.status }}
+        </p>
+        <p>
+            Form IsValid: {{ shopForm.invalid }}
+        </p>
         <form [formGroup]="shopForm" (ngSubmit)="onSearch($event)">
             <div fxLayout="row" fxLayout.xs="column" ngClass.gt-xs="form-group">
                 <mat-form-field>

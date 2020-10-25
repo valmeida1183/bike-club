@@ -11,7 +11,7 @@ import { MainComponent } from './main/main.component';
 import { MainNavComponent } from './main/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { AboutComponent } from './main/main-nav/about/about.component';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { AuthInterceptor } from './auth/auth.interceptor';
 import { RequestParamsInterceptor } from './shared/request-params.interceptor';
 
 @NgModule({
@@ -31,7 +31,7 @@ import { RequestParamsInterceptor } from './shared/request-params.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestParamsInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

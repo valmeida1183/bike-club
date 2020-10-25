@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -32,16 +32,18 @@ export class ShoppFilterComponent implements OnInit {
     console.log(this.shopForm);
     console.log(event);
 
-    const bikesUrl = `${environment.baseApiUrl}/bikes`;
 
-    this.http.get<Bike[]>(bikesUrl).subscribe(bikes => console.log(bikes));
+    const bikesUrl = `${environment.baseApiUrl}/bikes`;
+    const query = this.shopForm.value;
+
+    this.http.get<Bike[]>(bikesUrl, {params: query}).subscribe(bikes => console.log(bikes));
   }
 
   //#region Reactive Forms
   private configureForm(): void {
     this.shopForm = new FormGroup({
-      category: new FormControl(null),
-      gender: new FormControl(null),
+      categoryId: new FormControl(null),
+      genderCode: new FormControl(null),
       price: new FormControl(null, Validators.pattern(/^\$?\d+((,\d{3})+)?(\.\d+)?$/)),
       gears: new FormControl(0, [Validators.min(0), Validators.max(36)]),
       frameSize: new FormControl(19, [Validators.min(13), Validators.max(24)]),

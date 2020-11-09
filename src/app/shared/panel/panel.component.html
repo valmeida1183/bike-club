@@ -14,7 +14,8 @@
                 mat-raised-button 
                 color="primary" 
                 (click)="onSubmit()"
-                [disabled]="submitDisabled">
+                [disabled]="submitDisabled"
+                *ngIf="showSubmit">
                 {{submitText}}
         </button>
       </mat-action-row>

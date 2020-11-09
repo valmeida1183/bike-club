@@ -2,6 +2,7 @@
 
 .mat-expansion-panel {
     border: double 4px $primary;
+    margin-bottom: 20px;
 
     h2.panel-title {
         font-size: 1.3em;
@@ -9,4 +10,3 @@
         color: $secondary;
     }
 }
-

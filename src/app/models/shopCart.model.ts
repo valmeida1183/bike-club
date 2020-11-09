@@ -1,7 +1,7 @@
 export class ShopCart {
-    constructor(public id: number,
-                public purchaseDate: Date,
-                public totalAmount: number,
-                public useId: number,
-                public addressId: number){}
+    constructor(public id: number = null,
+                public purchaseDate: Date = null,
+                public totalAmount: number = null,
+                public useId: number = null,
+                public addressId: number = null){}
 }

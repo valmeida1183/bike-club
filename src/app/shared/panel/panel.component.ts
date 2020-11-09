@@ -10,7 +10,8 @@ export class PanelComponent implements OnInit {
   @Input() submitDisabled?: boolean;
   @Input() title: string;
   @Input() description: string;
-  @Input() submitText: string;
+  @Input() submitText?: string;
+  @Input() showSubmit?: boolean;
   @Output() actionPanel = new EventEmitter<void>();
 
   constructor() { }
@@ -26,5 +27,7 @@ export class PanelComponent implements OnInit {
   private setDefaultValues() {
     this.expanded = this.expanded === null || this.expanded === undefined ? true : this.expanded;
     this.submitDisabled = this.submitDisabled === null || this.submitDisabled === undefined ? true : this.submitDisabled;
+    this.submitText = this.submitText === null || this.submitText === undefined || this.submitText === '' ? null : this.submitText;
+    this.showSubmit = this.showSubmit === null || this.showSubmit === undefined ? false : this.showSubmit;
   }
 }

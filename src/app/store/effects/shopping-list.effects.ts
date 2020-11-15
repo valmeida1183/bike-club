@@ -12,10 +12,10 @@ import * as ShoppingListActions from '../actions/shopping-list.actions';
 export class ShoppingListEffects {
     loadBikes$ = createEffect(() => this.actions$.pipe(
         ofType(ShoppingListActions.loadBikes),
-        switchMap(action => {
+        switchMap((action) => {
             const bikesUrl = `${environment.baseApiUrl}/bikes`;
 
-            return this.http.get<Bike[]>(bikesUrl, {params: action.bike})
+            return this.http.get<Bike[]>(bikesUrl, {params: action.query})
             .pipe(
                 map((bikes: Bike[]) => ShoppingListActions.loadBikesSuccess({bikes})),
                 catchError(error => of(ShoppingListActions.loadBikesFailed({errorMsg: error.message})))

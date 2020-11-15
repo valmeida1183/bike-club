@@ -9,6 +9,7 @@ import { Category } from 'src/app/models/category';
 import { environment } from 'src/environments/environment';
 import { Gender } from 'src/app/models/gender.model';
 import { Observable } from 'rxjs';
+import { loadBikes } from 'src/app/store/actions/shopping-list.actions';
 
 @Component({
   selector: 'bc-shopp-filter',
@@ -19,7 +20,7 @@ export class ShoppFilterComponent implements OnInit {
   shopForm: FormGroup;
   categories: Category[];
   genders: Gender[];
-  bikes: Observable<Bike[]>;
+  // bikes: Observable<Bike[]>;
 
   constructor(private activatedRoute: ActivatedRoute,
               private store: Store<{ shoppingList: Bike[] }>,
@@ -29,8 +30,8 @@ export class ShoppFilterComponent implements OnInit {
     this.categories = this.activatedRoute.snapshot.data.categories;
     this.genders = this.activatedRoute.snapshot.data.genders;
     this.configureForm();
-    this.bikes = this.store.select('shoppingList');
-    console.log(this.bikes.subscribe(bikes => console.log(bikes)));
+    /* this.bikes = this.store.select('shoppingList');
+    console.log(this.bikes.subscribe(bikes => console.log(bikes))); */
   }
 
   onSearch(event: any) {
@@ -38,10 +39,11 @@ export class ShoppFilterComponent implements OnInit {
     console.log(this.shopForm);
     console.log(event);
 
-    const bikesUrl = `${environment.baseApiUrl}/bikes`;
+    // const bikesUrl = `${environment.baseApiUrl}/bikes`;
     const query = this.shopForm.value;
+    this.store.dispatch(loadBikes({query}));
 
-    this.http.get<Bike[]>(bikesUrl, {params: query}).subscribe(bikes => console.log(bikes));
+    // this.http.get<Bike[]>(bikesUrl, {params: query}).subscribe(bikes => console.log(bikes));
   }
 
   //#region Reactive Forms

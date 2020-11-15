@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
@@ -15,6 +16,7 @@ import { AboutComponent } from './main/main-nav/about/about.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { RequestParamsInterceptor } from './shared/request-params.interceptor';
 import { shoppingListReducer } from './store/reducers/shopping-list.reducer';
+import { ShoppingListEffects } from './store/effects/shopping-list.effects';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { shoppingListReducer } from './store/reducers/shopping-list.reducer';
     SharedModule,
     LayoutModule,
     HttpClientModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer})
+    StoreModule.forRoot({shoppingList: shoppingListReducer}),
+    EffectsModule.forRoot([ShoppingListEffects])
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestParamsInterceptor, multi: true },

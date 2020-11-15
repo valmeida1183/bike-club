@@ -17,5 +17,4 @@ export class SimpleDialogComponent implements OnInit {
   onClose() {
     this.dialogRef.close();
   }
-
 }

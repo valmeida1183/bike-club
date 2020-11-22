@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -36,6 +37,7 @@ import { PanelComponent } from './panel/panel.component';
     CommonModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatCardModule,
     MatDialogModule,
     MatIconModule,
     MatExpansionModule
@@ -45,6 +47,7 @@ import { PanelComponent } from './panel/panel.component';
     CommonModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatCardModule,
     MatDialogModule,
     MatToolbarModule,
     MatIconModule,

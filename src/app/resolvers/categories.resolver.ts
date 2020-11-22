@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category';
+import { Category } from '../models/category.model';
 import { SelectOptionsService } from '../shared/select-options.service';
 
 @Injectable({ providedIn: 'root'})

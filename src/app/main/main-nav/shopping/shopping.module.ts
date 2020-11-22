@@ -7,12 +7,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ShoppingComponent } from './shopping.component';
 import { ShoppListComponent } from './shopp-list/shopp-list.component';
 import { ShoppFilterComponent } from './shopp-filter/shopp-filter.component';
+import { ShopItemComponent } from './shopp-list/shop-item/shop-item.component';
 
 @NgModule({
   declarations: [
     ShoppingComponent,
     ShoppListComponent,
-    ShoppFilterComponent
+    ShoppFilterComponent,
+    ShopItemComponent
   ],
   imports: [
     SharedModule,

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Bike } from 'src/app/models/bike.model';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/models/category.model';
 import { environment } from 'src/environments/environment';
 import { Gender } from 'src/app/models/gender.model';
 import { Observable } from 'rxjs';
@@ -52,7 +52,7 @@ export class ShoppFilterComponent implements OnInit {
       categoryId: new FormControl(null),
       genderCode: new FormControl(null),
       price: new FormControl(null, Validators.pattern(/^\$?\d+((,\d{3})+)?(\.\d+)?$/)),
-      gears: new FormControl(0, [Validators.min(0), Validators.max(36)]),
+      gears: new FormControl(21, [Validators.min(0), Validators.max(36)]),
       frameSize: new FormControl(19, [Validators.min(13), Validators.max(24)]),
       rimSize: new FormControl(27.5, [Validators.min(12), Validators.max(29)])
     });

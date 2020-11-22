@@ -6,5 +6,6 @@ export const environment = {
   firebaseApiKey: 'AIzaSyAzPmvGAZOxtMFQFIPv2gdkG2HDqVAvcyU',
   apiUrl,
   apiVersion,
-  baseApiUrl: `${apiUrl}/${apiVersion}`
+  baseApiUrl: `${apiUrl}/${apiVersion}`,
+  imageResource: `${apiUrl}/resources/images/`
 };

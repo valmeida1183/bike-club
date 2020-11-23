@@ -31,9 +31,11 @@
         padding: 25px;
         box-shadow: $container-shadow;
 
-        .box-header {
+        .mat-card-title {
+            color: $primary;    
+            font-family: $default-font;
             font-size: 3em;
-            color: $primary;
+            margin: 0;
         }
     }
 }

@@ -1,0 +1,29 @@
+<mat-card class="shop-card">
+    <mat-card-header>
+        <mat-card-title class="shop-card-title">{{bike.model}}</mat-card-title>
+        <mat-card-subtitle>{{ bike.category.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <div class="shop-card-image-content">
+        <img class="img-responsive shop-card-image" [src]="imagePath" [alt]="bike.image">
+    </div>        
+    <mat-card-content>
+        <h1 class="shop-card-price">{{ bike.price | currency }}</h1>
+        <p>{{bike.description}}</p>        
+    </mat-card-content>
+    <mat-card-actions class="shop-card-actions">
+        <button class="form-button" 
+                mat-button 
+                mat-raised-button 
+                color="primary" 
+                (click)="onDetails()">
+                Details
+        </button>
+        <button class="form-button secondary" 
+                mat-button 
+                mat-raised-button 
+                color="accent" 
+                (click)="onAddToCart()">               
+                Add to Cart
+        </button>
+    </mat-card-actions>
+</mat-card>

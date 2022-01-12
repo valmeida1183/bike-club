@@ -6,12 +6,12 @@
               [showSubmit]="true"
               (actionPanel)= "onSearch($event)">
         <p>Please fill in the fields below to search for the bikes you want.</p>
-        <p>
+        <!-- <p>
             Form Status: {{ shopForm.status }}
         </p>
         <p>
             Form IsValid: {{ shopForm.invalid }}
-        </p>
+        </p> -->
         <form [formGroup]="shopForm" (ngSubmit)="onSearch($event)">
             <div fxLayout="row" fxLayout.xs="column" ngClass.gt-xs="form-group">
                 <mat-form-field>

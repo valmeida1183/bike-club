@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { Bike } from 'src/app/models/bike.model';
-import { loadBikes, loadBikesFailed, loadBikesSuccess } from '../actions/shopping-list.actions';
+
+import { loadBikesFailed, loadBikesSuccess } from '../actions/shopping-list.actions';
 
 const initialState = {
     bikes: [],

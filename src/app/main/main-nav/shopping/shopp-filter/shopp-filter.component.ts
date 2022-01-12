@@ -1,14 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Bike } from 'src/app/models/bike.model';
 import { Category } from 'src/app/models/category.model';
-import { environment } from 'src/environments/environment';
 import { Gender } from 'src/app/models/gender.model';
-import { Observable } from 'rxjs';
 import { loadBikes } from 'src/app/store/actions/shopping-list.actions';
 
 @Component({
@@ -20,30 +16,19 @@ export class ShoppFilterComponent implements OnInit {
   shopForm: FormGroup;
   categories: Category[];
   genders: Gender[];
-  // bikes: Observable<Bike[]>;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private store: Store<{ shoppingList: Bike[] }>,
-              private http: HttpClient) { }
+              private store: Store<{ shoppingList: any }>) { }
 
   ngOnInit() {
     this.categories = this.activatedRoute.snapshot.data.categories;
     this.genders = this.activatedRoute.snapshot.data.genders;
     this.configureForm();
-    /* this.bikes = this.store.select('shoppingList');
-    console.log(this.bikes.subscribe(bikes => console.log(bikes))); */
   }
 
   onSearch(event: any) {
-    console.log('Submitted!!!');
-    console.log(this.shopForm);
-    console.log(event);
-
-    // const bikesUrl = `${environment.baseApiUrl}/bikes`;
     const query = this.shopForm.value;
     this.store.dispatch(loadBikes({query}));
-
-    // this.http.get<Bike[]>(bikesUrl, {params: query}).subscribe(bikes => console.log(bikes));
   }
 
   //#region Reactive Forms

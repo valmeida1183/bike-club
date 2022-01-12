@@ -3,7 +3,7 @@ import { Gender } from './gender.model';
 
 export class Bike {
     constructor(
-        public id: string,
+        public id: number,
         public categoryId: number,
         public description: string,
         public frameSize: number,

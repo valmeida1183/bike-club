@@ -4,9 +4,7 @@
 .shop-card {
     @extend .double-border;
     font-family: $default-font;
-    margin: 20px 10px;
-    //max-width: 400px;
-    //width: 400px;
+    margin: 10px;    
     min-height: 465px;
     transition: all 0.5s ease-in;    
 
@@ -15,6 +13,7 @@
     }
 
     .shop-card-image-content {
+        min-height: 230px;
         padding: 10px;
         
         .shop-card-image{
@@ -26,6 +25,10 @@
     .shop-card-price {
         margin-top: 10px;
         color: $secondary;
+    }
+
+    .shop-card-description {
+        min-height: 42px;
     }
 
     .shop-card-actions {

@@ -28,6 +28,21 @@
     color: white;
     cursor: pointer;
     background-color: transparent;
+    position: relative;
+
+    .caret {
+      position: absolute;
+      text-align: center;
+      font-size: 10px;
+      background-color: $secondary;
+      border-radius: 50%;
+      line-height: 15px;
+      width: 15px;
+      height: 15px;
+      right: 3px;
+      top: 4px;
+      color: white;      
+    }    
 
     &:hover {
       color: $secondary;      

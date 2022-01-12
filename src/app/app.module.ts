@@ -17,6 +17,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { RequestParamsInterceptor } from './shared/request-params.interceptor';
 import { shoppingListReducer } from './store/reducers/shopping-list.reducer';
 import { ShoppingListEffects } from './store/effects/shopping-list.effects';
+import { shopCartReducer } from './store/reducers/shop-cart.reducer';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { ShoppingListEffects } from './store/effects/shopping-list.effects';
     SharedModule,
     LayoutModule,
     HttpClientModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer}),
+    StoreModule.forRoot({shoppingList: shoppingListReducer, shopCart: shopCartReducer}),
     EffectsModule.forRoot([ShoppingListEffects])
   ],
   providers: [

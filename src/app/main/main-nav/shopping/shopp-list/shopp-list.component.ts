@@ -12,21 +12,19 @@ import { Bike } from 'src/app/models/bike.model';
 export class ShoppListComponent implements OnInit, OnDestroy {
   bikes$: Observable<any>;
   bikes: Bike[];
-  // private subscription: Subscription;
+  bikesSubscription: Subscription;
 
-  constructor(private store: Store<{shoppingList: Bike[]}>) { }
+  constructor(private store: Store<{shoppingList: any}>) { }
 
   ngOnInit() {
     this.bikes$ = this.store.select('shoppingList');
-    this.bikes$.subscribe(response => {
-      console.log(response);
-      this.bikes = response.bikes;
+    this.bikesSubscription = this.bikes$.subscribe(storeState => {
+      console.log(storeState);
+      this.bikes = storeState.bikes;
     });
-    // this.subscription = this.bikes$.subscribe(bikes => console.log(bikes));
-    // console.log(this.subscription);
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.bikesSubscription.unsubscribe();
   }
 }

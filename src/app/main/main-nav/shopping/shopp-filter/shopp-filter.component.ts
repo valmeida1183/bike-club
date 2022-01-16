@@ -10,15 +10,17 @@ import { loadBikes } from 'src/app/store/actions/shopping-list.actions';
 @Component({
   selector: 'bc-shopp-filter',
   templateUrl: './shopp-filter.component.html',
-  styleUrls: ['./shopp-filter.component.scss']
+  styleUrls: ['./shopp-filter.component.scss'],
 })
 export class ShoppFilterComponent implements OnInit {
   shopForm: FormGroup;
   categories: Category[];
   genders: Gender[];
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private store: Store<{ shoppingList: any }>) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private store: Store<{ shoppingList: any }>
+  ) {}
 
   ngOnInit() {
     this.categories = this.activatedRoute.snapshot.data.categories;
@@ -28,7 +30,7 @@ export class ShoppFilterComponent implements OnInit {
 
   onSearch(event: any) {
     const query = this.shopForm.value;
-    this.store.dispatch(loadBikes({query}));
+    this.store.dispatch(loadBikes({ query }));
   }
 
   //#region Reactive Forms
@@ -36,10 +38,13 @@ export class ShoppFilterComponent implements OnInit {
     this.shopForm = new FormGroup({
       categoryId: new FormControl(null),
       genderCode: new FormControl(null),
-      price: new FormControl(null, Validators.pattern(/^\$?\d+((,\d{3})+)?(\.\d+)?$/)),
+      price: new FormControl(
+        null,
+        Validators.pattern(/^\$?\d+((,\d{3})+)?(\.\d+)?$/)
+      ),
       gears: new FormControl(21, [Validators.min(0), Validators.max(36)]),
       frameSize: new FormControl(19, [Validators.min(13), Validators.max(24)]),
-      rimSize: new FormControl(27.5, [Validators.min(12), Validators.max(29)])
+      rimSize: new FormControl(27.5, [Validators.min(12), Validators.max(29)]),
     });
   }
   //#endregion Reactive Forms

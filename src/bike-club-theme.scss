@@ -1,10 +1,11 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+@include mat.core();
 
 
 $mat-bike-club-blue-gray: (
@@ -109,16 +110,16 @@ $mat-bike-club-dark-red: (
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$bike-club-primary: mat-palette($mat-bike-club-blue-gray);
-$bike-club-accent:  mat-palette($mat-bike-club-red);
+$bike-club-primary: mat.define-palette($mat-bike-club-blue-gray);
+$bike-club-accent:  mat.define-palette($mat-bike-club-red);
 // The warn palette is optional (defaults to red).
-$bike-club-warn:    mat-palette($mat-bike-club-dark-red);
+$bike-club-warn:    mat.define-palette($mat-bike-club-dark-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$bike-club-theme: mat-light-theme($bike-club-primary, $bike-club-accent, $bike-club-warn);
+$bike-club-theme: mat.define-light-theme($bike-club-primary, $bike-club-accent, $bike-club-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 
-@include angular-material-theme($bike-club-theme);
+@include mat.all-component-themes($bike-club-theme);

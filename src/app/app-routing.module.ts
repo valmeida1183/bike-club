@@ -40,9 +40,8 @@ const routes: Routes = [
   // mantendo o comportamento de lazy load (bundle separadados)
   imports: [
     RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules,
-      relativeLinkResolution: 'legacy',
-    }),
+    preloadingStrategy: PreloadAllModules
+}),
   ],
   exports: [RouterModule],
 })

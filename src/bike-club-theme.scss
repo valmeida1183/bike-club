@@ -1,21 +1,7 @@
 @use '@angular/material' as mat;
-@import '~@angular/material/theming';
-// Plus imports for other components in your app.
+@import '@angular/material/theming';
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
-
+@include mat.core();
 
 $mat-bike-club-blue-gray: (
   50: #e6e9ed,
@@ -47,7 +33,7 @@ $mat-bike-club-blue-gray: (
     A200: $light-primary-text,
     A400: $light-primary-text,
     A700: $light-primary-text,
-  )
+  ),
 );
 
 $mat-bike-club-red: (
@@ -80,7 +66,7 @@ $mat-bike-club-red: (
     A200: $light-primary-text,
     A400: $light-primary-text,
     A700: $light-primary-text,
-  )
+  ),
 );
 
 $mat-bike-club-dark-red: (
@@ -113,22 +99,28 @@ $mat-bike-club-dark-red: (
     A200: $light-primary-text,
     A400: $light-primary-text,
     A700: $light-primary-text,
+  ),
+);
+
+// Convert custom colors into Material palettes
+$bike-club-primary: mat.define-palette($mat-bike-club-blue-gray);
+$bike-club-accent: mat.define-palette($mat-bike-club-red);
+$bike-club-warn: mat.define-palette($mat-bike-club-dark-red);
+
+// Define the theme with the correct structure
+$bike-club-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $bike-club-primary,
+      accent: $bike-club-accent,
+      warn: $bike-club-warn,
+    ),
+    typography: mat.define-typography-config(),
+    // Default typography
+    density: 0,
+    // Default density
   )
 );
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$bike-club-primary: mat.define-palette($mat-bike-club-blue-gray);
-$bike-club-accent:  mat.define-palette($mat-bike-club-red);
-// The warn palette is optional (defaults to red).
-$bike-club-warn:    mat.define-palette($mat-bike-club-dark-red);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$bike-club-theme: mat.define-light-theme($bike-club-primary, $bike-club-accent, $bike-club-warn);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-
+// Apply the theme
 @include mat.all-legacy-component-themes($bike-club-theme);

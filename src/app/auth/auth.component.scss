@@ -1,53 +1,88 @@
 @import '../../variables';
+@import '../../styles.scss';
 
-.toolbar-logo{
-    padding-top: 25px;
-    -webkit-filter: $logo-shadow;
-    filter: $logo-shadow;
-    width: 325px;
-    height: 325px;    
+.toolbar-logo {
+  display: none;
+  padding-top: 25px;
+  -webkit-filter: $logo-shadow;
+  filter: $logo-shadow;
+  width: 325px;
+  height: 325px;
+}
+
+.toolbar-first-row {
+  justify-content: center;
+  align-items: baseline;
 }
 
 .toolbar-second-row {
-    background-color: $secondary;
-    border-top: double 5px white;
-    border-bottom: double 5px white;
+  background-color: $secondary;
+  border-top: double 5px white;
+  border-bottom: double 5px white;
+  justify-content: end;
 }
 
 .toolbar-third-row {
-    box-shadow: $container-shadow;
+  box-shadow: $container-shadow;
 }
 
 .box-wrapper {
-    height:100%;
-    margin: 25px;    
+  height: 100%;
+  margin: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
 
-    .box {
-        width: 100%;
-        max-width: 600px;
-        background-color: white;
-        border: double 4px $primary;
-        border-radius: 10px;
-        padding: 25px;
-        box-shadow: $container-shadow;
+  .box {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border: double 4px $primary;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: $container-shadow;
+    flex-direction: column;
+    align-items: center;
 
-        .mat-card-title {
-            color: $primary;    
-            font-family: $default-font;
-            font-size: 3em;
-            margin: 0;
-        }
+    .mat-card-header {
+      justify-content: center;
+
+      .mat-card-title {
+        color: $primary;
+        font-family: $default-font;
+        font-size: 3em;
+        margin: 0;
+      }
     }
+  }
 }
 
 .btn-auth {
-    margin-top: 15px;
-    border:1px solid currentColor;
-    line-height:54px;
-    background: $light-red;
-    width: 100%;
+  margin-top: 15px;
+  border: 1px solid currentColor;
+  line-height: 54px;
+  background: $light-red;
+  width: 100%;
 }
 
-.mat-progress-spinner circle, .mat-spinner circle {
-    stroke: white;
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: white;
+}
+
+@include respond-above(md) {
+  .toolbar-logo {
+    display: block;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .box-wrapper {
+    .box {
+      margin-top: 150px;
+    }
+  }
 }

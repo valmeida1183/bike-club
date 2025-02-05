@@ -1,120 +1,133 @@
 /* You can add global styles to this file, and also import other style files */
-//@import '~bootstrap/dist/css/bootstrap.min.css'; 
+//@import '~bootstrap/dist/css/bootstrap.min.css';
 @import './variables';
 
-html, body { height: 100%; }
-body { 
-    margin: 0; 
-    font-family: $default-font;    
-    @extend .dot-background;   
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: $default-font;
+  @extend .dot-background;
 }
 
 /* background textures */
 .dot-background {
-    background-color: $background;
-    background-image: $dotted-image;
+  background-color: $background;
+  background-image: $dotted-image;
 }
 
 .grain {
-    background-image: url('assets/images/grain.png');
-    background-repeat: repeat;
+  background-image: url('assets/images/grain.png');
+  background-repeat: repeat;
 }
 
 .simple-background {
-    background-color: $background;
+  background-color: $background;
 }
 /* Logo text */
 .logo-text {
-    font-family: $logo-font;
-    font-size: 2.1em;
-    color: $background;
-    text-shadow: 2px 4px 5px rgba(15,6,4,0.6);
+  font-family: $logo-font;
+  font-size: 2.1em;
+  color: $background;
+  padding-top: 1rem;
+  text-shadow: 2px 4px 5px rgba(15, 6, 4, 0.6);
 }
 
 /* Inputs and Forms */
 
 form {
-    display: flex;
-    flex-flow: column wrap;
-    width: 100%;    
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
 
-    mat-form-field {
-        width: 100%;        
-    }    
+  mat-form-field {
+    width: 100%;
+  }
 }
 
 .form-group {
-    mat-form-field + mat-form-field {
-        margin-left: 1em;
-    }
+  mat-form-field + mat-form-field {
+    margin-left: 1em;
+  }
 }
 
-// Commom Screen Classes 
+// Commom Screen Classes
 .double-border {
-    border: double 4px $primary;
+  border: double 4px $primary;
 }
 
 .main-container {
-    padding: 25px;
+  padding: 25px;
 }
 
 .main-content {
-    //@extend .simple-background;
-    background-color: rgb(255, 255, 255, 0.7);
+  //@extend .simple-background;
+  background-color: rgb(255, 255, 255, 0.7);
 }
 
 .img-responsive {
-    display: block;
-    height: auto;
-    max-width: 100%;    
+  display: block;
+  height: auto;
+  max-width: 100%;
 }
 
 // Material desgin personalizations -- // Todo passar para um arquivo scss separado.
 
-.mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button, .mat-fab, .mat-mini-fab {
-    font-family: $default-font;
-    font-size: 18px;
-    
-    &:hover {
-        color: $secondary;             
-    }
-    
-    &.secondary, &.accent, &.warn {
-        &:hover {
-            color: $primary;
-        }
-    }
+.mat-button,
+.mat-raised-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button,
+.mat-fab,
+.mat-mini-fab {
+  font-family: $default-font;
+  font-size: 18px;
 
-    &.form-button {
-        min-width: 100px; 
+  &:hover {
+    color: $secondary;
+  }
+
+  &.secondary,
+  &.accent,
+  &.warn {
+    &:hover {
+      color: $primary;
     }
+  }
+
+  &.form-button {
+    min-width: 100px;
+  }
 }
 
 .mat-form-field {
-    font-family: $default-font;
-    margin-top: 0.7em;    
+  font-family: $default-font;
+  margin-top: 0.7em;
 }
 
-.mat-option, .mat-select {
-    font-family: $default-font;
+.mat-option,
+.mat-select {
+  font-family: $default-font;
 }
 
 // Overlay
 .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 50;
 }
 
 /* Media queries */
 
 @mixin respond-above($breakpoint) {
-    // If the breakpoint exists in the map.
-    @if map-has-key($breakpoints, $breakpoint) {
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
     // Get the breakpoint value.
     $breakpoint-value: map-get($breakpoints, $breakpoint);
 
@@ -124,54 +137,53 @@ form {
     }
 
     // If the breakpoint doesn't exist in the map.
-    } @else {
+  } @else {
     // Log a warning.
     @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
 
 @mixin respond-below($breakpoint) {
-    // If the breakpoint exists in the map.
-    @if map-has-key($breakpoints, $breakpoint) {
-        // Get the breakpoint value.
-        $breakpoint-value: map-get($breakpoints, $breakpoint);
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
 
-        // Write the media query.
-        @media (max-width: ($breakpoint-value - 1)) {
-           @content;
-        }
+    // Write the media query.
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
 
     // If the breakpoint doesn't exist in the map.
-    } @else {
-        // Log a warning.
-        @warn 'Invalid breakpoint: #{$breakpoint}.';
-    }
+  } @else {
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
 }
 
 @mixin respond-between($lower, $upper) {
-    @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    // Get the lower and upper breakpoints.
+    $lower-breakpoint: map-get($breakpoints, $lower);
+    $upper-breakpoint: map-get($breakpoints, $upper);
 
-        // Get the lower and upper breakpoints.
-        $lower-breakpoint: map-get($breakpoints, $lower);
-        $upper-breakpoint: map-get($breakpoints, $upper);
-    
-        // Write the media query.
-        @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
-          @content;
-        }
-      
-      // If one or both of the breakpoints don't exist.
-      } @else {    
-        // If lower breakpoint is invalid.
-        @if (map-has-key($breakpoints, $lower) == false) {    
-          // Log a warning.
-          @warn 'Your lower breakpoint was invalid: #{$lower}.';
-        }
-    
-        // If upper breakpoint is invalid.
-        @if (map-has-key($breakpoints, $upper) == false) {    
-          // Log a warning.
-          @warn 'Your upper breakpoint was invalid: #{$upper}.';
-        }
-      }
+    // Write the media query.
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+
+    // If one or both of the breakpoints don't exist.
+  } @else {
+    // If lower breakpoint is invalid.
+    @if (map-has-key($breakpoints, $lower) == false) {
+      // Log a warning.
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    // If upper breakpoint is invalid.
+    @if (map-has-key($breakpoints, $upper) == false) {
+      // Log a warning.
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
 }

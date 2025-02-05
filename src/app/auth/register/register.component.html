@@ -1,74 +1,132 @@
-<div class="box-wrapper" fxLayout="column" fxLayoutAlign="center center">
-    <div fxHide.lt-md="true" fxFlex="0 0 150px"></div>
-    <mat-card class="box" fxLayout="column" fxLayoutAlign="center center">
-        <mat-card-header class="box-header" fxFlex="1">
-            <mat-card-title>Register</mat-card-title>
-        </mat-card-header>
-        <form (ngSubmit)="onSubmit()" #form="ngForm">
-            <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-                <mat-form-field>
-                    <input type="email" matInput ngModel placeholder="Email" name="email" required #email="ngModel" email>
-                    <mat-error *ngIf="email?.invalid && (email.dirty || email.touched)">
-                        <div *ngIf="email.errors.required">Email is required.</div>
-                        <div *ngIf="email?.errors?.email">Email is invalid.</div>
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <input type="password" matInput ngModel placeholder="Password" name="password" required
-                        #password="ngModel" minlength="6">
-                    <mat-hint align="end">{{password.value?.length}} / 6</mat-hint>
-                    <mat-error *ngIf="password?.invalid && (password.dirty || password.touched)">
-                        <div *ngIf="password.errors.required">Password is required.</div>
-                        <div *ngIf="password.errors.minlength">password must be at least 6 characters.</div>
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <input type="password" matInput ngModel placeholder="Confirm Password" name="confirmPassword"
-                        required pattern="{{ password.value }}" #confirmPassword="ngModel">
-                    <mat-error *ngIf="confirmPassword?.invalid && (confirmPassword.dirty || confirmPassword.touched)">
-                        <div *ngIf="confirmPassword.errors.required">Confirm Password is required.</div>
-                        <div *ngIf="confirmPassword.errors.pattern">password must match</div>
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <input type="text" matInput ngModel placeholder="Name" name="name" required #name="ngModel">
-                    <mat-error *ngIf="name?.invalid && (name.dirty || name.touched)">
-                        <div *ngIf="name.errors.required">Name is required.</div>
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <input type="text" matInput ngModel placeholder="Last Name" name="lastName" required
-                        #lastName="ngModel">
-                    <mat-error *ngIf="lastName?.invalid && (lastName.dirty || lastName.touched)">
-                        <div *ngIf="lastName.errors.required">Last Name is required.</div>
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Gender</mat-label>
-                    <mat-select ngModel required #gender="ngModel" name="gender">
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let gender of genders" [value]="gender.code">
-                            {{gender.description}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="gender?.hasError('required')">Please choose a gender.</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <input type="text" 
-                           matInput 
-                           ngModel 
-                           placeholder="Phone" 
-                           name="phone" 
-                           required 
-                           pattern="^(?:\()[0-9]{2}(?:\))\s?[0-9]{4,5}(?:-)[0-9]{4}$" 
-                           #phone="ngModel">
-                    <mat-hint align="start">Ex: (99) 99999-9999</mat-hint>
-                    <mat-error *ngIf="phone?.invalid && (phone.dirty || phone.touched)">
-                        <div *ngIf="phone.errors.required">Phone is required.</div>
-                        <div *ngIf="phone.errors.pattern">Phone is invalid.</div>
-                    </mat-error>
-                </mat-form-field>
-               <!--  <mat-form-field>
+<div class="box-wrapper">
+  <mat-card class="box">
+    <mat-card-header class="box-header">
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <mat-card-content>
+        <mat-form-field>
+          <input
+            type="email"
+            matInput
+            ngModel
+            placeholder="Email"
+            name="email"
+            required
+            #email="ngModel"
+            email
+          />
+          <mat-error *ngIf="email?.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors.required">Email is required.</div>
+            <div *ngIf="email?.errors?.email">Email is invalid.</div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="password"
+            matInput
+            ngModel
+            placeholder="Password"
+            name="password"
+            required
+            #password="ngModel"
+            minlength="6"
+          />
+          <mat-hint align="end">{{ password.value?.length }} / 6</mat-hint>
+          <mat-error
+            *ngIf="password?.invalid && (password.dirty || password.touched)"
+          >
+            <div *ngIf="password.errors.required">Password is required.</div>
+            <div *ngIf="password.errors.minlength">
+              password must be at least 6 characters.
+            </div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="password"
+            matInput
+            ngModel
+            placeholder="Confirm Password"
+            name="confirmPassword"
+            required
+            pattern="{{ password.value }}"
+            #confirmPassword="ngModel"
+          />
+          <mat-error
+            *ngIf="
+              confirmPassword?.invalid &&
+              (confirmPassword.dirty || confirmPassword.touched)
+            "
+          >
+            <div *ngIf="confirmPassword.errors.required">
+              Confirm Password is required.
+            </div>
+            <div *ngIf="confirmPassword.errors.pattern">
+              password must match
+            </div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            ngModel
+            placeholder="Name"
+            name="name"
+            required
+            #name="ngModel"
+          />
+          <mat-error *ngIf="name?.invalid && (name.dirty || name.touched)">
+            <div *ngIf="name.errors.required">Name is required.</div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            ngModel
+            placeholder="Last Name"
+            name="lastName"
+            required
+            #lastName="ngModel"
+          />
+          <mat-error
+            *ngIf="lastName?.invalid && (lastName.dirty || lastName.touched)"
+          >
+            <div *ngIf="lastName.errors.required">Last Name is required.</div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <mat-select ngModel required #gender="ngModel" name="gender">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let gender of genders" [value]="gender.code">
+              {{ gender.description }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="gender?.hasError('required')"
+            >Please choose a gender.</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            ngModel
+            placeholder="Phone"
+            name="phone"
+            required
+            pattern="^(?:\()[0-9]{2}(?:\))\s?[0-9]{4,5}(?:-)[0-9]{4}$"
+            #phone="ngModel"
+          />
+          <mat-hint align="start">Ex: (99) 99999-9999</mat-hint>
+          <mat-error *ngIf="phone?.invalid && (phone.dirty || phone.touched)">
+            <div *ngIf="phone.errors.required">Phone is required.</div>
+            <div *ngIf="phone.errors.pattern">Phone is invalid.</div>
+          </mat-error>
+        </mat-form-field>
+        <!--  <mat-form-field>
                     <mat-label>State</mat-label>
                     <mat-select ngModel required #state="ngModel" name="state">
                         <mat-option>--</mat-option>
@@ -116,10 +174,15 @@
                         <div *ngIf="zipcode.errors.pattern">Zip Code is invalid.</div>
                     </mat-error>
                 </mat-form-field> -->
-            </mat-card-content>
-            <button mat-stroked-button color="accent" class="btn-auth" [disabled]="form.invalid">
-                Register
-            </button>           
-        </form>
-    </mat-card>    
+      </mat-card-content>
+      <button
+        mat-stroked-button
+        color="accent"
+        class="btn-auth"
+        [disabled]="form.invalid"
+      >
+        Register
+      </button>
+    </form>
+  </mat-card>
 </div>

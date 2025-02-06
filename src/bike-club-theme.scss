@@ -123,4 +123,4 @@ $bike-club-theme: mat.define-light-theme(
 );
 
 // Apply the theme
-@include mat.all-legacy-component-themes($bike-club-theme);
+@include mat.all-component-themes($bike-club-theme);

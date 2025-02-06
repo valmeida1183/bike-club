@@ -1,11 +1,11 @@
 @import '../../../variables';
 
 .simple-dialog {
-    .mat-dialog-container {
+    .mat-mdc-dialog-container {
         border: double 5px;
         border-radius: 10px;
 
-        .mat-dialog-title {
+        .mat-mdc-dialog-title {
             font-family: $default-font;;
         }
 
@@ -22,7 +22,7 @@
 }
 
 .error-dialog {
-    .mat-dialog-container {
+    .mat-mdc-dialog-container {
        border-color: $warn;
 
         .mat-icon {
@@ -32,7 +32,7 @@
 }
 
 .warning-dialog {
-    .mat-dialog-container {
+    .mat-mdc-dialog-container {
         border-color: $warning;
 
         .mat-icon {
@@ -42,7 +42,7 @@
 }
 
 .info-dialog {
-    .mat-dialog-container {
+    .mat-mdc-dialog-container {
         border-color: $primary;
 
         .mat-icon {

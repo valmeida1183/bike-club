@@ -45,10 +45,10 @@
     flex-direction: column;
     align-items: center;
 
-    .mat-card-header {
+    .mat-mdc-card-header {
       justify-content: center;
 
-      .mat-card-title {
+      .mat-mdc-card-title {
         color: $primary;
         font-family: $default-font;
         font-size: 3em;
@@ -66,8 +66,8 @@
   width: 100%;
 }
 
-.mat-progress-spinner circle,
-.mat-spinner circle {
+.mat-mdc-progress-spinner circle,
+.mat-mdc-progress-spinner circle {
   stroke: white;
 }
 

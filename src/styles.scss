@@ -80,13 +80,13 @@ form {
 
 // Material desgin personalizations -- // Todo passar para um arquivo scss separado.
 
-.mat-button,
-.mat-raised-button,
-.mat-icon-button,
-.mat-stroked-button,
-.mat-flat-button,
-.mat-fab,
-.mat-mini-fab {
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-icon-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-fab,
+.mat-mdc-mini-fab {
   font-family: $default-font;
   font-size: 18px;
 
@@ -107,13 +107,13 @@ form {
   }
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   font-family: $default-font;
   margin-top: 0.7em;
 }
 
-.mat-option,
-.mat-select {
+.mat-mdc-option,
+.mat-mdc-select {
   font-family: $default-font;
 }
 

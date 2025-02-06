@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
 import { SelectOptionsService } from '../shared/select-options.service';
 
 @Injectable({ providedIn: 'root'})
-export class CategoriesResolver implements Resolve<Category[]> {
+export class CategoriesResolver  {
     constructor(private selectOptionsService: SelectOptionsService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Category[] | Observable<Category[]> | Promise<Category[]> {

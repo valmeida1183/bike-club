@@ -1,21 +1,31 @@
-@import "../../../../variables";
+@import '../../../../variables';
+@import '../../../../styles.scss';
 
-.about-container {       
-    > * {
-        margin: 10px;
-        padding: 20px;
+.about-container {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    margin: 10px;
+    padding: 20px;
+  }
+
+  figure {
+    margin: 0;
+    .about-banner {
+      border: solid 2px $secondary;
+      max-width: 100%;
+      max-height: 100%;
     }
-    
-    figure {
-        margin: 0;        
-        .about-banner {
-           border: solid 2px $secondary;
-           max-width: 100%;
-           max-height: 100%;              
-        }
-        figcaption {
-            text-align: center;
-            color: $secondary;
-        } 
-    }  
+    figcaption {
+      text-align: center;
+      color: $secondary;
+    }
+  }
+}
+
+@include respond-above(md) {
+  .about-container {
+    flex-direction: row;
+  }
 }

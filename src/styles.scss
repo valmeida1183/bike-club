@@ -49,8 +49,13 @@ form {
 
 .form-group {
   mat-form-field + mat-form-field {
-    margin-left: 1em;
+    margin-left: 1rem;
   }
+}
+
+.form-row {
+  display: flex;
+  flex-flow: column wrap;
 }
 
 // Commom Screen Classes
@@ -109,6 +114,10 @@ form {
 
 .mat-option,
 .mat-select {
+  font-family: $default-font;
+}
+
+.mat-expansion-panel-body {
   font-family: $default-font;
 }
 
@@ -185,5 +194,14 @@ form {
       // Log a warning.
       @warn 'Your upper breakpoint was invalid: #{$upper}.';
     }
+  }
+}
+
+@include respond-above(md) {
+  .form-row {
+    mat-form-field + mat-form-field {
+      margin-left: 1rem;
+    }
+    flex-flow: row nowrap;
   }
 }

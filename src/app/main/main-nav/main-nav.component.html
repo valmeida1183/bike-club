@@ -1,9 +1,11 @@
 <mat-toolbar color="primary" class="toolbar-header">
-  <mat-toolbar-row class="grain" fxLayoutAlign="flex-start center" fxLayoutGap="20px">    
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-    </button>
-    <img class="main-logo" src="../../assets/images/BikeClub_Logo_small.png" alt="Logo" width="150px" height="150px" fxHide.lt-md>     
+  <mat-toolbar-row class="grain" fxLayoutAlign="flex-start center" fxLayoutGap="20px">
+    @if (isHandset$ | async) {
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    }
+    <img class="main-logo" src="../../assets/images/BikeClub_Logo_small.png" alt="Logo" width="150px" height="150px" fxHide.lt-md>
     <div class="logo-text" fxHide.gt-sm>
       <span>Bike Club</span>
     </div>
@@ -11,20 +13,22 @@
       <a class="header-link" mat-flat-button routerLink="/shopping" routerLinkActive="header-link-active">Shop</a>
       <a class="header-link" mat-flat-button routerLink="/club" routerLinkActive="header-link-active">Club</a>
       <a class="header-link" mat-flat-button routerLink="/about" routerLinkActive="header-link-active">About</a>
-    </div>    
+    </div>
     <div class="flex-spacer"></div>
     <div fxHide.lt-md>
       <a class="header-link" type="button" aria-label="Cart" mat-icon-button routerLink="/about" title="Cart">
         <mat-icon>shopping_cart</mat-icon>
-        <span class="caret" *ngIf="cartItemCount > 0">{{cartItemCount}}</span>
+        @if (cartItemCount > 0) {
+          <span class="caret">{{cartItemCount}}</span>
+        }
       </a>
       <a class="header-link" type="button" aria-label="Profile" mat-icon-button routerLink="/about" title="Profile">
-        <mat-icon>person</mat-icon>        
-      </a>    
+        <mat-icon>person</mat-icon>
+      </a>
       <a class="header-link" type="button" aria-label="Loggout" mat-icon-button (click)="onLogout()" title="Logout">
         <mat-icon>exit_to_app</mat-icon>
       </a>
-    </div>    
+    </div>
   </mat-toolbar-row>
   <mat-toolbar-row class="toolbar-second-row grain"></mat-toolbar-row>
 </mat-toolbar>
@@ -44,6 +48,6 @@
   <mat-sidenav-content class="dot-background">
     <div class="main-container">
       <router-outlet></router-outlet>
-    </div>    
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

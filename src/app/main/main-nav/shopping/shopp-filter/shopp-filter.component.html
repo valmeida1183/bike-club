@@ -6,112 +6,133 @@
     [submitDisabled]="shopForm.invalid"
     [showSubmit]="true"
     (actionPanel)="onSearch($event)"
-  >
+    >
     <p>Please fill in the fields below to search for the bikes you want.</p>
     <!-- <p>
-            Form Status: {{ shopForm.status }}
-        </p>
-        <p>
-            Form IsValid: {{ shopForm.invalid }}
-        </p> -->
-    <form class="form" [formGroup]="shopForm" (ngSubmit)="onSearch($event)">
-      <div class="form-row">
-        <mat-form-field>
-          <mat-label>Category</mat-label>
-          <mat-select formControlName="categoryId">
-            <mat-option>--</mat-option>
+    Form Status: {{ shopForm.status }}
+  </p>
+  <p>
+    Form IsValid: {{ shopForm.invalid }}
+  </p> -->
+  <form class="form" [formGroup]="shopForm" (ngSubmit)="onSearch($event)">
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+          <mat-option>--</mat-option>
+          @for (category of categories; track category) {
             <mat-option
-              *ngFor="let category of categories"
               [value]="category.id"
-            >
+              >
               {{ category.name }}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Gender</mat-label>
-          <mat-select formControlName="genderCode">
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let gender of genders" [value]="gender.code">
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="genderCode">
+          <mat-option>--</mat-option>
+          @for (gender of genders; track gender) {
+            <mat-option [value]="gender.code">
               {{ gender.description }}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Price</mat-label>
-          <input type="text" matInput formControlName="price" />
-          <span matPrefix>$&nbsp;</span>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input type="text" matInput formControlName="price" />
+        <span matPrefix>$&nbsp;</span>
+        @if (
+          shopForm.get('price').invalid &&
+          (shopForm.get('price').dirty || shopForm.get('price').touched)
+          ) {
           <mat-error
-            *ngIf="
-              shopForm.get('price').invalid &&
-              (shopForm.get('price').dirty || shopForm.get('price').touched)
-            "
-          >
-            <div *ngIf="shopForm.get('price').errors['pattern']">
-              Price is invalid.
-            </div>
+            >
+            @if (shopForm.get('price').errors['pattern']) {
+              <div>
+                Price is invalid.
+              </div>
+            }
           </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="form-row">
-        <mat-form-field>
-          <mat-label>Gears</mat-label>
-          <input type="number" matInput formControlName="gears" step="1" />
+        }
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-form-field>
+        <mat-label>Gears</mat-label>
+        <input type="number" matInput formControlName="gears" step="1" />
+        @if (
+          shopForm.get('gears').invalid &&
+          (shopForm.get('gears').dirty || shopForm.get('gears').touched)
+          ) {
           <mat-error
-            *ngIf="
-              shopForm.get('gears').invalid &&
-              (shopForm.get('gears').dirty || shopForm.get('gears').touched)
-            "
-          >
-            <div *ngIf="shopForm.get('gears').errors['min']">
-              Minimum value is 0.
-            </div>
-            <div *ngIf="shopForm.get('gears').errors['max']">
-              Maximum value is 36.
-            </div>
+            >
+            @if (shopForm.get('gears').errors['min']) {
+              <div>
+                Minimum value is 0.
+              </div>
+            }
+            @if (shopForm.get('gears').errors['max']) {
+              <div>
+                Maximum value is 36.
+              </div>
+            }
           </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Frame Size</mat-label>
-          <input
-            type="number"
-            matInput
-            formControlName="frameSize"
-            step="0.5"
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Frame Size</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="frameSize"
+          step="0.5"
           />
+        @if (
+          shopForm.get('frameSize').invalid &&
+          (shopForm.get('frameSize').dirty ||
+          shopForm.get('frameSize').touched)
+          ) {
           <mat-error
-            *ngIf="
-              shopForm.get('frameSize').invalid &&
-              (shopForm.get('frameSize').dirty ||
-                shopForm.get('frameSize').touched)
-            "
-          >
-            <div *ngIf="shopForm.get('frameSize').errors['min']">
-              Minimum value is 13.
-            </div>
-            <div *ngIf="shopForm.get('frameSize').errors['max']">
-              Maximum value is 24.
-            </div>
+            >
+            @if (shopForm.get('frameSize').errors['min']) {
+              <div>
+                Minimum value is 13.
+              </div>
+            }
+            @if (shopForm.get('frameSize').errors['max']) {
+              <div>
+                Maximum value is 24.
+              </div>
+            }
           </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Rim Size</mat-label>
-          <input type="number" matInput formControlName="rimSize" step="0.5" />
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Rim Size</mat-label>
+        <input type="number" matInput formControlName="rimSize" step="0.5" />
+        @if (
+          shopForm.get('rimSize').invalid &&
+          (shopForm.get('rimSize').dirty || shopForm.get('rimSize').touched)
+          ) {
           <mat-error
-            *ngIf="
-              shopForm.get('rimSize').invalid &&
-              (shopForm.get('rimSize').dirty || shopForm.get('rimSize').touched)
-            "
-          >
-            <div *ngIf="shopForm.get('rimSize').errors['min']">
-              Minimum value is 12.
-            </div>
-            <div *ngIf="shopForm.get('rimSize').errors['max']">
-              Maximum value is 29.
-            </div>
+            >
+            @if (shopForm.get('rimSize').errors['min']) {
+              <div>
+                Minimum value is 12.
+              </div>
+            }
+            @if (shopForm.get('rimSize').errors['max']) {
+              <div>
+                Maximum value is 29.
+              </div>
+            }
           </mat-error>
-        </mat-form-field>
-      </div>
-    </form>
-  </bc-panel>
+        }
+      </mat-form-field>
+    </div>
+  </form>
+</bc-panel>
 </div>

@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "bike-club:build"
+            "buildTarget": "bike-club:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "bike-club:build:production"
+              "buildTarget": "bike-club:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bike-club:build"
+            "buildTarget": "bike-club:build"
           }
         },
         "test": {

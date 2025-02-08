@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -19,7 +23,7 @@ export class ShoppFilterComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private store: Store<{ shoppingList: any }>
+    private store: Store<{ shoppingList: any }>,
   ) {}
 
   ngOnInit() {
@@ -40,11 +44,20 @@ export class ShoppFilterComponent implements OnInit {
       genderCode: new UntypedFormControl(null),
       price: new UntypedFormControl(
         null,
-        Validators.pattern(/^\$?\d+((,\d{3})+)?(\.\d+)?$/)
+        Validators.pattern(/^\$?\d+((,\d{3})+)?(\.\d+)?$/),
       ),
-      gears: new UntypedFormControl(21, [Validators.min(0), Validators.max(36)]),
-      frameSize: new UntypedFormControl(19, [Validators.min(13), Validators.max(24)]),
-      rimSize: new UntypedFormControl(27.5, [Validators.min(12), Validators.max(29)]),
+      gears: new UntypedFormControl(21, [
+        Validators.min(0),
+        Validators.max(36),
+      ]),
+      frameSize: new UntypedFormControl(19, [
+        Validators.min(13),
+        Validators.max(24),
+      ]),
+      rimSize: new UntypedFormControl(27.5, [
+        Validators.min(12),
+        Validators.max(29),
+      ]),
     });
   }
   //#endregion Reactive Forms

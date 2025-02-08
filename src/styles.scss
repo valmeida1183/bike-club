@@ -89,6 +89,7 @@ form {
 .mat-mdc-mini-fab {
   font-family: $default-font;
   font-size: 18px;
+  letter-spacing: normal;
 
   &:hover {
     color: $secondary;
@@ -107,9 +108,16 @@ form {
   }
 }
 
-.mat-mdc-form-field {
-  font-family: $default-font;
-  margin-top: 0.7em;
+.form-field {
+  &.mat-mdc-form-field {
+    font-family: $default-font;
+    margin-top: 0.7em;
+
+    .mdc-text-field--filled,
+    .mdc-floating-label {
+      font-family: $default-font;
+    }
+  }
 }
 
 .mat-mdc-option,

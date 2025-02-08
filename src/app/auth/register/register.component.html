@@ -5,122 +5,90 @@
     </mat-card-header>
     <form (ngSubmit)="onSubmit()" #form="ngForm">
       <mat-card-content>
-        <mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Email</mat-label>
           <input
             type="email"
             matInput
             ngModel
-            placeholder="Email"
             name="email"
             required
             #email="ngModel"
             email
-            />
-          @if (email?.invalid && (email.dirty || email.touched)) {
-            <mat-error>
-              @if (email.errors.required) {
-                <div>Email is required.</div>
-              }
-              @if (email?.errors?.email) {
-                <div>Email is invalid.</div>
-              }
-            </mat-error>
+          />
+          @if (email?.hasError('required')) {
+            <mat-error>Email is required.</mat-error>
+          }
+          @if (email?.hasError('email')) {
+            <mat-error>Email is invalid.</mat-error>
           }
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Password</mat-label>
           <input
             type="password"
             matInput
             ngModel
-            placeholder="Password"
             name="password"
             required
             #password="ngModel"
             minlength="6"
-            />
+          />
           <mat-hint align="end">{{ password.value?.length }} / 6</mat-hint>
-          @if (password?.invalid && (password.dirty || password.touched)) {
-            <mat-error
-              >
-              @if (password.errors.required) {
-                <div>Password is required.</div>
-              }
-              @if (password.errors.minlength) {
-                <div>
-                  password must be at least 6 characters.
-                </div>
-              }
-            </mat-error>
+          @if (password?.hasError('required')) {
+            <mat-error>Password is required.</mat-error>
+          }
+          @if (password?.hasError('minlength')) {
+            <mat-error>Password must be at least 6 characters.</mat-error>
           }
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Confirm Password</mat-label>
           <input
             type="password"
             matInput
             ngModel
-            placeholder="Confirm Password"
             name="confirmPassword"
             required
             pattern="{{ password.value }}"
             #confirmPassword="ngModel"
-            />
-          @if (
-            confirmPassword?.invalid &&
-            (confirmPassword.dirty || confirmPassword.touched)
-            ) {
-            <mat-error
-              >
-              @if (confirmPassword.errors.required) {
-                <div>
-                  Confirm Password is required.
-                </div>
-              }
-              @if (confirmPassword.errors.pattern) {
-                <div>
-                  password must match
-                </div>
-              }
-            </mat-error>
+          />
+          @if (confirmPassword?.hasError('required')) {
+            <mat-error>Confirm Password is required.</mat-error>
+          }
+          @if (confirmPassword?.hasError('pattern')) {
+            <mat-error>Password must match.</mat-error>
           }
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Name</mat-label>
           <input
             type="text"
             matInput
             ngModel
-            placeholder="Name"
             name="name"
             required
             #name="ngModel"
-            />
-          @if (name?.invalid && (name.dirty || name.touched)) {
-            <mat-error>
-              @if (name.errors.required) {
-                <div>Name is required.</div>
-              }
-            </mat-error>
+          />
+          @if (name?.hasError('required')) {
+            <mat-error>Name is required.</mat-error>
           }
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Last Name</mat-label>
           <input
             type="text"
             matInput
             ngModel
-            placeholder="Last Name"
             name="lastName"
             required
             #lastName="ngModel"
-            />
-          @if (lastName?.invalid && (lastName.dirty || lastName.touched)) {
-            <mat-error
-              >
-              @if (lastName.errors.required) {
-                <div>Last Name is required.</div>
-              }
-            </mat-error>
+          />
+          @if (lastName?.hasError('required')) {
+            <mat-error>Last Name is required.</mat-error>
           }
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="form-field">
           <mat-label>Gender</mat-label>
           <mat-select ngModel required #gender="ngModel" name="gender">
             <mat-option>--</mat-option>
@@ -131,35 +99,29 @@
             }
           </mat-select>
           @if (gender?.hasError('required')) {
-            <mat-error
-              >Please choose a gender.</mat-error
-              >
-            }
-          </mat-form-field>
-          <mat-form-field>
-            <input
-              type="text"
-              matInput
-              ngModel
-              placeholder="Phone"
-              name="phone"
-              required
-              pattern="^(?:\()[0-9]{2}(?:\))\s?[0-9]{4,5}(?:-)[0-9]{4}$"
-              #phone="ngModel"
-              />
-            <mat-hint align="start">Ex: (99) 99999-9999</mat-hint>
-            @if (phone?.invalid && (phone.dirty || phone.touched)) {
-              <mat-error>
-                @if (phone.errors.required) {
-                  <div>Phone is required.</div>
-                }
-                @if (phone.errors.pattern) {
-                  <div>Phone is invalid.</div>
-                }
-              </mat-error>
-            }
-          </mat-form-field>
-          <!--  <mat-form-field>
+            <mat-error>Please choose a gender.</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Phone</mat-label>
+          <input
+            type="text"
+            matInput
+            ngModel
+            name="phone"
+            required
+            pattern="^(?:\()[0-9]{2}(?:\))\s?[0-9]{4,5}(?:-)[0-9]{4}$"
+            #phone="ngModel"
+          />
+          <mat-hint align="start">Ex: (99) 99999-9999</mat-hint>
+          @if (phone?.hasError('required')) {
+            <mat-error>Phone is required.</mat-error>
+          }
+          @if (phone?.hasError('pattern')) {
+            <mat-error>Phone is invalid.</mat-error>
+          }
+        </mat-form-field>
+        <!--  <mat-form-field>
           <mat-label>State</mat-label>
           <mat-select ngModel required #state="ngModel" name="state">
             <mat-option>--</mat-option>
@@ -213,7 +175,7 @@
         color="accent"
         class="btn-auth"
         [disabled]="form.invalid"
-        >
+      >
         Register
       </button>
     </form>

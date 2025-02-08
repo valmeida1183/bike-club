@@ -1,7 +1,7 @@
 @import '../../../variables';
 
-.sidenav-container { 
-  z-index: 0;  
+.sidenav-container {
+  z-index: 0;
 }
 
 .sidenav {
@@ -23,34 +23,41 @@
   top: 0;
   left: 0;
   right: 0;
-  
-  .header-link {
-    color: white;
-    cursor: pointer;
-    background-color: transparent;
-    position: relative;
 
-    .caret {
-      position: absolute;
-      text-align: center;
-      font-size: 10px;
-      background-color: $secondary;
-      border-radius: 50%;
-      line-height: 15px;
-      width: 15px;
-      height: 15px;
-      right: 3px;
-      top: 4px;
-      color: white;      
-    }    
+  .nav-links {
+    margin-left: 1.5rem;
 
-    &:hover {
-      color: $secondary;      
-    }
-    
-    &.header-link-active {
-      border: 1px solid white;
-      color: $secondary;
+    .header-link {
+      color: white;
+      cursor: pointer;
+      background-color: transparent;
+      position: relative;
+      font-family: $default-font;
+      font-size: 18px;
+      letter-spacing: normal;
+
+      .caret {
+        position: absolute;
+        text-align: center;
+        font-size: 10px;
+        background-color: $secondary;
+        border-radius: 50%;
+        line-height: 15px;
+        width: 15px;
+        height: 15px;
+        right: 3px;
+        top: 4px;
+        color: white;
+      }
+
+      &:hover {
+        color: $secondary;
+      }
+
+      &.header-link-active {
+        border: 1px solid white;
+        color: $secondary;
+      }
     }
   }
 
@@ -60,18 +67,18 @@
   }
 }
 
-.toolbar-second-row {  
+.toolbar-second-row {
   background-color: $secondary;
   border-bottom: double 5px white;
-  border-top: double 5px white;  
+  border-top: double 5px white;
   box-shadow: $container-shadow;
-  height: 40px;  
+  height: 40px;
 }
 
 .main-logo {
   margin-top: 100px;
   -webkit-filter: $logo-shadow;
-  filter: $logo-shadow; 
+  filter: $logo-shadow;
   z-index: 1;
 }
 

@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+	HTTP_INTERCEPTORS,
+	provideHttpClient,
+	withInterceptorsFromDi,
+} from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -19,22 +23,29 @@ import { shoppingListReducer } from './store/reducers/shopping-list.reducer';
 import { ShoppingListEffects } from './store/effects/shopping-list.effects';
 import { shopCartReducer } from './store/reducers/shop-cart.reducer';
 
-
-@NgModule({ declarations: [
-        AppComponent,
-        MainComponent,
-        MainNavComponent,
-        AboutComponent
-    ],
-    bootstrap: [AppComponent], imports: [AppRoutingModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        SharedModule,
-        LayoutModule,
-        StoreModule.forRoot({ shoppingList: shoppingListReducer, shopCart: shopCartReducer }),
-        EffectsModule.forRoot([ShoppingListEffects])], providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: RequestParamsInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
-export class AppModule { }
+@NgModule({
+	declarations: [AppComponent, MainComponent, MainNavComponent, AboutComponent],
+	bootstrap: [AppComponent],
+	imports: [
+		AppRoutingModule,
+		BrowserModule,
+		BrowserAnimationsModule,
+		SharedModule,
+		LayoutModule,
+		StoreModule.forRoot({
+			shoppingList: shoppingListReducer,
+			shopCart: shopCartReducer,
+		}),
+		EffectsModule.forRoot([ShoppingListEffects]),
+	],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: RequestParamsInterceptor,
+			multi: true,
+		},
+		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+		provideHttpClient(withInterceptorsFromDi()),
+	],
+})
+export class AppModule {}

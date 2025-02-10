@@ -1,57 +1,57 @@
-@import "../../../../../../variables";
-@import "../../../../../../styles.scss";
+@import '../../../../../../variables';
+@import '../../../../../../styles.scss';
 
 .shop-card {
-    @extend .double-border;
-    font-family: $default-font;
-    margin: 10px;    
-    min-height: 465px;
-    transition: all 0.5s ease-in;    
+  @extend .double-border;
+  font-family: $default-font;
+  margin: 10px;
+  min-height: 465px;
+  transition: all 0.5s ease-in;
 
-    .shop-card-title {        
-        color: $secondary;
+  .shop-card-title {
+    color: $secondary;
+  }
+
+  .shop-card-image-content {
+    min-height: 230px;
+    padding: 10px;
+
+    .shop-card-image {
+      margin-left: auto;
+      margin-right: auto;
     }
+  }
 
-    .shop-card-image-content {
-        min-height: 230px;
-        padding: 10px;
-        
-        .shop-card-image{
-            margin-left: auto;
-            margin-right: auto;
-        }
+  .shop-card-price {
+    margin-top: 10px;
+    color: $secondary;
+  }
+
+  .shop-card-description {
+    min-height: 42px;
+  }
+
+  .shop-card-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &:hover {
+    background-color: $light-background;
+    border-color: $warn;
+
+    .shop-card-title {
+      color: $primary;
     }
 
     .shop-card-price {
-        margin-top: 10px;
-        color: $secondary;
+      color: $primary;
     }
-
-    .shop-card-description {
-        min-height: 42px;
-    }
-
-    .shop-card-actions {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    &:hover {
-        background-color: $light-background;
-        border-color: $warn;
-
-        .shop-card-title {
-            color: $primary;
-        }
-
-        .shop-card-price {
-            color: $primary;
-        }
-    }
+  }
 }
 
 @include respond-above(xs) {
-    .shop-card {
-        width: 400px;
-    }
+  .shop-card {
+    width: 400px;
+  }
 }

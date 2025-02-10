@@ -1,52 +1,55 @@
 @import '../../../variables';
 
 .simple-dialog {
-    .mat-mdc-dialog-container {
-        border: double 5px;
-        border-radius: 10px;
+  .mat-mdc-dialog-container {
+    border: double 5px;
+    border-radius: 10px;
 
-        .mat-mdc-dialog-title {
-            font-family: $default-font;;
-        }
-
-        .mat-icon {
-            width: 40px;
-            height: 40px;
-            font-size: 40px;
-        }
-
-        h3 {
-            margin: 0 15px;
-        }
+    .simple-dialog-title {
+      display: flex;
+      justify-content: center;
+      font-family: $default-font;
+      margin-top: 1rem;
     }
+
+    .mat-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 40px;
+    }
+
+    h3 {
+      margin: 0 15px;
+    }
+  }
 }
 
 .error-dialog {
-    .mat-mdc-dialog-container {
-       border-color: $warn;
+  .mat-mdc-dialog-container {
+    border-color: $warn;
 
-        .mat-icon {
-            color: $warn;           
-        }
+    .mat-icon {
+      color: $warn;
     }
+  }
 }
 
 .warning-dialog {
-    .mat-mdc-dialog-container {
-        border-color: $warning;
+  .mat-mdc-dialog-container {
+    border-color: $warning;
 
-        .mat-icon {
-            color: $warning;           
-        }
+    .mat-icon {
+      color: $warning;
     }
+  }
 }
 
 .info-dialog {
-    .mat-mdc-dialog-container {
-        border-color: $primary;
+  .mat-mdc-dialog-container {
+    border-color: $primary;
 
-        .mat-icon {
-            color: $primary;           
-        }
+    .mat-icon {
+      color: $primary;
     }
+  }
 }

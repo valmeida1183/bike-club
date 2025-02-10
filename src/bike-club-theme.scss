@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@import './variables';
 
 @include mat.core();
 
@@ -123,3 +124,9 @@ $bike-club-theme: mat.define-light-theme(
 
 // Apply the theme
 @include mat.all-component-themes($bike-club-theme);
+
+//Overrides default theme variables
+
+:root {
+  --mat-card-title-text-font: $default-font;
+}

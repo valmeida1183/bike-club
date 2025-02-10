@@ -1,4 +1,4 @@
-<div mat-dialog-title color="warn" fxLayout="row" fxLayoutAlign="start center">
+<div class="simple-dialog-title" mat-dialog-title color="warn">
   @if (data.type === 'Error') {
     <mat-icon>error</mat-icon>
   }
@@ -8,10 +8,10 @@
   @if (data.type === 'Information') {
     <mat-icon>info</mat-icon>
   }
-  <h3>{{data.title}}</h3>
+  <h3>{{ data.title }}</h3>
 </div>
 <div mat-dialog-content>
-  {{data.message}}
+  {{ data.message }}
 </div>
 <div mat-dialog-actions align="end">
   <button mat-button mat-raised-button (click)="onClose()">Close</button>

@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'bc-panel',
-  templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.scss']
+    selector: 'bc-panel',
+    templateUrl: './panel.component.html',
+    styleUrls: ['./panel.component.scss'],
+    standalone: false
 })
 export class PanelComponent implements OnInit {
   @Input() expanded?: boolean;

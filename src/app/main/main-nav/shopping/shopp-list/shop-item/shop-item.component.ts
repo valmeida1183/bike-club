@@ -8,9 +8,10 @@ import { Purchase } from 'src/app/models/purchase.model';
 import { ShopCart } from 'src/app/models/shopCart.model';
 
 @Component({
-  selector: 'bc-shop-item',
-  templateUrl: './shop-item.component.html',
-  styleUrls: ['./shop-item.component.scss']
+    selector: 'bc-shop-item',
+    templateUrl: './shop-item.component.html',
+    styleUrls: ['./shop-item.component.scss'],
+    standalone: false
 })
 export class ShopItemComponent implements OnInit {
   @Input() bike: Bike;

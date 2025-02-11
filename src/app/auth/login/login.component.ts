@@ -8,9 +8,10 @@ import { DialogService } from 'src/app/shared/dialog.service';
 import { DialogType } from 'src/app/shared/simple-dialog/dialogType';
 
 @Component({
-  selector: 'bc-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['../auth.component.scss']
+    selector: 'bc-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['../auth.component.scss'],
+    standalone: false
 })
 export class LoginComponent implements OnInit {
   @ViewChild('form') form: NgForm;

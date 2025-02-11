@@ -11,9 +11,10 @@ import { ShopCart } from 'src/app/models/shopCart.model';
 import { BreakpointService } from 'src/app/shared/breakpoint.service';
 
 @Component({
-  selector: 'bc-main-nav',
-  templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.scss'],
+    selector: 'bc-main-nav',
+    templateUrl: './main-nav.component.html',
+    styleUrls: ['./main-nav.component.scss'],
+    standalone: false
 })
 export class MainNavComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') drawer: MatSidenav;

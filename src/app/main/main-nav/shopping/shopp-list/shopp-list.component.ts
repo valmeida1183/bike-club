@@ -5,9 +5,10 @@ import { Observable, Subscription } from 'rxjs';
 import { Bike } from 'src/app/models/bike.model';
 
 @Component({
-  selector: 'bc-shopp-list',
-  templateUrl: './shopp-list.component.html',
-  styleUrls: ['./shopp-list.component.scss']
+    selector: 'bc-shopp-list',
+    templateUrl: './shopp-list.component.html',
+    styleUrls: ['./shopp-list.component.scss'],
+    standalone: false
 })
 export class ShoppListComponent implements OnInit, OnDestroy {
   bikes$: Observable<any>;

@@ -12,9 +12,10 @@ import { Gender } from 'src/app/models/gender.model';
 import { loadBikes } from 'src/app/store/actions/shopping-list.actions';
 
 @Component({
-  selector: 'bc-shopp-filter',
-  templateUrl: './shopp-filter.component.html',
-  styleUrls: ['./shopp-filter.component.scss'],
+    selector: 'bc-shopp-filter',
+    templateUrl: './shopp-filter.component.html',
+    styleUrls: ['./shopp-filter.component.scss'],
+    standalone: false
 })
 export class ShoppFilterComponent implements OnInit {
   shopForm: UntypedFormGroup;

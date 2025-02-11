@@ -1,13 +1,13 @@
-@import "../../../variables";
-@import "../../../styles.scss";
+@use 'variables' as _var;
+@forward 'styles.scss';
 
 .mat-expansion-panel {
-    @extend .double-border;
-    margin-bottom: 20px;
+	@extend .double-border;
+	margin-bottom: 20px;
 
-    h2.panel-title {
-        font-size: 1.3em;
-        font-family: $default-font;
-        color: $secondary;
-    }
+	h2.panel-title {
+		font-size: 1.3em;
+		font-family: _var.$default-font;
+		color: _var.$secondary;
+	}
 }

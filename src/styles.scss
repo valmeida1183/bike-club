@@ -1,81 +1,82 @@
 /* You can add global styles to this file, and also import other style files */
 //@import 'bootstrap/dist/css/bootstrap.min.css';
-@import './variables';
+@use 'sass:map';
+@use './variables' as _var;
 
 html,
 body {
-  height: 100%;
+	height: 100%;
 }
 body {
-  margin: 0;
-  font-family: $default-font;
-  @extend .dot-background;
+	margin: 0;
+	font-family: _var.$default-font;
+	@extend .dot-background;
 }
 
 /* background textures */
 .dot-background {
-  background-color: $background;
-  background-image: $dotted-image;
+	background-color: _var.$background;
+	background-image: _var.$dotted-image;
 }
 
 .grain {
-  background-image: url('assets/images/grain.png');
-  background-repeat: repeat;
+	background-image: url('assets/images/grain.png');
+	background-repeat: repeat;
 }
 
 .simple-background {
-  background-color: $background;
+	background-color: _var.$background;
 }
 /* Logo text */
 .logo-text {
-  font-family: $logo-font;
-  font-size: 2.1em;
-  color: $background;
-  padding-top: 1rem;
-  text-shadow: 2px 4px 5px rgba(15, 6, 4, 0.6);
+	font-family: _var.$logo-font;
+	font-size: 2.1em;
+	color: _var.$background;
+	padding-top: 1rem;
+	text-shadow: 2px 4px 5px rgba(15, 6, 4, 0.6);
 }
 
 /* Inputs and Forms */
 
 form {
-  display: flex;
-  flex-flow: column wrap;
-  width: 100%;
+	display: flex;
+	flex-flow: column wrap;
+	width: 100%;
 
-  mat-form-field {
-    width: 100%;
-  }
+	mat-form-field {
+		width: 100%;
+	}
 }
 
 .form-group {
-  mat-form-field + mat-form-field {
-    margin-left: 1rem;
-  }
+	mat-form-field + mat-form-field {
+		margin-left: 1rem;
+	}
 }
 
 .form-row {
-  display: flex;
-  flex-flow: column wrap;
+	display: flex;
+	flex-flow: column wrap;
 }
 
 // Commom Screen Classes
 .double-border {
-  border: double 4px $primary;
+	border: double 4px _var.$primary;
 }
 
 .main-container {
-  padding: 25px;
+	padding: 25px;
 }
 
 .main-content {
-  //@extend .simple-background;
-  background-color: rgb(255, 255, 255, 0.7);
+	//@extend .simple-background;
+	background-color: rgb(255, 255, 255, 0.7);
 }
 
 .img-responsive {
-  display: block;
-  height: auto;
-  max-width: 100%;
+	display: block;
+	height: auto;
+	max-width: 100%;
 }
 
 // Material desgin personalizations -- // Todo passar para um arquivo scss separado.
@@ -87,134 +88,136 @@ form {
 .mat-mdc-unelevated-button,
 .mat-mdc-fab,
 .mat-mdc-mini-fab {
-  font-family: $default-font;
-  font-size: 18px;
-  letter-spacing: normal;
-  margin: 0 0.2rem;
+	font-family: _var.$default-font;
+	font-size: 18px;
+	letter-spacing: normal;
+	margin: 0 0.2rem;
 
-  &:hover {
-    color: $secondary;
-  }
+	&:hover {
+		color: _var.$secondary;
+	}
 
-  &.secondary,
-  &.accent,
-  &.warn {
-    &:hover {
-      color: $primary;
-    }
-  }
+	&.secondary,
+	&.accent,
+	&.warn {
+		&:hover {
+			color: _var.$primary;
+		}
+	}
 
-  &.form-button {
-    min-width: 100px;
-  }
+	&.form-button {
+		min-width: 100px;
+	}
 }
 
 .form-field {
-  &.mat-mdc-form-field {
-    font-family: $default-font;
-    margin-top: 0.7em;
+	&.mat-mdc-form-field {
+		font-family: _var.$default-font;
+		margin-top: 0.7em;
 
-    .mdc-text-field--filled,
-    .mdc-floating-label {
-      font-family: $default-font;
-    }
-  }
+		.mdc-text-field--filled,
+		.mdc-floating-label {
+			font-family: _var.$default-font;
+		}
+	}
 }
 
 .mat-mdc-option,
 .mat-mdc-select {
-  font-family: $default-font;
+	font-family: _var.$default-font;
 }
 
 .mat-expansion-panel-body {
-  font-family: $default-font;
+	font-family: _var.$default-font;
 }
 
 // Overlay
 .backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.85);
+	z-index: 50;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 /* Media queries */
 
 @mixin respond-above($breakpoint) {
-  // If the breakpoint exists in the map.
-  @if map-has-key($breakpoints, $breakpoint) {
-    // Get the breakpoint value.
-    $breakpoint-value: map-get($breakpoints, $breakpoint);
+	// If the breakpoint exists in the map.
+	@if map.has-key(_var.$breakpoints, $breakpoint) {
+		// Get the breakpoint value.
+		$breakpoint-value: map.get(_var.$breakpoints, $breakpoint);
 
-    // Write the media query.
-    @media (min-width: $breakpoint-value) {
-      @content;
-    }
+		// Write the media query.
+		@media (min-width: $breakpoint-value) {
+			@content;
+		}
 
-    // If the breakpoint doesn't exist in the map.
-  } @else {
-    // Log a warning.
-    @warn 'Invalid breakpoint: #{$breakpoint}.';
-  }
+		// If the breakpoint doesn't exist in the map.
+	} @else {
+		// Log a warning.
+		@warn 'Invalid breakpoint: #{$breakpoint}.';
+	}
 }
 
 @mixin respond-below($breakpoint) {
-  // If the breakpoint exists in the map.
-  @if map-has-key($breakpoints, $breakpoint) {
-    // Get the breakpoint value.
-    $breakpoint-value: map-get($breakpoints, $breakpoint);
+	// If the breakpoint exists in the map.
+	@if map.has-key(_var.$breakpoints, $breakpoint) {
+		// Get the breakpoint value.
+		$breakpoint-value: map.get(_var.$breakpoints, $breakpoint);
 
-    // Write the media query.
-    @media (max-width: ($breakpoint-value - 1)) {
-      @content;
-    }
+		// Write the media query.
+		@media (max-width: ($breakpoint-value - 1)) {
+			@content;
+		}
 
-    // If the breakpoint doesn't exist in the map.
-  } @else {
-    // Log a warning.
-    @warn 'Invalid breakpoint: #{$breakpoint}.';
-  }
+		// If the breakpoint doesn't exist in the map.
+	} @else {
+		// Log a warning.
+		@warn 'Invalid breakpoint: #{$breakpoint}.';
+	}
 }
 
 @mixin respond-between($lower, $upper) {
-  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
-    // Get the lower and upper breakpoints.
-    $lower-breakpoint: map-get($breakpoints, $lower);
-    $upper-breakpoint: map-get($breakpoints, $upper);
+	@if map.has-key(_var.$breakpoints, $lower) and
+		map.has-key(_var.$breakpoints, $upper)
+	{
+		// Get the lower and upper breakpoints.
+		$lower-breakpoint: map.get(_var.$breakpoints, $lower);
+		$upper-breakpoint: map.get(_var.$breakpoints, $upper);
 
-    // Write the media query.
-    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
-      @content;
-    }
+		// Write the media query.
+		@media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+			@content;
+		}
 
-    // If one or both of the breakpoints don't exist.
-  } @else {
-    // If lower breakpoint is invalid.
-    @if (map-has-key($breakpoints, $lower) == false) {
-      // Log a warning.
-      @warn 'Your lower breakpoint was invalid: #{$lower}.';
-    }
+		// If one or both of the breakpoints don't exist.
+	} @else {
+		// If lower breakpoint is invalid.
+		@if (map.has-key(_var.$breakpoints, $lower) == false) {
+			// Log a warning.
+			@warn 'Your lower breakpoint was invalid: #{$lower}.';
+		}
 
-    // If upper breakpoint is invalid.
-    @if (map-has-key($breakpoints, $upper) == false) {
-      // Log a warning.
-      @warn 'Your upper breakpoint was invalid: #{$upper}.';
-    }
-  }
+		// If upper breakpoint is invalid.
+		@if (map.has-key(_var.$breakpoints, $upper) == false) {
+			// Log a warning.
+			@warn 'Your upper breakpoint was invalid: #{$upper}.';
+		}
+	}
 }
 
 @include respond-above(md) {
-  .form-row {
-    mat-form-field + mat-form-field {
-      margin-left: 1rem;
-    }
-    flex-flow: row nowrap;
-  }
+	.form-row {
+		mat-form-field + mat-form-field {
+			margin-left: 1rem;
+		}
+		flex-flow: row nowrap;
+	}
 }

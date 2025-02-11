@@ -1,57 +1,57 @@
-@import '../../../../../../variables';
-@import '../../../../../../styles.scss';
+@use 'variables' as _var;
+@use 'styles.scss' as global;
 
 .shop-card {
-  @extend .double-border;
-  font-family: $default-font;
-  margin: 10px;
-  min-height: 465px;
-  transition: all 0.5s ease-in;
+	@extend .double-border;
+	font-family: _var.$default-font;
+	margin: 10px;
+	min-height: 465px;
+	transition: all 0.5s ease-in;
 
-  .shop-card-title {
-    color: $secondary;
-  }
+	.shop-card-title {
+		color: _var.$secondary;
+	}
 
-  .shop-card-image-content {
-    min-height: 230px;
-    padding: 10px;
+	.shop-card-image-content {
+		min-height: 230px;
+		padding: 10px;
 
-    .shop-card-image {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
+		.shop-card-image {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
 
-  .shop-card-price {
-    margin-top: 10px;
-    color: $secondary;
-  }
+	.shop-card-price {
+		margin-top: 10px;
+		color: _var.$secondary;
+	}
 
-  .shop-card-description {
-    min-height: 42px;
-  }
+	.shop-card-description {
+		min-height: 42px;
+	}
 
-  .shop-card-actions {
-    display: flex;
-    justify-content: flex-end;
-  }
+	.shop-card-actions {
+		display: flex;
+		justify-content: flex-end;
+	}
 
-  &:hover {
-    background-color: $light-background;
-    border-color: $warn;
+	&:hover {
+		background-color: _var.$light-background;
+		border-color: _var.$warn;
 
-    .shop-card-title {
-      color: $primary;
-    }
+		.shop-card-title {
+			color: _var.$primary;
+		}
 
-    .shop-card-price {
-      color: $primary;
-    }
-  }
+		.shop-card-price {
+			color: _var.$primary;
+		}
+	}
 }
 
-@include respond-above(xs) {
-  .shop-card {
-    width: 400px;
-  }
+@include global.respond-above(xs) {
+	.shop-card {
+		width: 400px;
+	}
 }

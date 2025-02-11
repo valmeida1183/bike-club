@@ -1,13 +1,13 @@
-@import "../../../variables";
+@use 'variables' as _var;
 
 h1.screen-title {
-    font-size: 3em;
-    color: $primary;
-    text-shadow: 2px 4px 5px #fff;
-    margin: 40px 0 0;
+	font-size: 3em;
+	color: _var.$primary;
+	text-shadow: 2px 4px 5px #fff;
+	margin: 40px 0 0;
 }
 
 hr.title-spacer {
-    border: solid 2px $secondary;
-    margin-bottom: 20px;
+	border: solid 2px _var.$secondary;
+	margin-bottom: 20px;
 }

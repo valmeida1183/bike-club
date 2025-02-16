@@ -62,10 +62,6 @@ export class AuthWebService {
 			this.authWebUserDataSubject.next(authWebUserData);
 
 			this.autoLogout(new Date(storedUserData.expiresIn));
-
-			if (this.router.url === '/') {
-				this.router.navigate(['/shopping']);
-			}
 		}
 	}
 
@@ -80,7 +76,7 @@ export class AuthWebService {
 		this.tokenExpirationTimer = null;
 	}
 
-	autoLogout(expirationDate: Date) {
+	private autoLogout(expirationDate: Date) {
 		// calcula o tempo restante que o token do user do localstorage está válido. (pois pode ter se logado a bastante tempo).
 		const expirationDuration = expirationDate.getTime() - new Date().getTime();
 

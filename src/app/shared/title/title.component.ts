@@ -1,16 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 
 @Component({
-    selector: 'bc-title',
-    templateUrl: './title.component.html',
-    styleUrls: ['./title.component.scss'],
-    standalone: false
+	selector: 'bc-title',
+	templateUrl: './title.component.html',
+	styleUrls: ['./title.component.scss'],
+	standalone: false,
 })
 export class TitleComponent implements OnInit {
-  @Input() title: string;
+	readonly title = input.required<string>();
 
-  constructor() { }
+	constructor() {}
 
-  ngOnInit() {
-  }
+	ngOnInit() {}
 }

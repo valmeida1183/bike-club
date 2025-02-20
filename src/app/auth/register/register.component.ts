@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, viewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute , Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ import { DialogType } from 'src/app/shared/simple-dialog/dialogType';
     standalone: false
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('form') form: NgForm;
+  readonly form = viewChild<NgForm>('form');
   genders: Gender[];
 
   constructor(private activatedRoute: ActivatedRoute ,
@@ -30,12 +30,13 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.invalid) {
+    const form = this.form();
+    if (form.invalid) {
       return;
     }
 
     this.spinnerService.showSpinner();
-    const { name, lastName, email, password, gender, phone } = this.form.value;
+    const { name, lastName, email, password, gender, phone } = form.value;
     const user = new User(0, name, lastName, email, password, gender, phone, null);
 
     this.authWebService.signUp(user).subscribe(response => {
@@ -46,6 +47,6 @@ export class RegisterComponent implements OnInit {
       this.spinnerService.hideSpinner();
     });
 
-    this.form.resetForm();
+    form.resetForm();
   }
 }

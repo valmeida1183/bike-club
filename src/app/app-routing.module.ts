@@ -5,6 +5,7 @@ import { MainComponent } from './main/main.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/auth/role.model';
 import { AboutComponent } from './main/main-nav/about/about.component';
+import { HomeComponent } from './main/main-nav/home/home.component';
 
 const routes: Routes = [
 	{
@@ -13,6 +14,7 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 		children: [
 			// Para ativar o lazy load é preciso apontar a rota e o path do arquivo do módulo que será carregado
+			{ path: 'home', component: HomeComponent },
 			{
 				path: 'club',
 				loadChildren: () =>

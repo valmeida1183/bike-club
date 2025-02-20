@@ -22,9 +22,10 @@ import { RequestParamsInterceptor } from './shared/request-params.interceptor';
 import { shoppingListReducer } from './store/reducers/shopping-list.reducer';
 import { ShoppingListEffects } from './store/effects/shopping-list.effects';
 import { shopCartReducer } from './store/reducers/shop-cart.reducer';
+import { HomeComponent } from './main/main-nav/home/home.component';
 
 @NgModule({
-	declarations: [AppComponent, MainComponent, MainNavComponent, AboutComponent],
+	declarations: [AppComponent, MainComponent, MainNavComponent, AboutComponent, HomeComponent],
 	bootstrap: [AppComponent],
 	imports: [
 		AppRoutingModule,

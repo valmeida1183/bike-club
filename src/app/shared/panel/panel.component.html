@@ -1,25 +1,25 @@
-<mat-expansion-panel [expanded]="expanded">
+<mat-expansion-panel [expanded]="expanded()">
   <mat-expansion-panel-header>
     <mat-panel-title>
-      <h2 class="panel-title">{{title}}</h2>
+      <h2 class="panel-title">{{title()}}</h2>
     </mat-panel-title>
-    @if (description) {
+    @if (description()) {
       <mat-panel-description>
-        {{description}}
+        {{description()}}
       </mat-panel-description>
     }
   </mat-expansion-panel-header>
   <ng-content></ng-content>
   <mat-action-row>
-    @if (showSubmit) {
+    @if (showSubmit()) {
       <button class="form-button"
         mat-button
         mat-raised-button
         color="primary"
         (click)="onSubmit()"
-        [disabled]="submitDisabled"
+        [disabled]="submitDisabled()"
         >
-        {{submitText}}
+        {{submitText()}}
       </button>
     }
   </mat-action-row>

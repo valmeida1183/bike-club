@@ -1,14 +1,14 @@
 <mat-card appearance="outlined" class="shop-card">
     <mat-card-header>
-        <mat-card-title class="shop-card-title">{{bike.model}}</mat-card-title>
-        <mat-card-subtitle>{{ bike.category.name }}</mat-card-subtitle>
+        <mat-card-title class="shop-card-title">{{bike().model}}</mat-card-title>
+        <mat-card-subtitle>{{ bike().category.name }}</mat-card-subtitle>
     </mat-card-header>
     <div class="shop-card-image-content">
-        <img class="img-responsive shop-card-image" [src]="imagePath" [alt]="bike.image">
+        <img class="img-responsive shop-card-image" [src]="imagePath" [alt]="bike().image">
     </div>        
     <mat-card-content>
-        <h1 class="shop-card-price">{{ bike.price | currency }}</h1>
-        <p class="shop-card-description">{{bike.description}}</p>        
+        <h1 class="shop-card-price">{{ bike().price | currency }}</h1>
+        <p class="shop-card-description">{{bike().description}}</p>        
     </mat-card-content>
     <mat-card-actions class="shop-card-actions">
         <button class="form-button" 

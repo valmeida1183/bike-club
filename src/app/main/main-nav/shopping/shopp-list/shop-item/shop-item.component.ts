@@ -1,4 +1,4 @@
-import { Input, Component, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { addToShopCart } from 'src/app/store/actions/shop-cart.actions';
@@ -14,13 +14,13 @@ import { ShopCart } from 'src/app/models/shopCart.model';
     standalone: false
 })
 export class ShopItemComponent implements OnInit {
-  @Input() bike: Bike;
+  readonly bike = input<Bike>(undefined);
   imagePath: string;
 
   constructor(private store: Store<{shopCart: ShopCart}>) {}
 
   ngOnInit(): void {
-    this.imagePath = `${environment.imageResource}${this.bike.image}`;
+    this.imagePath = `${environment.imageResource}${this.bike().image}`;
   }
 
   onDetails(): void {
@@ -29,8 +29,8 @@ export class ShopItemComponent implements OnInit {
 
   onAddToCart(): void {
     const purchase = new Purchase();
-    purchase.bike = this.bike;
-    purchase.bikeId = this.bike.id;
+    purchase.bike = this.bike();
+    purchase.bikeId = this.bike().id;
     purchase.quantity += +1;
 
     this.store.dispatch(addToShopCart({purchase}));

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, viewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
@@ -11,84 +11,69 @@ import { ShopCart } from 'src/app/models/shopCart.model';
 import { BreakpointService } from 'src/app/shared/breakpoint.service';
 
 @Component({
-    selector: 'bc-main-nav',
-    templateUrl: './main-nav.component.html',
-    styleUrls: ['./main-nav.component.scss'],
-    standalone: false
+	selector: 'bc-main-nav',
+	templateUrl: './main-nav.component.html',
+	styleUrls: ['./main-nav.component.scss'],
+	standalone: false,
 })
 export class MainNavComponent implements OnInit, OnDestroy {
-  @ViewChild('drawer') drawer: MatSidenav;
+	readonly drawer = viewChild<MatSidenav>('drawer');
 
-  shopCart$: Observable<ShopCart>;
-  role: Role;
-  userName: string;
-  cartItemCount: number;
+	shopCart$: Observable<ShopCart>;
+	role: Role;
+	userName: string;
+	cartItemCount: number;
 
-  isHandsetSize = signal<boolean>(false);
-  isWebSize = signal<boolean>(false);
+	private readonly componentSubscription = new Subscription();
 
-  private readonly componentSubscription = new Subscription();
+	constructor(
+		public breakpointService: BreakpointService,
+		private authWebService: AuthWebService,
+		private store: Store<{ shopCart: ShopCart }>,
+	) {}
 
-  /* isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      tap((result) => {
-        if (!result.matches && this.drawer) {
-          this.drawer.close();
-        }
-      }),
-      map((result) => result.matches),
-      shareReplay(),
-    ); */
+	//#region Life Cicle Events
+	ngOnInit(): void {
+		this.setAuthenticatedUserInfo();
+		this.setShopCartFromStore();
+	}
 
-  constructor(
-    public breakpointService: BreakpointService,
-    private authWebService: AuthWebService,
-    private store: Store<{ shopCart: ShopCart }>,
-  ) {}
+	ngOnDestroy(): void {
+		this.componentSubscription.unsubscribe();
+	}
+	//#endregion
 
-  //#region Life Cicle Events
-  ngOnInit(): void {
-    this.setAuthenticatedUserInfo();
-    this.setShopCartFromStore();
-  }
+	//#region Events
+	onLogout() {
+		this.authWebService.logout();
+	}
+	//#endregion
 
-  ngOnDestroy(): void {
-    this.componentSubscription.unsubscribe();
-  }
-  //#endregion
+	//#region Auxiliary
+	setAuthenticatedUserInfo(): void {
+		const subscription = this.authWebService.authWebUserDataSubject.subscribe(
+			(authWebUserData) => {
+				if (authWebUserData && authWebUserData.user) {
+					const { user } = authWebUserData;
 
-  //#region Events
-  onLogout() {
-    this.authWebService.logout();
-  }
-  //#endregion
+					this.role = user.roleName;
+					this.userName = `${user.name} ${user.lastName}`;
+				}
+			},
+		);
 
-  //#region Auxiliary
-  setAuthenticatedUserInfo(): void {
-    const subscription = this.authWebService.authWebUserDataSubject.subscribe(
-      (authWebUserData) => {
-        if (authWebUserData && authWebUserData.user) {
-          const { user } = authWebUserData;
+		this.componentSubscription.add(subscription);
+	}
 
-          this.role = user.roleName;
-          this.userName = `${user.name} ${user.lastName}`;
-        }
-      },
-    );
+	setShopCartFromStore(): void {
+		this.shopCart$ = this.store.select('shopCart');
 
-    this.componentSubscription.add(subscription);
-  }
+		const subscription = this.shopCart$.subscribe((storeState) => {
+			console.log(storeState);
+			this.cartItemCount = storeState.purchases.length;
+		});
 
-  setShopCartFromStore(): void {
-    this.shopCart$ = this.store.select('shopCart');
-
-    const subscription = this.shopCart$.subscribe((storeState) => {
-      console.log(storeState);
-      this.cartItemCount = storeState.purchases.length;
-    });
-
-    this.componentSubscription.add(subscription);
-  }
-  ////#endregion
+		this.componentSubscription.add(subscription);
+	}
+	////#endregion
 }

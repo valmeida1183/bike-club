@@ -1,0 +1,51 @@
+<div class="carousel">
+	<!-- <button class="prev" (click)="prevSlide()">&#10094;</button> -->
+	<button
+		type="button"
+		aria-label="Toggle sidenav"
+		mat-icon-button
+		(click)="prevSlide()"
+		class="prev"
+	>
+		<mat-icon aria-label="test">arrow_back_ios_new</mat-icon>
+	</button>
+
+	<div class="carousel-wrapper">
+		@for (image of images(); track $index; let i = $index) {
+			<div
+				class="carousel-slide"
+				[@slideAnimation]="i === currentIndex() ? 1 : -1"
+				[ngStyle]="{ 'background-image': 'url(' + image + ')' }"
+				[ngClass]="{ active: i === currentIndex() }"
+			></div>
+		}
+
+		<div
+			class="carousel-slide"
+			*ngFor="let image of images(); let i = index"
+			[@slideAnimation]="i === currentIndex ? 1 : -1"
+			[ngStyle]="{ 'background-image': 'url(' + image + ')' }"
+			[class.active]="i === currentIndex"
+		></div>
+	</div>
+
+	<!-- <button class="next" (click)="nextSlide()">&#10095;</button> -->
+	<button
+		type="button"
+		aria-label="Toggle sidenav"
+		mat-icon-button
+		(click)="nextSlide()"
+		class="next"
+	>
+		<mat-icon aria-label="test">arrow_forward_ios</mat-icon>
+	</button>
+
+	<div class="indicators">
+		@for (image of images(); track $index; let i = $index) {
+			<span
+				(click)="goToSlide(i)"
+				[ngClass]="{ active: i === currentIndex() }"
+			></span>
+		}
+	</div>
+</div>

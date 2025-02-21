@@ -1,0 +1,60 @@
+@use 'variables' as _var;
+
+bc-home {
+	background-color: #fff;
+	display: block;
+	height: 100%;
+	max-width: 1350px;
+	margin: 0 auto;
+
+	.hero-container {
+		background-color: #fff;
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: space-around;
+		padding: 1.5rem;
+
+		.hero-image {
+			max-width: 700px;
+			width: 100%;
+			height: auto;
+		}
+
+		.hero-content {
+			display: flex;
+			color: _var.$secondary;
+			flex-flow: column wrap;
+			justify-content: center;
+			text-align: left;
+			margin-bottom: 1rem;
+
+			h1 {
+				font-size: 2.5rem;
+				margin: 0.5rem 0;
+			}
+
+			p {
+				font-size: 1.3rem;
+			}
+
+			button {
+				max-width: 150px;
+				margin: 1rem auto;
+			}
+		}
+	}
+
+	.hero-image-container {
+		background-image: url('../../../../assets/images/Hero_1.png');
+		height: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+	}
+}
+
+div.main-container {
+	padding: 0;
+	background-color: #fff;
+}

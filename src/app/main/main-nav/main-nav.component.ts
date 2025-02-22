@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy, signal, viewChild } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Component, OnInit, OnDestroy, viewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { map, shareReplay, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { Role } from 'src/app/models/auth/role.model';

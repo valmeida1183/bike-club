@@ -1,10 +1,9 @@
 @use 'variables' as _var;
+@use 'styles.scss' as global;
 
 bc-home {
-	background-color: #fff;
 	display: block;
 	height: 100%;
-	max-width: 1350px;
 	margin: 0 auto;
 
 	.hero-container {
@@ -44,17 +43,38 @@ bc-home {
 		}
 	}
 
-	.hero-image-container {
-		background-image: url('../../../../assets/images/Hero_1.png');
-		height: 100%;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		position: relative;
+	.info-container {
+		background-color: rgb(255, 255, 255, 0.7);
+		min-height: 500px;
+		padding: 1.5rem;
+		text-align: center;
+
+		h1 {
+			font-size: 2.5rem;
+			color: _var.$primary;
+			margin: 0;
+		}
+
+		p {
+			font-size: 1.5rem;
+			color: _var.$secondary;
+		}
+
+		.info-images {
+			margin-top: 2.5rem;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: center;
+
+			img {
+				max-width: 500px;
+				width: 100%;
+				height: auto;
+			}
+		}
 	}
 }
 
 div.main-container {
 	padding: 0;
-	background-color: #fff;
 }

@@ -1,3 +1,14 @@
+@if (breakpointService.isHandleset()) {
+	<div class="logo-container">
+		<img
+			class="main-logo"
+			src="../../assets/images/BikeClub_Logo_small.png"
+			alt="Logo"
+			width="130px"
+			height="130px"
+		/>
+	</div>
+}
 <mat-toolbar color="primary" class="toolbar-header">
 	<mat-toolbar-row class="grain">
 		@if (breakpointService.isHandleset()) {
@@ -50,11 +61,6 @@
 					routerLinkActive="header-link-active"
 					>About</a
 				>
-			</div>
-		}
-		@if (breakpointService.isHandleset()) {
-			<div class="logo-text">
-				<span>Bike Club</span>
 			</div>
 		}
 		<div class="flex-spacer"></div>

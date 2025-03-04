@@ -73,6 +73,33 @@ bc-home {
 			}
 		}
 	}
+
+	.info-text-container {
+		display: flex;
+		background-color: #fff;
+		flex-flow: row wrap;
+		justify-content: space-evenly;
+		padding: 1.5rem;
+
+		.info-text-item {
+			display: flex;
+			flex-flow: column nowrap;
+			text-align: center;
+			margin: 1rem;
+
+			h4 {
+				color: _var.$primary;
+				font-size: 1.3rem;
+				margin: 0;
+			}
+
+			p {
+				color: _var.$secondary;
+				font-size: 1rem;
+				margin: 0;
+			}
+		}
+	}
 }
 
 div.main-container {

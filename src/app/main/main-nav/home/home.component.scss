@@ -3,7 +3,7 @@
 
 bc-home {
 	display: block;
-	height: 100%;
+	height: calc(100vh - 105px);
 	margin: 0 auto;
 
 	.hero-container {
@@ -80,10 +80,12 @@ bc-home {
 		flex-flow: row wrap;
 		justify-content: space-evenly;
 		padding: 1.5rem;
+		height: 150px;
 
 		.info-text-item {
 			display: flex;
 			flex-flow: column nowrap;
+			justify-content: center;
 			text-align: center;
 			margin: 1rem;
 

@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 		this.authWebService.signIn(email, password).subscribe(
 			(response) => {
 				this.spinnerService.hideSpinner();
-				this.router.navigate(['/shopping']);
+				this.router.navigate(['/home']);
 			},
 			(errorMessage) => {
 				this.dialogService.openDialog(

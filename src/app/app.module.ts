@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, provideZoneChangeDetection } from '@angular/core';
 import {
 	HTTP_INTERCEPTORS,
 	provideHttpClient,
@@ -25,7 +25,13 @@ import { shopCartReducer } from './store/reducers/shop-cart.reducer';
 import { HomeComponent } from './main/main-nav/home/home.component';
 
 @NgModule({
-	declarations: [AppComponent, MainComponent, MainNavComponent, AboutComponent, HomeComponent],
+	declarations: [
+		AppComponent,
+		MainComponent,
+		MainNavComponent,
+		AboutComponent,
+		HomeComponent,
+	],
 	bootstrap: [AppComponent],
 	imports: [
 		AppRoutingModule,
@@ -47,6 +53,7 @@ import { HomeComponent } from './main/main-nav/home/home.component';
 		},
 		{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
 		provideHttpClient(withInterceptorsFromDi()),
+		provideZoneChangeDetection(),
 	],
 })
 export class AppModule {}

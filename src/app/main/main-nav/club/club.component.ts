@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleComponent } from 'src/app/shared/title/title.component';
 
 @Component({
     selector: 'app-club',
     templateUrl: './club.component.html',
     styleUrls: ['./club.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [TitleComponent]
 })
 export class ClubComponent implements OnInit {
 

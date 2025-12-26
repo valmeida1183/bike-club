@@ -1,10 +1,14 @@
 import { Component, OnInit, input, output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
 	selector: 'bc-panel',
 	templateUrl: './panel.component.html',
 	styleUrls: ['./panel.component.scss'],
-	standalone: false,
+	standalone: true,
+	imports: [CommonModule, MatExpansionModule, MatButtonModule],
 })
 export class PanelComponent implements OnInit {
 	readonly expanded = input<boolean>(true);

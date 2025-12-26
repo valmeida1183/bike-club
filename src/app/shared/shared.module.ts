@@ -32,12 +32,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
-	declarations: [
-		SimpleDialogComponent,
-		TitleComponent,
-		PanelComponent,
-		CarouselComponent,
-	],
 	imports: [
 		CommonModule,
 		MatButtonModule,
@@ -45,6 +39,10 @@ import { CarouselComponent } from './carousel/carousel.component';
 		MatDialogModule,
 		MatIconModule,
 		MatExpansionModule,
+		SimpleDialogComponent,
+		TitleComponent,
+		PanelComponent,
+		CarouselComponent,
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	exports: [
@@ -73,6 +71,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 		TitleComponent,
 		PanelComponent,
 		CarouselComponent,
+		SimpleDialogComponent,
 	],
 	providers: [
 		{

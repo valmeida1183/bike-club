@@ -2,12 +2,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SpinnerService } from './shared/spinner.service';
 import { Subscription } from 'rxjs';
 import { AuthWebService } from './auth/auth-web.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'bc-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, RouterModule, MatProgressSpinnerModule]
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'bike-club';

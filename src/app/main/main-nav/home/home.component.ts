@@ -1,8 +1,18 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+// import { CarouselComponent } from 'src/app/shared/carousel/carousel.component'; // Keep commented out for now
 
 @Component({
 	selector: 'bc-home',
-	standalone: false,
+	standalone: true,
+	imports: [
+		CommonModule,
+		RouterModule,
+		MatButtonModule,
+		// CarouselComponent, // Uncomment if bc-carousel is used
+	],
 	templateUrl: './home.component.html',
 	styleUrl: './home.component.scss',
 	encapsulation: ViewEncapsulation.None,

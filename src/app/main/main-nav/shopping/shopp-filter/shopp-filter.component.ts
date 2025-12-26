@@ -3,19 +3,33 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { CommonModule } from '@angular/common';
 
 import { Category } from 'src/app/models/category.model';
 import { Gender } from 'src/app/models/gender.model';
 import { loadBikes } from 'src/app/store/actions/shopping-list.actions';
+import { PanelComponent } from 'src/app/shared/panel/panel.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-    selector: 'bc-shopp-filter',
-    templateUrl: './shopp-filter.component.html',
-    styleUrls: ['./shopp-filter.component.scss'],
-    standalone: false
+  selector: 'bc-shopp-filter',
+  templateUrl: './shopp-filter.component.html',
+  styleUrls: ['./shopp-filter.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    PanelComponent,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+  ],
 })
 export class ShoppFilterComponent implements OnInit {
   shopForm: UntypedFormGroup;
@@ -24,7 +38,7 @@ export class ShoppFilterComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private store: Store<{ shoppingList: any }>,
+    private store: Store<{ shoppingList: any }>
   ) {}
 
   ngOnInit() {
@@ -45,7 +59,7 @@ export class ShoppFilterComponent implements OnInit {
       genderCode: new UntypedFormControl(null),
       price: new UntypedFormControl(
         null,
-        Validators.pattern(/^\$?\d+((,\d{3})+)?(\.\d+)?$/),
+        Validators.pattern(/^\$?\d+((,\d{3})+)?(\.\d+)?$/)
       ),
       gears: new UntypedFormControl(21, [
         Validators.min(0),

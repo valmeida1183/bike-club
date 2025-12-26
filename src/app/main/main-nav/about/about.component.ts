@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleComponent } from 'src/app/shared/title/title.component';
 
 @Component({
-    selector: 'bc-about',
-    templateUrl: './about.component.html',
-    styleUrls: ['./about.component.scss'],
-    standalone: false
+	selector: 'bc-about',
+	templateUrl: './about.component.html',
+	styleUrls: ['./about.component.scss'],
+	standalone: true,
+	imports: [TitleComponent],
 })
 export class AboutComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+	ngOnInit() {}
 }

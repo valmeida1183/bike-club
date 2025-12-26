@@ -1,9 +1,13 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, computed, input, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
 	selector: 'bc-carousel',
-	standalone: false,
+	standalone: true,
+	imports: [CommonModule, MatIconModule, MatButtonModule],
 	templateUrl: './carousel.component.html',
 	styleUrl: './carousel.component.scss',
 	animations: [

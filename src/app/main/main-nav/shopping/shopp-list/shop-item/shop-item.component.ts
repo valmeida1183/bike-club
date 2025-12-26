@@ -6,12 +6,16 @@ import { Bike } from 'src/app/models/bike.model';
 import { environment } from 'src/environments/environment';
 import { Purchase } from 'src/app/models/purchase.model';
 import { ShopCart } from 'src/app/models/shopCart.model';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'bc-shop-item',
     templateUrl: './shop-item.component.html',
     styleUrls: ['./shop-item.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [CommonModule, MatCardModule, MatButtonModule]
 })
 export class ShopItemComponent implements OnInit {
   readonly bike = input<Bike>(undefined);

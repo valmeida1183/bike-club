@@ -1,8 +1,9 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { PreloadAllModules, provideRouter, withPreloading, Routes } from '@angular/router';
+import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 import { requestParamsInterceptor } from './shared/request-params.interceptor'; // Updated import
 import { authInterceptor } from './auth/auth.interceptor'; // Updated import
@@ -24,5 +25,9 @@ export const appConfig: ApplicationConfig = {
         }),
         provideEffects([ShoppingListEffects]),
         provideAnimations(),
+        {
+            provide: MAT_DIALOG_DEFAULT_OPTIONS,
+            useValue: { minWidth: '15vw', minHeight: '10vh', autoFocus: false },
+        },
     ]
 };

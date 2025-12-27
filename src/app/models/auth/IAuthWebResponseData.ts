@@ -1,7 +1,7 @@
-import { User } from '../user.model';
+import { User } from '../../core/auth/models/user.model';
 
 export interface IAuthWebResponseData {
-    user: User;
-    token: string;
-    expiresIn: Date;
+	user: User;
+	token: string;
+	expiresIn: Date;
 }

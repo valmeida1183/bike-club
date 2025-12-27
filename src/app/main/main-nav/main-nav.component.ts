@@ -8,7 +8,7 @@ import { Role } from 'src/app/models/auth/role.model';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { AuthWebService } from 'src/app/auth/auth-web.service';
 import { ShopCart } from 'src/app/models/shopCart.model';
-import { BreakpointService } from 'src/app/shared/breakpoint.service';
+import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
 
 // Material Imports
 import { MatToolbarModule } from '@angular/material/toolbar';

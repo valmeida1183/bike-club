@@ -1,13 +1,17 @@
-import { User } from '../user.model';
+import { User } from '../../core/auth/models/user.model';
 
 export class AuthWebUserData {
-    constructor(public user: User, public expiresIn: Date, private token: string){}
+	constructor(
+		public user: User,
+		public expiresIn: Date,
+		private token: string,
+	) {}
 
-    currentToken() {
-        if (!this.expiresIn || new Date() > this.expiresIn) {
-            return null;
-        }
+	currentToken() {
+		if (!this.expiresIn || new Date() > this.expiresIn) {
+			return null;
+		}
 
-        return this.token;
-    }
+		return this.token;
+	}
 }

@@ -1,7 +1,7 @@
 import { AuthRequestData } from '../models/auth/authRequestData';
 import { AuthWebUserData } from '../models/auth/authWebUserData';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/user.model';
+import { User } from '../core/auth/models/user.model';
 
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';

@@ -3,12 +3,12 @@ import { NgForm, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { User } from 'src/app/models/user.model';
+import { User } from 'src/app/core/auth/models/user.model';
 import { AuthWebService } from '../auth-web.service';
-import { SpinnerService } from 'src/app/shared/spinner.service';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { Gender } from 'src/app/models/gender.model';
-import { DialogService } from 'src/app/shared/dialog.service';
-import { DialogType } from 'src/app/shared/simple-dialog/dialogType';
+import { DialogService } from 'src/app/shared/services/dialog.service';
+import { DialogType } from 'src/app/shared/components/simple-dialog/dialogType';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TitleComponent } from 'src/app/shared/title/title.component';
+import { TitleComponent } from 'src/app/shared/components/title/title.component';
 
 @Component({
 	selector: 'bc-about',

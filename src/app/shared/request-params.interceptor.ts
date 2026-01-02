@@ -2,7 +2,7 @@ import {
 	HttpRequest,
 	HttpEvent,
 	HttpInterceptorFn,
-	HttpHandlerFn
+	HttpHandlerFn,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -18,7 +18,7 @@ export const requestParamsInterceptor: HttpInterceptorFn = (
 		for (const key of keys) {
 			const value = newParams.get(key);
 
-			if (value === null || value === undefined || value === '') {
+			if (value === 'null' || value === 'undefined' || value === '') {
 				newParams = newParams.delete(key, value);
 			}
 		}

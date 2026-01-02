@@ -7,7 +7,7 @@ import { Category } from '../../models/category.model';
 import { Gender } from '../../models/gender.model';
 
 @Injectable({ providedIn: 'root' })
-export class SelectOptionsService {
+export class SelectOptionsApiService {
 	constructor(private http: HttpClient) {}
 
 	getGenderSelectOption(): Observable<Gender[]> {

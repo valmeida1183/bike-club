@@ -1,4 +1,13 @@
-import { Component, OnInit, OnDestroy, viewChild } from '@angular/core';
+import {
+	Component,
+	OnInit,
+	OnDestroy,
+	viewChild,
+	inject,
+	effect,
+	Signal,
+	computed,
+} from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
@@ -16,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatBadgeModule } from '@angular/material/badge';
+import { AuthStore } from 'src/app/core/auth/store/auth.store';
 
 @Component({
 	selector: 'bc-main-nav',
@@ -34,24 +44,24 @@ import { MatBadgeModule } from '@angular/material/badge';
 	],
 })
 export class MainNavComponent implements OnInit, OnDestroy {
+	private authStore = inject(AuthStore);
 	readonly drawer = viewChild<MatSidenav>('drawer');
 
 	shopCart$: Observable<ShopCart>;
-	role: Role;
-	userName: string;
 	cartItemCount: number;
 
 	private readonly componentSubscription = new Subscription();
 
 	constructor(
-		public breakpointService: BreakpointService,
-		private authWebService: AuthWebService,
+		protected breakpointService: BreakpointService,
 		private store: Store<{ shopCart: ShopCart }>,
-	) {}
+	) {
+		console.log(`Current user role: ${this.authStore.userRole()}`);
+		console.log(`Current user name: ${this.authStore.userFullName()}`);
+	}
 
 	//#region Life Cicle Events
 	ngOnInit(): void {
-		this.setAuthenticatedUserInfo();
 		this.setShopCartFromStore();
 	}
 
@@ -62,26 +72,11 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
 	//#region Events
 	onLogout() {
-		this.authWebService.logout();
+		this.authStore.logout();
 	}
 	//#endregion
 
 	//#region Auxiliary
-	setAuthenticatedUserInfo(): void {
-		const subscription = this.authWebService.authWebUserDataSubject.subscribe(
-			(authWebUserData) => {
-				if (authWebUserData && authWebUserData.user) {
-					const { user } = authWebUserData;
-
-					this.role = user.roleName;
-					this.userName = `${user.name} ${user.lastName}`;
-				}
-			},
-		);
-
-		this.componentSubscription.add(subscription);
-	}
-
 	setShopCartFromStore(): void {
 		this.shopCart$ = this.store.select('shopCart');
 

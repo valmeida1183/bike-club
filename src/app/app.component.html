@@ -1,6 +1,6 @@
 <router-outlet></router-outlet>
-@if (isLoading) {
-  <div class="backdrop">
-    <mat-spinner color="warn"></mat-spinner>
-  </div>
+@if (layoutStore.isLoading()) {
+	<div class="backdrop">
+		<mat-spinner color="warn"></mat-spinner>
+	</div>
 }

@@ -108,6 +108,6 @@ export class AuthWebService {
 				? errorResponse.error.message
 				: defaultErrorMessage;
 
-		return throwError(errorMessage);
+		return throwError(() => new Error(errorMessage));
 	}
 }

@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SpinnerService } from './shared/services/spinner.service';
-import { Subscription } from 'rxjs';
-import { AuthWebService } from './auth/auth-web.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterModule } from '@angular/router';
+import { LayoutStore } from './core/layout/store/layout.store';
 
 @Component({
 	selector: 'bc-root',
@@ -13,27 +11,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 	standalone: true,
 	imports: [CommonModule, RouterModule, MatProgressSpinnerModule],
 })
-export class AppComponent implements OnInit, OnDestroy {
-	title = 'bike-club';
-	loadingSubscription: Subscription;
-	isLoading = false;
-
-	constructor(
-		private spinnerService: SpinnerService,
-		private authWebService: AuthWebService,
-	) {}
-
-	ngOnInit(): void {
-		this.loadingSubscription = this.spinnerService.isLoading.subscribe(
-			(toggleValue) => {
-				this.isLoading = toggleValue;
-			},
-		);
-
-		this.authWebService.autoSignIn();
-	}
-
-	ngOnDestroy(): void {
-		this.loadingSubscription.unsubscribe();
-	}
+export class AppComponent {
+	layoutStore = inject(LayoutStore);
 }

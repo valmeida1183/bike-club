@@ -1,0 +1,33 @@
+<bc-account-card title="Login">
+	<form [formGroup]="loginForm">
+		<mat-card-content>
+			<mat-form-field class="form-field">
+				<mat-label>Email</mat-label>
+				<input type="email" matInput formControlName="email" />
+				@if (email?.hasError('required')) {
+					<mat-error>Email is required.</mat-error>
+				} @else if (email?.hasError('email')) {
+					<mat-error>Email is invalid.</mat-error>
+				}
+			</mat-form-field>
+			<mat-form-field class="form-field">
+				<mat-label>Password</mat-label>
+				<input type="password" matInput formControlName="password" />
+				@if (password?.hasError('required')) {
+					<mat-error>Password is required.</mat-error>
+				} @else if (password?.hasError('minlength')) {
+					<mat-error>Password must be at least 6 characters.</mat-error>
+				}
+			</mat-form-field>
+			<button
+				mat-stroked-button
+				color="accent"
+				class="btn-auth"
+				[disabled]="loginForm.invalid"
+				(click)="onSubmit()"
+			>
+				Login
+			</button>
+		</mat-card-content>
+	</form>
+</bc-account-card>

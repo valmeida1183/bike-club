@@ -12,14 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
 	selector: 'bc-simple-dialog',
 	templateUrl: './simple-dialog.component.html',
 	styleUrls: ['./simple-dialog.component.scss'],
-	encapsulation: ViewEncapsulation.None,
+	encapsulation: ViewEncapsulation.None, //TODO find another alternative to turn of view encapsulation
 	standalone: true,
 	imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule],
 })
 export class SimpleDialogComponent implements OnInit {
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: any,
-		private dialogRef: MatDialogRef<SimpleDialogComponent>
+		private dialogRef: MatDialogRef<SimpleDialogComponent>,
 	) {}
 
 	ngOnInit() {}

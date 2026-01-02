@@ -1,0 +1,100 @@
+<bc-account-card title="Register">
+	<form [formGroup]="registerForm">
+		<mat-card-content>
+			<mat-form-field class="form-field">
+				<mat-label>Email</mat-label>
+				<input type="email" matInput formControlName="email" />
+
+				@if (email?.hasError('required')) {
+					<mat-error>Email is required.</mat-error>
+				} @else if (email?.hasError('email')) {
+					<mat-error>Email is invalid.</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Password</mat-label>
+				<input type="password" matInput formControlName="password" />
+				<mat-hint align="end">{{ password?.value?.length }} / 6</mat-hint>
+
+				@if (password?.hasError('required')) {
+					<mat-error>Password is required.</mat-error>
+				} @else if (password?.hasError('minlength')) {
+					<mat-error>Password must be at least 6 characters.</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Confirm Password</mat-label>
+				<input type="password" matInput formControlName="confirmPassword" />
+				<mat-hint align="end">{{ confirmPassword?.value?.length }} / 6</mat-hint>
+
+				@if (confirmPassword?.hasError('required')) {
+					<mat-error>Confirm Password is required.</mat-error>
+				} @else if (confirmPassword?.hasError('mustMatch')) {
+					<mat-error>Password must match.</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Name</mat-label>
+				<input type="text" matInput formControlName="name" />
+
+				@if (name?.hasError('required')) {
+					<mat-error>Name is required.</mat-error>
+				} @else if (name?.hasError('maxlength')) {
+					<mat-error>Name must be at maximum 50 characters.</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Last Name</mat-label>
+				<input type="text" matInput formControlName="lastName" />
+
+				@if (lastName?.hasError('required')) {
+					<mat-error>Last Name is required.</mat-error>
+				} @else if (lastName?.hasError('maxlength')) {
+					<mat-error>Last Name must be at maximum 50 characters.</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Gender</mat-label>
+				<mat-select formControlName="gender">
+					<mat-option>--</mat-option>
+					@for (gender of genders(); track gender.code) {
+						<mat-option [value]="gender.code">
+							{{ gender.description }}
+						</mat-option>
+					}
+				</mat-select>
+
+				@if (gender?.hasError('required')) {
+					<mat-error>Please choose a gender.</mat-error>
+				}
+			</mat-form-field>
+
+			<mat-form-field class="form-field">
+				<mat-label>Phone</mat-label>
+				<input type="text" matInput formControlName="phone" />
+				<mat-hint align="start">Ex: (99) 99999-9999</mat-hint>
+
+				@if (phone?.hasError('required')) {
+					<mat-error>Phone is required.</mat-error>
+				} @else if (phone?.hasError('pattern')) {
+					<mat-error>Phone is invalid.</mat-error>
+				}
+			</mat-form-field>
+
+			<button
+				mat-stroked-button
+				color="accent"
+				class="btn-auth"
+				[disabled]="registerForm.invalid"
+				(click)="onSubmit()"
+			>
+				Register
+			</button>
+		</mat-card-content>
+	</form>
+</bc-account-card>

@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { MainNavComponent } from './main-nav/main-nav.component';
+// import { Component, OnInit } from '@angular/core';
+// import { MainNavComponent } from './main-nav/main-nav.component';
 
-@Component({
-    selector: 'bc-main',
-    templateUrl: './main.component.html',
-    standalone: true,
-    imports: [MainNavComponent]
-})
-export class MainComponent implements OnInit {
+// @Component({
+//     selector: 'bc-main',
+//     templateUrl: './main.component.html',
+//     standalone: true,
+//     imports: [MainNavComponent]
+// })
+// export class MainComponent implements OnInit {
 
-  constructor() { }
+//   constructor() { }
 
-  ngOnInit() {
-  }
+//   ngOnInit() {
+//   }
 
-}
+// }

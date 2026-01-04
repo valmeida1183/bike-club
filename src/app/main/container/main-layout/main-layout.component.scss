@@ -1,0 +1,99 @@
+@use 'variables' as _var;
+
+.sidenav-container {
+	z-index: 0;
+}
+
+.sidenav {
+	width: 200px;
+}
+
+.sidenav .mat-toolbar {
+	background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+
+.toolbar-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	.nav-links {
+		margin-left: 1.5rem;
+
+		.header-link {
+			color: white;
+			cursor: pointer;
+			background-color: transparent;
+			position: relative;
+			font-family: _var.$default-font;
+			font-size: 18px;
+			letter-spacing: normal;
+
+			.caret {
+				position: absolute;
+				text-align: center;
+				font-size: 10px;
+				background-color: _var.$secondary;
+				border-radius: 50%;
+				line-height: 15px;
+				width: 15px;
+				height: 15px;
+				right: 3px;
+				top: 4px;
+				color: white;
+				z-index: 1;
+			}
+
+			&:hover {
+				color: _var.$secondary;
+			}
+
+			&.header-link-active {
+				border: 1px solid white;
+				color: _var.$secondary;
+			}
+		}
+	}
+
+	.logo-text {
+		flex-basis: 100%;
+		text-align: center;
+	}
+}
+
+.toolbar-second-row {
+	background-color: _var.$secondary;
+	border-bottom: double 5px white;
+	border-top: double 5px white;
+	box-shadow: _var.$container-shadow;
+	height: 40px;
+}
+
+.main-logo {
+	margin-top: 100px;
+	-webkit-filter: _var.$logo-shadow;
+	filter: _var.$logo-shadow;
+	z-index: 1;
+}
+
+.flex-spacer {
+	flex-grow: 1;
+}
+
+.logo-container {
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 2;
+
+	.main-logo {
+		margin-top: 0.5rem;
+	}
+}

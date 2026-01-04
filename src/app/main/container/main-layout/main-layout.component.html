@@ -1,4 +1,4 @@
-<!-- @if (breakpointService.isHandleset()) {
+@if (breakpointService.isHandleset()) {
 	<div class="logo-container">
 		<img
 			class="main-logo"
@@ -75,8 +75,9 @@
 					title="Cart"
 				>
 					<mat-icon>shopping_cart</mat-icon>
-					@if (cartItemCount > 0) {
-						<span class="caret">{{ cartItemCount }}</span>
+					@let cartCounter = layoutStore.cartCounter();
+					@if (cartCounter > 0) {
+						<span class="caret">{{ cartCounter }}</span>
 					}
 				</a>
 				<a
@@ -136,4 +137,4 @@
 			<router-outlet></router-outlet>
 		</div>
 	</mat-sidenav-content>
-</mat-sidenav-container> -->
+</mat-sidenav-container>

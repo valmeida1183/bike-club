@@ -18,9 +18,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-	selector: 'bc-shopp-filter',
-	templateUrl: './shopp-filter.component.html',
-	styleUrls: ['./shopp-filter.component.scss'],
+	selector: 'bc-shop-filter',
+	templateUrl: './shop-filter.component.html',
+	styleUrls: ['./shop-filter.component.scss'],
 	standalone: true,
 	imports: [
 		CommonModule,

@@ -9,7 +9,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
-import { requestParamsInterceptor } from './shared/request-params.interceptor';
+import { requestParamsInterceptor } from './core/layout/interceptors/request-params.interceptor';
 
 import { loadingInterceptor } from './core/layout/interceptors/loading.interceptor';
 import { errorHandlingInterceptor } from './core/errors/interceptors/error-handling.interceptor';

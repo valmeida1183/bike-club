@@ -1,0 +1,77 @@
+<div class="main-content">
+	<bc-panel
+		[expanded]="true"
+		[title]="'Search for Bicycles'"
+		[submitText]="'Search'"
+		[submitDisabled]="shopForm.invalid"
+		[showSubmit]="true"
+		(actionPanel)="onSearch()"
+	>
+		<p>Please fill in the fields below to search for the bikes you want.</p>
+		<form class="form" [formGroup]="shopForm">
+			<div class="form-row">
+				<mat-form-field class="form-field">
+					<mat-label>Category</mat-label>
+					<mat-select formControlName="categoryId">
+						<mat-option>--</mat-option>
+						@for (category of categories(); track category.id) {
+							<mat-option [value]="category.id">
+								{{ category.name }}
+							</mat-option>
+						}
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="form-field">
+					<mat-label>Gender</mat-label>
+					<mat-select formControlName="genderCode">
+						<mat-option>--</mat-option>
+						@for (gender of genders(); track gender.code) {
+							<mat-option [value]="gender.code">
+								{{ gender.description }}
+							</mat-option>
+						}
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="form-field">
+					<mat-label>$ Price</mat-label>
+					<input type="text" matInput formControlName="price" />
+					@if (price?.hasError('pattern')) {
+						<mat-error>Price is invalid.</mat-error>
+					}
+				</mat-form-field>
+			</div>
+			<div class="form-row">
+				<mat-form-field class="form-field">
+					<mat-label>Gears</mat-label>
+					<input type="number" matInput formControlName="gears" step="1" />
+					@if (gears?.hasError('min')) {
+						<mat-error>Minimum value is 0.</mat-error>
+					}
+					@if (gears?.hasError('max')) {
+						<mat-error>Maximum value is 36.</mat-error>
+					}
+				</mat-form-field>
+				<mat-form-field class="form-field">
+					<mat-label>Frame Size</mat-label>
+					<input type="number" matInput formControlName="frameSize" step="0.5" />
+					@if (frameSize?.hasError('min')) {
+						<mat-error>Minimum value is 13.</mat-error>
+					}
+					@if (frameSize?.hasError('max')) {
+						<mat-error>Maximum value is 24.</mat-error>
+					}
+				</mat-form-field>
+				<mat-form-field class="form-field">
+					<mat-label>Rim Size</mat-label>
+					<input type="number" matInput formControlName="rimSize" step="0.5" />
+					@if (rimSize?.hasError('min')) {
+						<mat-error>Minimum value is 12.</mat-error>
+					}
+					@if (rimSize?.hasError('max')) {
+						<mat-error>Maximum value is 29.</mat-error>
+					}
+				</mat-form-field>
+			</div>
+		</form>
+	</bc-panel>
+</div>

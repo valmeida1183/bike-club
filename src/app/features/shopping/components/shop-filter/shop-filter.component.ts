@@ -54,8 +54,8 @@ export class ShoppFilterComponent implements OnInit {
 	}
 
 	onSearch(): void {
-		const query: BikeSearchFilter = this.shopForm.getRawValue();
-		this.search.emit(query);
+		const filter: BikeSearchFilter = this.shopForm.getRawValue();
+		this.search.emit(filter);
 	}
 
 	private configureForm(): void {

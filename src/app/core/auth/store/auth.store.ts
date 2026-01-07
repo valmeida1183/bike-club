@@ -87,24 +87,11 @@ export const AuthStore = signalStore(
 				}
 
 				patchState(store, initialState);
-				// router.navigate(['/account/login']);
-				// localStorage.removeItem('bikeClubAuthUserData');
 			},
 			// 👇 private method
 			_handleAuthentication(response: AuthResponse): void {
 				const { user, token, expiresIn } = response;
 				patchState(store, { user, token, expiresIn: new Date(expiresIn) });
-
-				// localStorage.setItem(
-				// 	'bikeClubAuthUserData',
-				// 	JSON.stringify({
-				// 		user: response.user,
-				// 		token: response.token,
-				// 		expiresIn: response.expiresIn,
-				// 	}),
-				// );
-
-				//router.navigate(['/home']);
 			},
 		};
 	}),

@@ -75,7 +75,7 @@
 					title="Cart"
 				>
 					<mat-icon>shopping_cart</mat-icon>
-					@let cartCounter = layoutStore.cartCounter();
+					@let cartCounter = cartStore.cartCounter();
 					@if (cartCounter > 0) {
 						<span class="caret">{{ cartCounter }}</span>
 					}

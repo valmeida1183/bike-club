@@ -8,6 +8,7 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { AuthStore } from 'src/app/core/auth/store/auth.store';
+import { CartStore } from 'src/app/core/cart/store/cart.store';
 import { LayoutStore } from 'src/app/core/layout/store/layout.store';
 import { BreakpointService } from 'src/app/shared/services/breakpoint.service';
 
@@ -31,6 +32,7 @@ export class MainLayoutComponent {
 
 	private authStore = inject(AuthStore);
 	protected layoutStore = inject(LayoutStore);
+	protected cartStore = inject(CartStore);
 	protected breakpointService = inject(BreakpointService);
 
 	onLogout() {

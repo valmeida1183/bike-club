@@ -1,9 +1,8 @@
-import { Component, input, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { Component, input, output } from '@angular/core';
 
 import { Bike } from 'src/app/models/bike.model';
+import { Purchase } from 'src/app/models/purchase.model';
 import { ShopItemComponent } from '../shop-item/shop-item.component';
 
 @Component({

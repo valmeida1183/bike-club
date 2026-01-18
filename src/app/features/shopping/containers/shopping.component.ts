@@ -1,14 +1,6 @@
-import {
-	Component,
-	computed,
-	inject,
-	OnDestroy,
-	OnInit,
-	Signal,
-} from '@angular/core';
+import { Component, computed, inject, OnInit, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { Gender } from 'src/app/models/gender.model';
 import { TitleComponent } from 'src/app/shared/components/title/title.component';
@@ -26,21 +18,16 @@ import { ShopStore } from '../store/shop.store';
 	imports: [TitleComponent, ShoppFilterComponent, ShoppListComponent],
 	providers: [ShopStore, ShopApiService],
 })
-export class ShoppingComponent implements OnInit, OnDestroy {
+export class ShoppingComponent implements OnInit {
 	private activatedRoute = inject(ActivatedRoute);
 	private routeData = toSignal(this.activatedRoute.data);
 	protected shopStore = inject(ShopStore);
 
 	protected categories: Signal<Category[]>;
 	protected genders: Signal<Gender[]>;
-	private bikesSubscription: Subscription;
 
 	ngOnInit(): void {
 		this.loadDataFromRouteResolver();
-	}
-
-	ngOnDestroy() {
-		this.bikesSubscription.unsubscribe();
 	}
 
 	onSearch(filter: BikeSearchFilter): void {

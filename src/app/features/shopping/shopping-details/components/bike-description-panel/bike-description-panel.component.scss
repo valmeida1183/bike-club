@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'variables' as _var;
 @use 'styles.scss' as global;
 
@@ -23,7 +24,7 @@
 	.bike-description {
 		margin-top: 16px;
 		font-size: 1.2rem;
-		color: darken(_var.$primary, 20%);
+		color: color.adjust(_var.$primary, $lightness: -20%);
 	}
 
 	.bike-tag-content {

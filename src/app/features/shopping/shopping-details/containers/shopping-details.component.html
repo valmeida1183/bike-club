@@ -2,6 +2,12 @@
 
 <div class="shopping-details-container">
 	<bc-bike-image-panel [imageName]="store.bike()?.image"></bc-bike-image-panel>
-	<bc-bike-item-description [bike]="store.bike()"></bc-bike-item-description>
-	<bc-bike-price [price]="store.bike()?.price"></bc-bike-price>
+	<bc-bike-description-panel [bike]="store.bike()"></bc-bike-description-panel>
+	<bc-bike-price-panel
+		[price]="store.bike()?.price"
+		(changeAddress)="onChangeAddress()"
+		(addToCart)="onAddToCart($event)"
+		(buyNow)="onBuyNow($event)"
+	>
+	</bc-bike-price-panel>
 </div>

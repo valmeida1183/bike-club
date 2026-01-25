@@ -4,9 +4,8 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
-import { CartStore } from 'src/app/core/cart/store/cart.store';
+import { CartStore } from 'src/app/features/shopping/cart/store/cart.store';
 import { Bike } from 'src/app/features/shopping/models/bike.model';
-import { Purchase } from 'src/app/features/shopping/models/purchase.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -34,11 +33,9 @@ export class ShopItemComponent implements OnInit {
 	}
 
 	onAddToCart(): void {
-		const purchase = new Purchase();
-		purchase.bike = this.bike();
-		purchase.bikeId = this.bike().id;
-		purchase.quantity = 1;
+		const bike = this.bike();
+		const quantity = 1;
 
-		this.cartStore.addPurchaseToCart(purchase);
+		this.cartStore.addPurchaseToCart(bike, quantity);
 	}
 }

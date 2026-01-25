@@ -9,6 +9,7 @@ import {
 } from '@ngrx/signals';
 import { Purchase } from 'src/app/features/shopping/models/purchase.model';
 import { computed } from '@angular/core';
+import { Bike } from 'src/app/features/shopping/models/bike.model';
 
 const initialState: CartState = {
 	shopCart: new ShopCart(),
@@ -19,8 +20,10 @@ export const CartStore = signalStore(
 	withState(initialState),
 	withMethods((store) => {
 		return {
-			addPurchaseToCart(purchase: Purchase): void {
+			addPurchaseToCart(bike: Bike, quantity: number): void {
 				const currentCart = store.shopCart();
+				const purchase = this._createPruchase(bike, quantity, currentCart.id);
+
 				const updatedPurchases = [...currentCart.purchases, purchase];
 				const updatedCart = new ShopCart(
 					currentCart.id,
@@ -34,10 +37,22 @@ export const CartStore = signalStore(
 				);
 
 				patchState(store, { shopCart: updatedCart });
+
+				// Todo: Persist the cart to backend.
 			},
 
-			setShopCart(shopCart: ShopCart | null): void {
-				patchState(store, { shopCart });
+			// Todo: Implement removePurchaseFromCart method.
+			// Todo: Implement loadCart from backend method and use on inInit hook of store.
+
+			_createPruchase(bike: Bike, quantity: number, shopCartId: number): Purchase {
+				const purchase = new Purchase();
+
+				purchase.shopCartId = shopCartId;
+				purchase.bike = bike;
+				purchase.bikeId = bike.id;
+				purchase.quantity = quantity;
+
+				return purchase;
 			},
 		};
 	}),

@@ -7,21 +7,21 @@ import { TitleComponent } from 'src/app/shared/components/title/title.component'
 import { ShoppFilterComponent } from '../components/shop-filter/shop-filter.component';
 import { ShoppListComponent } from '../components/shop-list/shop-list.component';
 import { BikeSearchFilter } from '../models/bike-search-filter';
-import { ShopApiService } from '../services/shop.api.service';
-import { ShopStore } from '../store/shop.store';
+import { ShoppingListApiService } from '../services/shopping-list.api.service';
+import { ShoppingListStore } from '../store/shopping-list.store';
 
 @Component({
 	selector: 'bc-shopping',
-	templateUrl: './shopping.component.html',
-	styleUrls: ['./shopping.component.scss'],
+	templateUrl: './shopping-list.component.html',
+	styleUrls: ['./shopping-list.component.scss'],
 	standalone: true,
 	imports: [TitleComponent, ShoppFilterComponent, ShoppListComponent],
-	providers: [ShopStore, ShopApiService],
+	providers: [ShoppingListStore, ShoppingListApiService],
 })
-export class ShoppingComponent implements OnInit {
+export class ShoppingListComponent implements OnInit {
 	private activatedRoute = inject(ActivatedRoute);
 	private routeData = toSignal(this.activatedRoute.data);
-	protected shopStore = inject(ShopStore);
+	protected store = inject(ShoppingListStore);
 
 	protected categories: Signal<Category[]>;
 	protected genders: Signal<Gender[]>;
@@ -31,7 +31,7 @@ export class ShoppingComponent implements OnInit {
 	}
 
 	onSearch(filter: BikeSearchFilter): void {
-		this.shopStore.getBikes(filter);
+		this.store.getBikes(filter);
 	}
 
 	private loadDataFromRouteResolver(): void {

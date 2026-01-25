@@ -1,4 +1,4 @@
-import { ShopCart } from 'src/app/models/shopCart.model';
+import { ShopCart } from 'src/app/features/shopping/models/shopCart.model';
 
 export interface CartState {
 	shopCart: ShopCart | null;

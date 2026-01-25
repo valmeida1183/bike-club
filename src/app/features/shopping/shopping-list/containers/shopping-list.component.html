@@ -1,7 +1,7 @@
-<bc-title [title]="'Shop'"></bc-title>
+<bc-title title="Shop"></bc-title>
 <bc-shop-filter
 	[categories]="categories()"
 	[genders]="genders()"
 	(search)="onSearch($event)"
 />
-<bc-shop-list [bikes]="shopStore.bikes()"></bc-shop-list>
+<bc-shop-list [bikes]="store.bikes()"></bc-shop-list>

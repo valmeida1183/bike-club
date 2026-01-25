@@ -1,4 +1,4 @@
-import { ShopCart } from 'src/app/models/shopCart.model';
+import { ShopCart } from 'src/app/features/shopping/models/shopCart.model';
 import { CartState } from './cart.state';
 import {
 	patchState,
@@ -7,7 +7,7 @@ import {
 	withMethods,
 	withState,
 } from '@ngrx/signals';
-import { Purchase } from 'src/app/models/purchase.model';
+import { Purchase } from 'src/app/features/shopping/models/purchase.model';
 import { computed } from '@angular/core';
 
 const initialState: CartState = {

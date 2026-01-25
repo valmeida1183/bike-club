@@ -1,0 +1,28 @@
+@use 'variables' as _var;
+@use 'styles.scss' as global;
+
+.bike-price-content {
+	@extend .double-border;
+	background: _var.$light-background;
+	padding: 16px;
+	box-shadow: _var.$container-shadow;
+	border-radius: 8px;
+	font-family: _var.$default-font;
+
+	h1 {
+		color: _var.$primary;
+		font-weight: bold;
+		margin: 0;
+	}
+
+	p {
+		color: darken(_var.$primary, 20%);
+		font-size: 1rem;
+		margin-top: 8px;
+	}
+
+	button {
+		width: 100%;
+		margin-top: 16px;
+	}
+}

@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Bike } from 'src/app/models/bike.model';
 import { environment } from 'src/environments/environment';
+import { Bike } from '../../models/bike.model';
 
 @Injectable()
-export class ShopApiService {
+export class ShoppingDetailsApiService {
 	private http = inject(HttpClient);
 	private bikesEndpointUrl = `${environment.baseApiUrl}/bikes`;
 
-	getBikes(filter: any): Observable<Bike[]> {
-		return this.http.get<Bike[]>(this.bikesEndpointUrl, { params: filter });
+	getBike(id: number): Observable<Bike> {
+		return this.http.get<Bike>(`${this.bikesEndpointUrl}/${id}`);
 	}
 }

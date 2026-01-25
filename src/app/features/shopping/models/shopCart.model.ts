@@ -1,6 +1,6 @@
-import { Address } from './address.model';
+import { Address } from '../../../models/address.model';
 import { Purchase } from './purchase.model';
-import { User } from '../core/auth/models/user.model';
+import { User } from '../../../core/auth/models/user.model';
 
 export class ShopCart {
 	constructor(

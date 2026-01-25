@@ -1,0 +1,35 @@
+<div class="bike-price-content">
+	<h1>{{ price() | currency }}</h1>
+	<p>
+		Delivery will be to the address registered in your account. If you want to
+		change the address, click here.
+	</p>
+	<button
+		class="form-button"
+		mat-button
+		mat-raised-button
+		color="accent"
+		(click)="onChangeAddress()"
+	>
+		Change Address
+	</button>
+	<p>You can add this bicycle to your cart or buy it right now.</p>
+	<button
+		class="form-button"
+		mat-button
+		mat-raised-button
+		color="primary"
+		(click)="onAddToCart()"
+	>
+		Add to Cart
+	</button>
+	<button
+		class="form-button"
+		mat-button
+		mat-raised-button
+		color="primary"
+		(click)="onBuyNow()"
+	>
+		Buy Now
+	</button>
+</div>

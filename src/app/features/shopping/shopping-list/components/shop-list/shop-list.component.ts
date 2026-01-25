@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 
-import { Bike } from 'src/app/models/bike.model';
-import { Purchase } from 'src/app/models/purchase.model';
+import { Bike } from 'src/app/features/shopping/models/bike.model';
+import { Purchase } from 'src/app/features/shopping/models/purchase.model';
 import { ShopItemComponent } from '../shop-item/shop-item.component';
 
 @Component({

@@ -1,0 +1,37 @@
+@use 'variables' as _var;
+@use 'styles.scss' as global;
+
+.bike-desc-content {
+	@extend .double-border;
+	background: _var.$light-background;
+	padding: 16px;
+	box-shadow: _var.$container-shadow;
+	border-radius: 8px;
+	font-family: _var.$default-font;
+
+	h1 {
+		color: _var.$secondary;
+		font-weight: bold;
+		margin: 0;
+	}
+
+	h3 {
+		color: _var.$primary;
+		margin: 0;
+	}
+
+	.bike-description {
+		margin-top: 16px;
+		font-size: 1.2rem;
+		color: darken(_var.$primary, 20%);
+	}
+
+	.bike-tag-content {
+		margin-top: 24px;
+		margin-left: auto;
+		margin-right: auto;
+		display: flex;
+		justify-content: space-evenly;
+		gap: 8px;
+	}
+}

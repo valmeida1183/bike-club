@@ -4,6 +4,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import {
 	PreloadAllModules,
 	provideRouter,
+	withComponentInputBinding,
 	withPreloading,
 } from '@angular/router';
 
@@ -19,7 +20,11 @@ import { authInterceptor } from './core/auth/interceptors/auth.interceptor';
 export const appConfig: ApplicationConfig = {
 	providers: [
 		provideZoneChangeDetection({ eventCoalescing: true }),
-		provideRouter(APP_ROUTES, withPreloading(PreloadAllModules)),
+		provideRouter(
+			APP_ROUTES,
+			withPreloading(PreloadAllModules),
+			withComponentInputBinding(), // This makes route params available as component inputs
+		),
 		provideHttpClient(
 			withInterceptors([
 				requestParamsInterceptor,

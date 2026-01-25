@@ -1,0 +1,25 @@
+@use 'variables' as _var;
+@use 'styles.scss' as global;
+
+.bike-tag-content {
+	@extend .double-border;
+	background: _var.$background;
+	border-color: _var.$secondary;
+	border-radius: 8px;
+	padding: 8px;
+	width: 150px;
+	margin-bottom: 16px;
+
+	h5 {
+		color: _var.$primary;
+		font-weight: bold;
+		margin: 0;
+	}
+
+	div.tag-value {
+		color: _var.$secondary;
+		display: flex;
+		font-size: 3rem;
+		justify-content: center;
+	}
+}

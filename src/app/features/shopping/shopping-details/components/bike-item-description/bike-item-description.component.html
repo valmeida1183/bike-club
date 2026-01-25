@@ -1,0 +1,11 @@
+<div class="bike-desc-content">
+	<h1>{{ bike()?.model }}</h1>
+	<h3>Category: {{ bike()?.category.name }}</h3>
+	<p class="bike-description">{{ bike()?.description }}</p>
+
+	<div class="bike-tag-content">
+		<bc-bike-tag tag="Gears" [value]="bike()?.gears"></bc-bike-tag>
+		<bc-bike-tag tag="Frame" [value]="bike()?.frameSize"></bc-bike-tag>
+		<bc-bike-tag tag="Rim" [value]="bike()?.rimSize"></bc-bike-tag>
+	</div>
+</div>

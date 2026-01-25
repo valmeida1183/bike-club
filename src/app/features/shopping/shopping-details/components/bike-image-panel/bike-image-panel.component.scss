@@ -1,0 +1,12 @@
+@use 'variables' as _var;
+@use 'styles.scss' as global;
+
+.bike-image-content {
+	@extend .double-border;
+	background: _var.$light-background;
+	display: flex;
+	justify-content: center;
+	padding: 16px;
+	box-shadow: _var.$container-shadow;
+	border-radius: 8px;
+}

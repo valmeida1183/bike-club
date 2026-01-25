@@ -3,9 +3,10 @@ import { Component, OnInit, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
 import { CartStore } from 'src/app/core/cart/store/cart.store';
-import { Bike } from 'src/app/models/bike.model';
-import { Purchase } from 'src/app/models/purchase.model';
+import { Bike } from 'src/app/features/shopping/models/bike.model';
+import { Purchase } from 'src/app/features/shopping/models/purchase.model';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,6 +18,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ShopItemComponent implements OnInit {
 	private cartStore = inject(CartStore);
+	private router = inject(Router);
 
 	bike = input<Bike>(undefined);
 
@@ -26,7 +28,10 @@ export class ShopItemComponent implements OnInit {
 		this.imagePath = `${environment.imageResource}${this.bike().image}`;
 	}
 
-	onDetails(): void {}
+	onDetails(): void {
+		const bike = this.bike();
+		this.router.navigate(['/shopping/details', bike.id]);
+	}
 
 	onAddToCart(): void {
 		const purchase = new Purchase();

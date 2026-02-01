@@ -4,12 +4,16 @@ import {
 	patchState,
 	signalStore,
 	withComputed,
+	withHooks,
 	withMethods,
+	withProps,
 	withState,
 } from '@ngrx/signals';
 import { Purchase } from 'src/app/features/shopping/models/purchase.model';
-import { computed } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { Bike } from 'src/app/features/shopping/models/bike.model';
+import { ShopCartApiService } from '../services/shop-cart.api.service';
+import { get } from 'http';
 
 const initialState: CartState = {
 	shopCart: new ShopCart(),
@@ -18,17 +22,22 @@ const initialState: CartState = {
 export const CartStore = signalStore(
 	{ providedIn: 'root' },
 	withState(initialState),
+	withProps(() => ({ shopCartApiService: inject(ShopCartApiService) })),
 	withMethods((store) => {
 		return {
 			addPurchaseToCart(bike: Bike, quantity: number): void {
 				const currentCart = store.shopCart();
 				const purchase = this._createPruchase(bike, quantity, currentCart.id);
-
+				const newTotalAmount = this._calculateTotalAmount(
+					purchase,
+					currentCart.totalAmount,
+				);
 				const updatedPurchases = [...currentCart.purchases, purchase];
+
 				const updatedCart = new ShopCart(
 					currentCart.id,
 					currentCart.purchaseDate,
-					currentCart.totalAmount,
+					newTotalAmount,
 					currentCart.userId,
 					currentCart.addressId,
 					updatedPurchases,
@@ -42,9 +51,22 @@ export const CartStore = signalStore(
 			},
 
 			// Todo: Implement removePurchaseFromCart method.
-			// Todo: Implement loadCart from backend method and use on inInit hook of store.
+			// Todo: Implement loadCart from backend method and use.
+			getCartByUserId(userId: number): void {
+				const { shopCartApiService } = store;
 
-			_createPruchase(bike: Bike, quantity: number, shopCartId: number): Purchase {
+				shopCartApiService.getShopCartByUserId(userId).subscribe({
+					next: (response: ShopCart) => {
+						patchState(store, { shopCart: response });
+					},
+				});
+			},
+
+			_calculateTotalAmount(purchase: Purchase, currentTotal: number): number {
+				return currentTotal + purchase.bike.price * purchase.quantity;
+			},
+
+			_createPurchase(bike: Bike, quantity: number, shopCartId: number): Purchase {
 				const purchase = new Purchase();
 
 				purchase.shopCartId = shopCartId;

@@ -28,12 +28,6 @@ export const LayoutStore = signalStore(
 			hideLoading(): void {
 				patchState(store, { isLoading: false });
 			},
-			// increaseCartCounter(): void {
-			// 	patchState(store, { cartCounter: store.cartCounter() + 1 });
-			// },
-			// decreaseCartCounter(): void {
-			// 	patchState(store, { cartCounter: store.cartCounter() - 1 });
-			// },
 			openMessageDialog(
 				type: DialogTypeEnum,
 				title: string,

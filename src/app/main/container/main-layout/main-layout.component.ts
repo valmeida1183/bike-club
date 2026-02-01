@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, viewChild } from '@angular/core';
+import { Component, effect, inject, OnInit, viewChild } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,6 +34,16 @@ export class MainLayoutComponent {
 	protected layoutStore = inject(LayoutStore);
 	protected cartStore = inject(CartStore);
 	protected breakpointService = inject(BreakpointService);
+
+	constructor() {
+		effect(() => {
+			const user = this.authStore.user();
+
+			if (user) {
+				this.cartStore.getCartByUserId(user.id);
+			}
+		});
+	}
 
 	onLogout() {
 		this.authStore.logout();

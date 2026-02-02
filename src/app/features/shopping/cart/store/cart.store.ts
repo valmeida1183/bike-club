@@ -1,19 +1,17 @@
-import { ShopCart } from 'src/app/features/shopping/models/shopCart.model';
-import { CartState } from './cart.state';
+import { computed, inject } from '@angular/core';
 import {
 	patchState,
 	signalStore,
 	withComputed,
-	withHooks,
 	withMethods,
 	withProps,
 	withState,
 } from '@ngrx/signals';
-import { Purchase } from 'src/app/features/shopping/models/purchase.model';
-import { computed, inject } from '@angular/core';
 import { Bike } from 'src/app/features/shopping/models/bike.model';
+import { Purchase } from 'src/app/features/shopping/models/purchase.model';
+import { ShopCart } from 'src/app/features/shopping/models/shopCart.model';
 import { ShopCartApiService } from '../services/shop-cart.api.service';
-import { get } from 'http';
+import { CartState } from './cart.state';
 
 const initialState: CartState = {
 	shopCart: new ShopCart(),
@@ -26,32 +24,51 @@ export const CartStore = signalStore(
 	withMethods((store) => {
 		return {
 			addPurchaseToCart(bike: Bike, quantity: number): void {
+				const { shopCartApiService } = store;
 				const currentCart = store.shopCart();
-				const purchase = this._createPruchase(bike, quantity, currentCart.id);
-				const newTotalAmount = this._calculateTotalAmount(
-					purchase,
-					currentCart.totalAmount,
-				);
+
+				if (!currentCart) {
+					return;
+				}
+
+				const purchase = this._createPurchase(bike, quantity, currentCart.id);
 				const updatedPurchases = [...currentCart.purchases, purchase];
+				const updatedCart = {
+					...currentCart,
+					purchases: updatedPurchases,
+				} as ShopCart;
 
-				const updatedCart = new ShopCart(
-					currentCart.id,
-					currentCart.purchaseDate,
-					newTotalAmount,
-					currentCart.userId,
-					currentCart.addressId,
-					updatedPurchases,
-					currentCart.user,
-					currentCart.address,
-				);
-
-				patchState(store, { shopCart: updatedCart });
-
-				// Todo: Persist the cart to backend.
+				shopCartApiService.updateShopCart(updatedCart).subscribe({
+					next: (response: ShopCart) => {
+						patchState(store, { shopCart: response });
+					},
+				});
 			},
 
-			// Todo: Implement removePurchaseFromCart method.
-			// Todo: Implement loadCart from backend method and use.
+			removePurchaseFromCart(purchaseId: number): void {
+				const { shopCartApiService } = store;
+				const currentCart = store.shopCart();
+
+				if (!currentCart) {
+					return;
+				}
+
+				const updatedPurchases = currentCart.purchases.filter(
+					(purchase) => purchase.bikeId !== purchaseId,
+				);
+
+				const updatedCart = {
+					...currentCart,
+					purchases: updatedPurchases,
+				} as ShopCart;
+
+				shopCartApiService.updateShopCart(updatedCart).subscribe({
+					next: (response: ShopCart) => {
+						patchState(store, { shopCart: response });
+					},
+				});
+			},
+
 			getCartByUserId(userId: number): void {
 				const { shopCartApiService } = store;
 

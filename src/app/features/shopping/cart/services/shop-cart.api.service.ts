@@ -14,4 +14,11 @@ export class ShopCartApiService {
 	getShopCartByUserId(userId: number): Observable<ShopCart> {
 		return this.http.get<ShopCart>(`${this.shopCartsEndpointUrl}/${userId}`);
 	}
+
+	updateShopCart(shopCart: ShopCart): Observable<ShopCart> {
+		return this.http.put<ShopCart>(
+			`${this.shopCartsEndpointUrl}/${shopCart.id}`,
+			shopCart,
+		);
+	}
 }

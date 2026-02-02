@@ -13,10 +13,4 @@ export class ShopCart {
 		public user: User = null,
 		public address: Address = null,
 	) {}
-
-	calculateTotalAmount() {
-		for (const purchase of this.purchases) {
-			this.totalAmount += purchase.bike.price;
-		}
-	}
 }

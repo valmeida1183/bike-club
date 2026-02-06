@@ -32,20 +32,15 @@ export const CartStore = signalStore(
 				}
 
 				const purchase = this._createPurchase(bike, quantity, currentCart.id);
-				const updatedPurchases = [...currentCart.purchases, purchase];
-				const updatedCart = {
-					...currentCart,
-					purchases: updatedPurchases,
-				} as ShopCart;
 
-				shopCartApiService.updateShopCart(updatedCart).subscribe({
+				shopCartApiService.addPurchaseInCart(purchase).subscribe({
 					next: (response: ShopCart) => {
 						patchState(store, { shopCart: response });
 					},
 				});
 			},
 
-			removePurchaseFromCart(purchaseId: number): void {
+			removePurchaseFromCart(purchase: Purchase): void {
 				const { shopCartApiService } = store;
 				const currentCart = store.shopCart();
 
@@ -53,16 +48,7 @@ export const CartStore = signalStore(
 					return;
 				}
 
-				const updatedPurchases = currentCart.purchases.filter(
-					(purchase) => purchase.bikeId !== purchaseId,
-				);
-
-				const updatedCart = {
-					...currentCart,
-					purchases: updatedPurchases,
-				} as ShopCart;
-
-				shopCartApiService.updateShopCart(updatedCart).subscribe({
+				shopCartApiService.removePurchaseFromCart(purchase).subscribe({
 					next: (response: ShopCart) => {
 						patchState(store, { shopCart: response });
 					},
@@ -79,15 +65,10 @@ export const CartStore = signalStore(
 				});
 			},
 
-			_calculateTotalAmount(purchase: Purchase, currentTotal: number): number {
-				return currentTotal + purchase.bike.price * purchase.quantity;
-			},
-
 			_createPurchase(bike: Bike, quantity: number, shopCartId: number): Purchase {
 				const purchase = new Purchase();
 
 				purchase.shopCartId = shopCartId;
-				purchase.bike = bike;
 				purchase.bikeId = bike.id;
 				purchase.quantity = quantity;
 

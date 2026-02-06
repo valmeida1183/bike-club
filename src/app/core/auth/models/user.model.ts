@@ -10,7 +10,7 @@ export class User {
 		public password: string,
 		public genderCode: string,
 		public phone: string,
-		public roleName: Role,
+		public roleName?: Role,
 	) {}
 
 	get address() {

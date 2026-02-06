@@ -111,6 +111,6 @@ export class RegisterComponent implements OnInit {
 		const { name, lastName, email, password, gender, phone } =
 			this.registerForm.value;
 
-		return new User(0, name, lastName, email, password, gender, phone, null);
+		return new User(0, name, lastName, email, password, gender, phone);
 	}
 }

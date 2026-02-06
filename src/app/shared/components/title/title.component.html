@@ -1,2 +1,10 @@
-<h1 class="screen-title">{{ title() }}</h1>
+<div class="title-container">
+	<h1 class="screen-title">{{ title() }}</h1>
+
+	@if (backLink()) {
+		<button matMiniFab color="primary" [routerLink]="backLink()" aria-label="Go back">
+			<mat-icon>arrow_back</mat-icon>
+		</button>
+	}
+</div>
 <hr class="title-spacer" />

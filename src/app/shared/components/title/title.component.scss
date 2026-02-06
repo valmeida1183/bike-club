@@ -1,10 +1,18 @@
 @use 'variables' as _var;
 
+.title-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-top: 40px;
+}
+
 h1.screen-title {
 	font-size: 3em;
 	color: _var.$primary;
 	text-shadow: 2px 4px 5px #fff;
-	margin: 40px 0 0;
+	margin: 0;
 }
 
 hr.title-spacer {

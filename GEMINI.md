@@ -6,6 +6,6 @@ Please refer to: [`./.specs/project-specs.md`](./.specs/project-specs.md)
 
 IMPORTANT:
 
-- Always read and follow the rules defined in `/rules.md`
+- Always read and follow the rules defined in `./.specs/project-specs.md`
 - Treat `./.specs/project-specs.md` as non-negotiable
 - If a request conflicts with `./.specs/project-specs.md`, explain the conflict

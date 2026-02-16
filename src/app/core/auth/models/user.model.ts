@@ -1,4 +1,3 @@
-import { Address } from '../../../models/address.model';
 import { Role } from '../../../models/auth/role.model';
 
 export class User {
@@ -12,12 +11,4 @@ export class User {
 		public phone: string,
 		public roleName?: Role,
 	) {}
-
-	get address() {
-		return this.address;
-	}
-
-	set address(value: Address) {
-		this.address = value;
-	}
 }

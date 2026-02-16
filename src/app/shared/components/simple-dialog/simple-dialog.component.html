@@ -1,18 +1,16 @@
 <div class="simple-dialog-title" mat-dialog-title color="warn">
-  @if (data.type === 'Error') {
-    <mat-icon>error</mat-icon>
-  }
-  @if (data.type === 'Warning') {
-    <mat-icon>warning</mat-icon>
-  }
-  @if (data.type === 'Information') {
-    <mat-icon>info</mat-icon>
-  }
-  <h3>{{ data.title }}</h3>
+	@if (data.type === dialogTypeEnum.ERROR) {
+		<mat-icon>error</mat-icon>
+	} @else if (data.type === dialogTypeEnum.WARN) {
+		<mat-icon>warning</mat-icon>
+	} @else if (data.type === dialogTypeEnum.INFO) {
+		<mat-icon>info</mat-icon>
+	}
+	<h3>{{ data.title }}</h3>
 </div>
 <div mat-dialog-content>
-  {{ data.message }}
+	{{ data.message }}
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button mat-raised-button (click)="onClose()">Close</button>
+	<button mat-button mat-raised-button (click)="onClose()">Close</button>
 </div>

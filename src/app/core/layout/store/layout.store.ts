@@ -2,7 +2,7 @@ import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { LayoutState } from './layout.state';
 import { inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DialogTypeEnum } from '../enums/dialog-type.enum';
+import { DialogTypeEnum } from '../../../shared/enums/dialog-type.enum';
 import { SimpleDialogComponent } from 'src/app/shared/components/simple-dialog/simple-dialog.component';
 
 const initialState: LayoutState = {
@@ -39,6 +39,9 @@ export const LayoutStore = signalStore(
 				const typeDialogCssClass = dialogTypeCssMap.get(type);
 
 				if (!dialogTypeCssMap.has(type)) {
+					console.error(
+						`Dialog type ${type} does not have a corresponding CSS class in the map.`,
+					);
 					return;
 				}
 

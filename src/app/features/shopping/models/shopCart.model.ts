@@ -1,4 +1,4 @@
-import { Address } from '../../../models/address.model';
+import { Address } from '../../../shared/models/address.model';
 import { Purchase } from './purchase.model';
 import { User } from '../../../core/auth/models/user.model';
 

@@ -1,0 +1,84 @@
+<h3 mat-dialog-title>{{ title }}</h3>
+<mat-dialog-content>
+	<div [formGroup]="addressForm">
+		<p>Please fill in the fields below to add a new address.</p>
+
+		<mat-form-field>
+			<mat-label>State</mat-label>
+			<mat-select formControlName="state" (selectionChange)="onStateChange($event.value)">
+				<mat-option>--</mat-option>
+				@for (state of addressStates(); track state.code) {
+					<mat-option [value]="state.code">
+						{{ state.name }}
+					</mat-option>
+				}
+			</mat-select>
+			@if (state?.hasError('required')) {
+				<mat-error>Please choose a state.</mat-error>
+			}
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>City</mat-label>
+			<mat-select formControlName="city">
+				<mat-option>--</mat-option>
+				@for (city of addressCities(); track city.name) {
+					<mat-option [value]="city.name">
+						{{ city.name }}
+					</mat-option>
+				}
+			</mat-select>
+			@if (city?.hasError('required')) {
+				<mat-error>Please choose a city.</mat-error>
+			}
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Street</mat-label>
+			<input type="text" matInput formControlName="street" />
+			<mat-hint align="end">{{ street.value?.length }} / 50</mat-hint>
+			@if (street?.hasError('required')) {
+				<mat-error>Street is required.</mat-error>
+			} @else if (street?.hasError('maxlength')) {
+				<mat-error>Street must contain a maximum of 50 characters.</mat-error>
+			}
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Complement</mat-label>
+			<input type="text" matInput formControlName="complement" />
+			<mat-hint align="end">{{ complement?.value?.length }} / 50</mat-hint>
+			@if (complement?.hasError('required')) {
+				<mat-error>Complement is required.</mat-error>
+			} @else if (complement?.hasError('maxlength')) {
+				<mat-error>Complement must contain a maximum of 50 characters.</mat-error>
+			}
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Zip Code</mat-label>
+			<input type="text" matInput formControlName="zipCode" />
+			<mat-hint align="end">{{ zipCode?.value?.length }} / 8</mat-hint>
+			@if (zipCode?.hasError('required')) {
+				<mat-error>Zip Code is required.</mat-error>
+			} @else if (zipCode?.hasError('maxlength')) {
+				<mat-error>Zip Code must contain a maximum of 8 characters.</mat-error>
+			} @else if (zipCode?.hasError('pattern')) {
+				<mat-error>Zip Code must contain only numbers.</mat-error>
+			}
+		</mat-form-field>
+
+		<mat-dialog-actions>
+			<button mat-button mat-raised-button (click)="onCancel()">Cancel</button>
+			<button
+				mat-button
+				mat-raised-button
+				color="primary"
+				(click)="onSaveAddress()"
+				[disabled]="addressForm.invalid"
+			>
+				Save
+			</button>
+		</mat-dialog-actions>
+	</div>
+</mat-dialog-content>

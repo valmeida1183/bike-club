@@ -9,7 +9,7 @@ import { inject } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LayoutStore } from '../../layout/store/layout.store';
-import { DialogTypeEnum } from '../../layout/enums/dialog-type.enum';
+import { DialogTypeEnum } from '../../../shared/enums/dialog-type.enum';
 import { HttpErrorHandlerService } from '../services/http-error-handler.service';
 
 export const SkipErrorHandlingHeader = 'X-Skip-Error-Handling';

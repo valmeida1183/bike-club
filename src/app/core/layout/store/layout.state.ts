@@ -1,4 +1,4 @@
-import { DialogTypeEnum } from '../enums/dialog-type.enum';
+import { DialogTypeEnum } from '../../../shared/enums/dialog-type.enum';
 
 export interface LayoutState {
 	isLoading: boolean;

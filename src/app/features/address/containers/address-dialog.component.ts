@@ -1,25 +1,19 @@
-import {
-	Component,
-	effect,
-	inject,
-	input,
-	OnInit,
-	output,
-} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
+import { MatButtonModule } from '@angular/material/button';
 import {
 	MAT_DIALOG_DATA,
 	MatDialogModule,
 	MatDialogRef,
 } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { Address } from 'src/app/shared/models/address.model';
 import { AddressForm } from '../models/address-form.type';
 import { AddressDialogData } from '../models/adress-dialog-data.model';
 import { AddressStore } from '../store/address.store';
-import { Address } from 'src/app/shared/models/address.model';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
 	selector: 'bc-address-dialog',
@@ -29,9 +23,11 @@ import { Address } from 'src/app/shared/models/address.model';
 		MatSelectModule,
 		MatDialogModule,
 		MatButtonModule,
+		MatInputModule,
 	],
 	templateUrl: './address-dialog.component.html',
 	styleUrl: './address-dialog.component.scss',
+	standalone: true,
 })
 export class AddressDialogComponent implements OnInit {
 	private fb = inject(FormBuilder);
@@ -66,7 +62,9 @@ export class AddressDialogComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.configureForm();
-		this.loadAddressToForm();
+		this.loadAddress();
+
+		console.log(this.addressStates());
 	}
 
 	onCancel(): void {
@@ -76,6 +74,8 @@ export class AddressDialogComponent implements OnInit {
 	onSaveAddress(): void {
 		const address: Address = this.addressForm.getRawValue();
 
+		// Store will handle whether to add or update the address based on the presence of an ID
+		// in afterClosed subscription in the cart component
 		this.dialogRef.close(address);
 	}
 
@@ -108,9 +108,12 @@ export class AddressDialogComponent implements OnInit {
 		});
 	}
 
-	private loadAddressToForm(): void {
-		const address = this.data.address;
+	private loadAddress(): void {
+		const { address = null } = this.data;
+
 		if (address) {
+			this.store.setAddress(address);
+
 			this.addressForm.patchValue({
 				state: address.state,
 				city: address.city,

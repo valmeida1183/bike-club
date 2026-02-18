@@ -1,0 +1,12 @@
+<bc-title title="Shopping Cart" [backLink]="'/shopping-cart'"></bc-title>
+
+<div class="cart-container">
+	<div class="cart-items"></div>
+
+	<bc-cart-summary
+		[shopCart]="store.shopCart()"
+		(openAddressDialog)="onOpenAddressDialog()"
+		(onBuyNow)="onBuyNow()"
+	>
+	</bc-cart-summary>
+</div>

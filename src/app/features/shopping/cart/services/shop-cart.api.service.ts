@@ -23,8 +23,6 @@ export class ShopCartApiService {
 		);
 	}
 
-	// todo remove purchase from cart api service method
-
 	removePurchaseFromCart(purchase: Purchase): Observable<ShopCart> {
 		const { shopCartId, bikeId } = purchase;
 

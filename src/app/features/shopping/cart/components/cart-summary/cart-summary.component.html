@@ -1,0 +1,39 @@
+<div class="cart-summary-container">
+	<h1>Total: {{ totalAmount() | currency }}</h1>
+	@if (address()) {
+		<p>
+			Delivery will be to the address below. If you want to change the address,
+			click here.
+		</p>
+
+		<div class="address-content">
+			<p>{{ address()?.street }}, {{ address()?.complement }}</p>
+			<p>{{ address()?.city }} - {{ address()?.state }}</p>
+			<p>{{ address()?.zipCode }}</p>
+		</div>
+	} @else {
+		<p>
+			No delivery address found. Please add an address to your profile or choose.
+		</p>
+	}
+
+	<button
+		class="form-button secondary"
+		mat-button
+		mat-raised-button
+		color="accent"
+		(click)="onOpenAddressDialog()"
+	>
+		{{ address() ? 'Change Address' : 'Add Address' }}
+	</button>
+	<button
+		class="form-button"
+		mat-button
+		mat-raised-button
+		color="primary"
+		[disabled]="isBuyNowDisabled()"
+		(click)="onBuyNow()"
+	>
+		Buy Now
+	</button>
+</div>

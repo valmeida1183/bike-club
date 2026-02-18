@@ -20,7 +20,9 @@ const initialState: CartState = {
 export const CartStore = signalStore(
 	{ providedIn: 'root' },
 	withState(initialState),
-	withProps(() => ({ shopCartApiService: inject(ShopCartApiService) })),
+	withProps(() => ({
+		shopCartApiService: inject(ShopCartApiService),
+	})),
 	withMethods((store) => {
 		return {
 			addPurchaseToCart(bike: Bike, quantity: number): void {

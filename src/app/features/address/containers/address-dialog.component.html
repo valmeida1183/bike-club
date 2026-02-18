@@ -1,11 +1,15 @@
-<h3 mat-dialog-title>{{ title }}</h3>
+<h2 mat-dialog-title>{{ title }}</h2>
+<hr />
 <mat-dialog-content>
-	<div [formGroup]="addressForm">
+	<form class="form" [formGroup]="addressForm">
 		<p>Please fill in the fields below to add a new address.</p>
 
-		<mat-form-field>
+		<mat-form-field class="form-field">
 			<mat-label>State</mat-label>
-			<mat-select formControlName="state" (selectionChange)="onStateChange($event.value)">
+			<mat-select
+				formControlName="state"
+				(selectionChange)="onStateChange($event.value)"
+			>
 				<mat-option>--</mat-option>
 				@for (state of addressStates(); track state.code) {
 					<mat-option [value]="state.code">
@@ -18,7 +22,7 @@
 			}
 		</mat-form-field>
 
-		<mat-form-field>
+		<mat-form-field class="form-field">
 			<mat-label>City</mat-label>
 			<mat-select formControlName="city">
 				<mat-option>--</mat-option>
@@ -33,7 +37,7 @@
 			}
 		</mat-form-field>
 
-		<mat-form-field>
+		<mat-form-field class="form-field">
 			<mat-label>Street</mat-label>
 			<input type="text" matInput formControlName="street" />
 			<mat-hint align="end">{{ street.value?.length }} / 50</mat-hint>
@@ -44,7 +48,7 @@
 			}
 		</mat-form-field>
 
-		<mat-form-field>
+		<mat-form-field class="form-field">
 			<mat-label>Complement</mat-label>
 			<input type="text" matInput formControlName="complement" />
 			<mat-hint align="end">{{ complement?.value?.length }} / 50</mat-hint>
@@ -55,7 +59,7 @@
 			}
 		</mat-form-field>
 
-		<mat-form-field>
+		<mat-form-field class="form-field">
 			<mat-label>Zip Code</mat-label>
 			<input type="text" matInput formControlName="zipCode" />
 			<mat-hint align="end">{{ zipCode?.value?.length }} / 8</mat-hint>
@@ -68,9 +72,18 @@
 			}
 		</mat-form-field>
 
-		<mat-dialog-actions>
-			<button mat-button mat-raised-button (click)="onCancel()">Cancel</button>
+		<mat-dialog-actions align="end">
 			<button
+				class="form-button secondary"
+				mat-button
+				mat-raised-button
+				color="accent"
+				(click)="onCancel()"
+			>
+				Cancel
+			</button>
+			<button
+				class="form-button"
 				mat-button
 				mat-raised-button
 				color="primary"
@@ -80,5 +93,5 @@
 				Save
 			</button>
 		</mat-dialog-actions>
-	</div>
+	</form>
 </mat-dialog-content>

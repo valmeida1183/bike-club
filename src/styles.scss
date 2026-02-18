@@ -130,6 +130,33 @@ form {
 	font-family: _var.$default-font;
 }
 
+.mat-mdc-dialog-container {
+	border: double 5px;
+	border-radius: 10px;
+	border-color: _var.$primary;
+
+	hr {
+		border: 1px solid _var.$secondary;
+		margin: 0.5rem 1rem;
+	}
+
+	.mat-mdc-dialog-surface {
+		background-color: _var.$light-background;
+	}
+
+	.mat-mdc-dialog-component-host {
+		.mat-mdc-dialog-title,
+		.mat-mdc-dialog-content {
+			font-family: _var.$default-font;
+		}
+
+		.mat-mdc-dialog-title {
+			color: _var.$primary;
+			font-size: 1.8rem;
+		}
+	}
+}
+
 // Overlay
 .backdrop {
 	position: fixed;

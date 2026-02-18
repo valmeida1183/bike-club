@@ -6,6 +6,7 @@ import { ShoppingDetailsStore } from '../store/shopping-details.store';
 import { BikeDescriptionPanelComponent } from '../components/bike-description-panel/bike-description-panel.component';
 import { BikePricePanelComponent } from '../components/bike-price-panel/bike-price-panel.component';
 import { CartStore } from 'src/app/features/shopping/cart/store/cart.store';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'bc-shopping-details',
@@ -22,6 +23,7 @@ import { CartStore } from 'src/app/features/shopping/cart/store/cart.store';
 export class ShoppingDetailsComponent implements OnInit {
 	store = inject(ShoppingDetailsStore);
 	cartStore = inject(CartStore);
+	router = inject(Router);
 
 	id = input.required<number>(); // this id comes from the route due withComponentInputBinding.
 
@@ -40,7 +42,7 @@ export class ShoppingDetailsComponent implements OnInit {
 			this.cartStore.addPurchaseToCart(bike, quantity);
 		}
 
-		// Todo Redirect to cart page.
+		this.router.navigate(['/shopping/cart']);
 	}
 
 	onBuyNow(quantity: number): void {

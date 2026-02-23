@@ -112,10 +112,17 @@ export class AddressDialogComponent implements OnInit {
 		const { address = null } = this.data;
 
 		if (address) {
-			this.store.setAddress(address);
-
+			// First, set the state value
 			this.addressForm.patchValue({
 				state: address.state,
+			});
+
+			// Then fetch cities for that state
+			this.store.getCities(address.state);
+
+			// Finally, patch all remaining values after cities are loaded
+			// Use setTimeout or better, subscribe to addressCities signal
+			this.addressForm.patchValue({
 				city: address.city,
 				street: address.street,
 				complement: address.complement,

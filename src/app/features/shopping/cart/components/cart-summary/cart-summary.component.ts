@@ -1,8 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, computed, input, output } from '@angular/core';
-import { ShopCart } from '../../../models/shopCart.model';
-import { Address } from 'src/app/shared/models/address.model';
+import { Component, computed, input, OnInit, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { ShopCart } from '../../../models/shopCart.model';
 
 @Component({
 	selector: 'bc-cart-summary',
@@ -10,9 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 	templateUrl: './cart-summary.component.html',
 	styleUrl: './cart-summary.component.scss',
 })
-export class CartSummaryComponent {
+export class CartSummaryComponent implements OnInit {
 	shopCart = input<ShopCart>(null);
-	openAddressDialog = output<Address | null>();
+	openAddressDialog = output<void>();
 	buyNow = output<void>();
 
 	address = computed(() => this.shopCart()?.address);
@@ -23,8 +22,15 @@ export class CartSummaryComponent {
 		return !cart.address || cart.purchases.length === 0;
 	});
 
+	ngOnInit(): void {
+		console.log(
+			'CartSummaryComponent initialized with shopCart:',
+			this.shopCart(),
+		);
+	}
+
 	onOpenAddressDialog(): void {
-		this.openAddressDialog.emit(this.address());
+		this.openAddressDialog.emit();
 	}
 
 	onBuyNow(): void {

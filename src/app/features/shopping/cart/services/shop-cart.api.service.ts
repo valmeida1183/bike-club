@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ShopCart } from '../../models/shopCart.model';
 import { Purchase } from '../../models/purchase.model';
+import { Address } from 'src/app/shared/models/address.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -28,6 +29,13 @@ export class ShopCartApiService {
 
 		return this.http.delete<ShopCart>(
 			`${this.shopCartsEndpointUrl}/remove-purchase/${shopCartId}/${bikeId}`,
+		);
+	}
+
+	updateAddressCart(shopCartId: number, adress: Address): Observable<ShopCart> {
+		return this.http.patch<ShopCart>(
+			`${this.shopCartsEndpointUrl}/${shopCartId}/address`,
+			adress,
 		);
 	}
 }

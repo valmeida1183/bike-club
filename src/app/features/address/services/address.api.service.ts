@@ -1,10 +1,9 @@
-import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { State } from '../models/state.model';
-import { City } from '../models/city.model';
 import { environment } from 'src/environments/environment';
-import { Address } from 'src/app/shared/models/address.model';
+import { City } from '../models/city.model';
+import { State } from '../models/state.model';
 
 @Injectable()
 export class AddressApiService {
@@ -41,17 +40,6 @@ export class AddressApiService {
 
 				return cities;
 			}),
-		);
-	}
-
-	addAddress(address: Address): Observable<Address> {
-		return this.http.post<Address>(this.addressesEndpointUrl, address);
-	}
-
-	updateAddress(address: Address): Observable<Address> {
-		return this.http.put<Address>(
-			`${this.addressesEndpointUrl}/${address.id}`,
-			address,
 		);
 	}
 }

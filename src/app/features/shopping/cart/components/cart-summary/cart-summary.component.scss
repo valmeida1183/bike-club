@@ -17,9 +17,22 @@
 	}
 
 	p {
-		color: color.adjust(_var.$primary, $lightness: -20%);
+		color: _var.$primary;
 		font-size: 1rem;
 		margin-top: 8px;
+	}
+
+	.address-content {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		margin-top: 16px;
+
+		span {
+			color: _var.$primary;
+			font-weight: bold;
+			font-size: 1rem;
+		}
 	}
 
 	button {

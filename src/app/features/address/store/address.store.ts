@@ -1,3 +1,9 @@
+import { inject, Injector } from '@angular/core';
+import {
+	MatDialog,
+	MatDialogConfig,
+	MatDialogRef,
+} from '@angular/material/dialog';
 import {
 	patchState,
 	signalStore,
@@ -6,17 +12,13 @@ import {
 	withProps,
 	withState,
 } from '@ngrx/signals';
-import { AddressState } from './address.state';
-import { inject, Injector } from '@angular/core';
-import { AddressApiService } from '../services/address.api.service';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Address } from 'src/app/shared/models/address.model';
-import { AddressDialogData } from '../models/adress-dialog-data.model';
 import { AddressDialogComponent } from '../containers/address-dialog.component';
-import { Observable, of, switchMap } from 'rxjs';
+import { AddressDialogData } from '../models/adress-dialog-data.model';
+import { AddressApiService } from '../services/address.api.service';
+import { AddressState } from './address.state';
 
 const initialState: AddressState = {
-	address: null,
 	addressStates: [],
 	addressCities: [],
 };
@@ -48,11 +50,9 @@ export const AddressStore = signalStore(
 				});
 			},
 
-			setAddress(address: Address): void {
-				patchState(store, { address: address });
-			},
-
-			openAddressDialog(address?: Address): void {
+			openAddressDialog(
+				address?: Address,
+			): MatDialogRef<AddressDialogComponent, Address> {
 				const { matDialogService } = store;
 				const title = address ? 'Edit Address' : 'Add Address';
 
@@ -63,43 +63,18 @@ export const AddressStore = signalStore(
 						title: title,
 						address: address ? address : null,
 					},
+					// Pass the injector context to the dialog then it can inject the AddressStore and knowing who is providing it (AddressStore)
+					// and avoid creating a new instance of the store in the dialog component
 					injector: store.injectorContext,
 				};
 
-				const dialogRef = matDialogService.open<AddressDialogComponent>(
+				const dialogRef = matDialogService.open<
 					AddressDialogComponent,
-					dialogConfig,
-				);
+					AddressDialogData,
+					Address
+				>(AddressDialogComponent, dialogConfig);
 
-				dialogRef
-					.afterClosed()
-					.pipe(
-						switchMap((address: Address | undefined) => {
-							if (address) {
-								return this._saveAddress(address);
-							}
-
-							return of(null);
-						}),
-					)
-					.subscribe({
-						next: (address: Address | null) => {
-							if (address) {
-								patchState(store, { address: address });
-							}
-						},
-					});
-			},
-
-			_saveAddress(newAddress: Address): Observable<Address> {
-				const currentAddress = this.store.address();
-
-				if (currentAddress) {
-					newAddress.id = currentAddress.id;
-					return addressApiService.updateAddress(newAddress);
-				} else {
-					return addressApiService.addAddress(newAddress);
-				}
+				return dialogRef;
 			},
 		};
 	}),

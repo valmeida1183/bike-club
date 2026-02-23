@@ -7,9 +7,9 @@
 		</p>
 
 		<div class="address-content">
-			<p>{{ address()?.street }}, {{ address()?.complement }}</p>
-			<p>{{ address()?.city }} - {{ address()?.state }}</p>
-			<p>{{ address()?.zipCode }}</p>
+			<span>{{ address()?.street }}, {{ address()?.complement }}</span>
+			<span>{{ address()?.city }} - {{ address()?.state }}</span>
+			<span>{{ address()?.zipCode }}</span>
 		</div>
 	} @else {
 		<p>

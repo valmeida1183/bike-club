@@ -12,6 +12,7 @@ import { Purchase } from 'src/app/features/shopping/models/purchase.model';
 import { ShopCart } from 'src/app/features/shopping/models/shopCart.model';
 import { ShopCartApiService } from '../services/shop-cart.api.service';
 import { CartState } from './cart.state';
+import { Address } from 'src/app/shared/models/address.model';
 
 const initialState: CartState = {
 	shopCart: new ShopCart(),
@@ -61,6 +62,21 @@ export const CartStore = signalStore(
 				const { shopCartApiService } = store;
 
 				shopCartApiService.getShopCartByUserId(userId).subscribe({
+					next: (response: ShopCart) => {
+						patchState(store, { shopCart: response });
+					},
+				});
+			},
+
+			updateCartAddress(address: Address): void {
+				const { shopCartApiService } = store;
+				const currentCart = store.shopCart();
+
+				if (!currentCart) {
+					return;
+				}
+
+				shopCartApiService.updateAddressCart(currentCart.id, address).subscribe({
 					next: (response: ShopCart) => {
 						patchState(store, { shopCart: response });
 					},

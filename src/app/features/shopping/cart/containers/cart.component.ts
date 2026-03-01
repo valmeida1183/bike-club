@@ -7,10 +7,11 @@ import { TitleComponent } from 'src/app/shared/components/title/title.component'
 import { Address } from 'src/app/shared/models/address.model';
 import { CartSummaryComponent } from '../components/cart-summary/cart-summary.component';
 import { CartStore } from '../store/cart.store';
+import { CartItemComponent } from '../components/cart-item/cart-item.component';
 
 @Component({
 	selector: 'bc-cart',
-	imports: [TitleComponent, CartSummaryComponent],
+	imports: [TitleComponent, CartSummaryComponent, CartItemComponent],
 	templateUrl: './cart.component.html',
 	styleUrl: './cart.component.scss',
 	providers: [AddressStore, AddressApiService],

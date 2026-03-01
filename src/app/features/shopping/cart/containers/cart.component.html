@@ -1,7 +1,11 @@
 <bc-title title="Shopping Cart" [backLink]="'/shopping-cart'"></bc-title>
 
 <div class="cart-container">
-	<div class="cart-items"></div>
+	<div>
+		@for (purchase of store.shopCart()?.purchases; track purchase.bikeId) {
+			<bc-cart-item [purchase]="purchase"></bc-cart-item>
+		}
+	</div>
 
 	<bc-cart-summary
 		[shopCart]="store.shopCart()"

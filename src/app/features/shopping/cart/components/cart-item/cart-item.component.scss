@@ -1,0 +1,44 @@
+@use 'sass:color';
+@use 'variables' as _var;
+@use 'styles.scss' as global;
+
+.cart-item-container {
+	@extend .double-border;
+	background: _var.$light-background;
+	padding: 16px;
+	box-shadow: _var.$container-shadow;
+	border-radius: 8px;
+	font-family: _var.$default-font;
+	display: flex;
+	gap: 2rem;
+	justify-content: space-between;
+	margin-bottom: 1rem;
+
+	.cart-item-image {
+		flex-grow: 2;
+		width: 100px;
+	}
+
+	.cart-item-details {
+		flex-grow: 3;
+
+		h2 {
+			color: _var.$primary;
+			font-weight: bold;
+			margin: 0;
+		}
+
+		hr {
+			border: 1px solid _var.$secondary;
+		}
+	}
+
+	.cart-item-total {
+		flex-grow: 1;
+
+		h3 {
+			color: _var.$secondary;
+			font-weight: bold;
+		}
+	}
+}

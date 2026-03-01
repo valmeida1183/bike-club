@@ -1,1 +1,16 @@
-<p>cart-item works!</p>
+<div class="cart-item-container">
+	<div class="cart-item-image">
+		<img class="img-responsive" [src]="imagePath()" alt="{{ bike()?.name }}" />
+	</div>
+	<div class="cart-item-details">
+		<h2>{{ bike()?.model }}</h2>
+		<hr />
+		<p>{{ bike()?.description }}</p>
+		<p>Price: {{ bike()?.price | currency }}</p>
+		<p>Quantity: {{ purchase().quantity }}</p>
+		<!-- <button mat-button color="warn" (click)="onRemove()">Remove</button> -->
+	</div>
+	<div class="cart-item-total">
+		<h3>Total: {{ totalPrice() | currency }}</h3>
+	</div>
+</div>

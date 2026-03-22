@@ -1,12 +1,16 @@
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
 import { LayoutState } from './layout.state';
 import { inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogTypeEnum } from '../../../shared/enums/dialog-type.enum';
 import { SimpleDialogComponent } from 'src/app/shared/components/simple-dialog/simple-dialog.component';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 const initialState: LayoutState = {
 	isLoading: false,
+	previousUrl: null,
+	currentUrl: null,
 	_dialogTypeCssMap: new Map<DialogTypeEnum, string>([
 		[DialogTypeEnum.ERROR, 'error-dialog'],
 		[DialogTypeEnum.WARN, 'warning-dialog'],
@@ -55,5 +59,20 @@ export const LayoutStore = signalStore(
 				matDialogService.open(SimpleDialogComponent, dialogConfig);
 			},
 		};
+	}),
+	withHooks({
+		onInit(store) {
+			const router = inject(Router);
+			patchState(store, { currentUrl: router.url });
+
+			router.events
+				.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+				.subscribe((event: NavigationEnd) => {
+					patchState(store, {
+						previousUrl: store.currentUrl(),
+						currentUrl: event.urlAfterRedirects,
+					});
+				});
+		},
 	}),
 );

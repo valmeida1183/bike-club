@@ -87,7 +87,7 @@ form {
 .mat-mdc-unelevated-button,
 .mat-mdc-fab,
 .mat-mdc-mini-fab {
-	font-family: _var.$default-font;
+	font-family: _var.$default-font !important;
 	font-size: 18px;
 	letter-spacing: normal;
 	margin: 0 0.2rem;
@@ -111,12 +111,14 @@ form {
 
 .form-field {
 	&.mat-mdc-form-field {
-		font-family: _var.$default-font;
+		font-family: _var.$default-font !important;
 		margin-top: 0.7em;
 
 		.mdc-text-field--filled,
+		.mat-mdc-select-value-text,
+		.mdc-list-item,
 		.mdc-floating-label {
-			font-family: _var.$default-font;
+			font-family: _var.$default-font !important;
 		}
 	}
 }

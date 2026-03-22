@@ -8,6 +8,7 @@ import { Address } from 'src/app/shared/models/address.model';
 import { CartSummaryComponent } from '../components/cart-summary/cart-summary.component';
 import { CartStore } from '../store/cart.store';
 import { CartItemComponent } from '../components/cart-item/cart-item.component';
+import { LayoutStore } from 'src/app/core/layout/store/layout.store';
 
 @Component({
 	selector: 'bc-cart',
@@ -20,6 +21,7 @@ export class CartComponent {
 	store = inject(CartStore);
 	addressStore = inject(AddressStore);
 	injectorContext = inject(Injector);
+	layoutStore = inject(LayoutStore);
 
 	dialogRef: MatDialogRef<AddressDialogComponent, Address>;
 

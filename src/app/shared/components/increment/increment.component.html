@@ -1,0 +1,20 @@
+<div class="increment-container">
+	<button
+		class="secondary"
+		matMiniFab
+		color="accent"
+		[disabled]="disabledDecrement()"
+		(click)="decrement()"
+	>
+		-
+	</button>
+	<span>{{ value() }}</span>
+	<button
+		matMiniFab
+		color="primary"
+		[disabled]="disabledIncrement()"
+		(click)="increment()"
+	>
+		+
+	</button>
+</div>

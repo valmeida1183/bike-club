@@ -43,6 +43,24 @@ export const CartStore = signalStore(
 				});
 			},
 
+			updateQuantityPurchaseInCart(bikeId: number, quantity: number): void {
+				const { shopCartApiService } = store;
+				const currentCart = store.shopCart();
+				const purchase = currentCart.purchases.find((p) => p.bikeId === bikeId);
+
+				if (!currentCart || !purchase) {
+					return;
+				}
+
+				purchase.quantity = quantity;
+
+				shopCartApiService.updatePurchaseInCart(purchase).subscribe({
+					next: (response: ShopCart) => {
+						patchState(store, { shopCart: response });
+					},
+				});
+			},
+
 			removePurchaseFromCart(purchase: Purchase): void {
 				const { shopCartApiService } = store;
 				const currentCart = store.shopCart();

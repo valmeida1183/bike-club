@@ -7,8 +7,15 @@
 		<hr />
 		<p>{{ bike()?.description }}</p>
 		<p>Price: {{ bike()?.price | currency }}</p>
-		<p>Quantity: {{ purchase().quantity }}</p>
-		<!-- <button mat-button color="warn" (click)="onRemove()">Remove</button> -->
+		<div class="cart-item-actions">
+			<bc-increment
+				[value]="purchase().quantity"
+				(changeQuantity)="onChangeQuantity($event)"
+			></bc-increment>
+			<button class="secondary" matMiniFab color="accent" (click)="onRemove()">
+				<mat-icon>delete</mat-icon>
+			</button>
+		</div>
 	</div>
 	<div class="cart-item-total">
 		<h3>Total: {{ totalPrice() | currency }}</h3>

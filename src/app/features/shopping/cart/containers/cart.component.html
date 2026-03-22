@@ -1,4 +1,4 @@
-<bc-title title="Shopping Cart" [backLink]="'/shopping-cart'"></bc-title>
+<bc-title title="Shopping Cart" [backLink]="layoutStore.previousUrl() || '/'"></bc-title>
 
 <div class="cart-container">
 	<div>

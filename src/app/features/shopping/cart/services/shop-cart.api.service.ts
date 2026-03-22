@@ -24,6 +24,15 @@ export class ShopCartApiService {
 		);
 	}
 
+	updatePurchaseInCart(purchase: Purchase): Observable<ShopCart> {
+		const { shopCartId, bikeId } = purchase;
+
+		return this.http.patch<ShopCart>(
+			`${this.shopCartsEndpointUrl}/update-purchase/${shopCartId}/${bikeId}`,
+			purchase,
+		);
+	}
+
 	removePurchaseFromCart(purchase: Purchase): Observable<ShopCart> {
 		const { shopCartId, bikeId } = purchase;
 

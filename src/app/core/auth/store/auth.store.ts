@@ -14,6 +14,7 @@ import { AuthResponse } from '../models/auth-response.model';
 import { User } from '../models/user.model';
 import { AuthApiService } from '../services/auth.api.service';
 import { AuthState } from './auth.state';
+import { Result } from '../../api/models/result';
 
 const initialState: AuthState = {
 	user: null,
@@ -41,29 +42,36 @@ export const AuthStore = signalStore(
 
 			return !!store.token();
 		}),
-		userFullName: computed(() => `${store.user?.name} ${store.user?.lastName}`),
-		userRole: computed(() => store.user.roleName),
+		userFullName: computed(
+			() => `${store.user()?.name} ${store.user()?.lastName}`,
+		),
+		userRole: computed(() => store.user()?.roleName),
 	})),
 	withMethods(({ authApiService, router, ...store }) => {
 		return {
 			signUp(user: User): void {
 				authApiService.signUp(user).subscribe({
-					next: (response: AuthResponse) => {
-						this._handleAuthentication(response);
+					next: (response: Result<AuthResponse>) => {
+						if (response.isSuccess && response.value) {
+							this._handleAuthentication(response.value);
+						}
 					},
 				});
 			},
 			signIn(email: string, password: string): void {
 				authApiService.signIn(email, password).subscribe({
-					next: (response: AuthResponse) => {
-						this._handleAuthentication(response);
+					next: (response: Result<AuthResponse>) => {
+						if (response.isSuccess && response.value) {
+							this._handleAuthentication(response.value);
+						}
 					},
 				});
 			},
 			autoSignIn(): void {
-				const localstoredUserData: AuthResponse = JSON.parse(
-					localStorage.getItem('bikeClubAuthUserData'),
-				);
+				const bikeClubAuthUserData = localStorage.getItem('bikeClubAuthUserData');
+				const localstoredUserData: AuthResponse = bikeClubAuthUserData
+					? JSON.parse(bikeClubAuthUserData)
+					: null;
 
 				if (!localstoredUserData) {
 					return;

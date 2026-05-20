@@ -41,7 +41,7 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (
 			} else {
 				// Server-side error
 				if (httpErrorMap.has(error.status)) {
-					const errorTuple = httpErrorMap.get(error.status);
+					const errorTuple = httpErrorMap.get(error.status)!;
 					errorTitle = errorTuple[0];
 					errorMessage = errorTuple[1];
 				}

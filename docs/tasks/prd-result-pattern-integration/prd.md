@@ -39,7 +39,7 @@ Success is measured by: (a) all existing flows (auth, shopping list, shopping de
 1. FR-1.1 The interceptor MUST detect responses whose body contains the keys `value`, `isSuccess`, and `isFailure` and replace the emitted body with the value at `body.value`.
 2. FR-1.2 The interceptor MUST leave responses without that shape unchanged (no false positives on third-party calls or static assets).
 3. FR-1.3 The interceptor MUST act only on success-class HTTP responses; error responses are handled by F3/F4.
-4. FR-1.4 The interceptor MUST be registered in `app.config.ts` in an order that places it after the auth interceptor and before/around `errorHandlingInterceptor` such that unwrapping happens on the way back and errors still reach the error interceptor untouched.
+4. FR-1.4 The interceptor MUST be registered in `app.config.ts` **after** `errorHandlingInterceptor` (i.e., last in the existing chain) so that, on the response path, it is the first to observe the raw backend body and unwraps it before any other interceptor sees the success shape. Errors MUST continue to propagate through `errorHandlingInterceptor` untouched by the unwrap step, and the existing four-interceptor ordering MUST remain otherwise unchanged.
 
 ### F2. Opt-out Header for Endpoints That Should Not Be Unwrapped
 

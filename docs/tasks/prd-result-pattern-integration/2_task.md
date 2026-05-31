@@ -28,11 +28,11 @@ Introduce a response-path-only `HttpInterceptorFn` that detects the backend `Res
 
 ## Subtasks
 
-- [ ] 2.1 Create `src/app/core/api/interceptors/result-unwrap.interceptor.ts` exporting `SkipResultUnwrapHeader` constant and `resultUnwrapInterceptor` function per techspec.md §Implementation Design.
-- [ ] 2.2 Register `resultUnwrapInterceptor` as the last entry in `withInterceptors([...])` in `src/app/app.config.ts`. Verify the final order matches techspec.md §System Architecture.
-- [ ] 2.3 Create `src/app/core/api/interceptors/result-unwrap.interceptor.spec.ts` covering the five test cases listed in techspec.md §Testing Approach (envelope unwrap, pass-through on non-envelope, opt-out header strips + preserves body, error response untouched, original instance not mutated). Test names follow `given_X_when_Y_then_Z` convention.
-- [ ] 2.4 Run `npm test --include=src/app/core/api/interceptors/result-unwrap.interceptor.spec.ts` and confirm all cases pass.
-- [ ] 2.5 Run `npm run build` to confirm no TypeScript regressions across the codebase.
+- [x] 2.1 Create `src/app/core/api/interceptors/result-unwrap.interceptor.ts` exporting `SkipResultUnwrapHeader` constant and `resultUnwrapInterceptor` function per techspec.md §Implementation Design.
+- [x] 2.2 Register `resultUnwrapInterceptor` as the last entry in `withInterceptors([...])` in `src/app/app.config.ts`. Verify the final order matches techspec.md §System Architecture.
+- [x] 2.3 Create `src/app/core/api/interceptors/result-unwrap.interceptor.spec.ts` covering the five test cases listed in techspec.md §Testing Approach (envelope unwrap, pass-through on non-envelope, opt-out header strips + preserves body, error response untouched, original instance not mutated). Test names follow `given_X_when_Y_then_Z` convention.
+- [x] 2.4 Run `npm test --include=src/app/core/api/interceptors/result-unwrap.interceptor.spec.ts` and confirm all cases pass.
+- [x] 2.5 Run `npm run build` to confirm no TypeScript regressions across the codebase.
 
 ## Implementation Details
 
@@ -49,8 +49,8 @@ See techspec.md §Implementation Design → "Main Interfaces" for the exported s
 
 ## Task Tests
 
-- [ ] Unit tests: the five `given_X_when_Y_then_Z` cases listed in techspec.md §Testing Approach for `result-unwrap.interceptor.spec.ts`.
-- [ ] E2E tests: not applicable (Protractor suite is not part of this initiative per PRD Out of Scope).
+- [x] Unit tests: the five `given_X_when_Y_then_Z` cases listed in techspec.md §Testing Approach for `result-unwrap.interceptor.spec.ts`.
+- [x] E2E tests: not applicable (Protractor suite is not part of this initiative per PRD Out of Scope).
 
 <critical>ALWAYS CREATE AND EXECUTE TASK TESTS BEFORE CONSIDERING IT COMPLETED</critical>
 

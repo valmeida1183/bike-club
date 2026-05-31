@@ -16,6 +16,7 @@ import { loadingInterceptor } from './core/layout/interceptors/loading.intercept
 
 import { APP_ROUTES } from './app.routes';
 import { authInterceptor } from './core/auth/interceptors/auth.interceptor';
+import { resultUnwrapInterceptor } from './core/api/interceptors/result-unwrap.interceptor';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -31,6 +32,7 @@ export const appConfig: ApplicationConfig = {
 				authInterceptor,
 				loadingInterceptor,
 				errorHandlingInterceptor,
+				resultUnwrapInterceptor,
 			]),
 		),
 		provideAnimations(),

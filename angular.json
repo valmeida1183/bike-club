@@ -94,7 +94,10 @@
 							"src/bike-club-theme.scss",
 							"src/styles.scss"
 						],
-						"scripts": []
+						"scripts": [],
+						"stylePreprocessorOptions": {
+							"includePaths": ["src", "src/styles"]
+						}
 					}
 				},
 				"lint": {

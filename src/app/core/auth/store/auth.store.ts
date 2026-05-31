@@ -14,7 +14,6 @@ import { AuthResponse } from '../models/auth-response.model';
 import { User } from '../models/user.model';
 import { AuthApiService } from '../services/auth.api.service';
 import { AuthState } from './auth.state';
-import { Result } from '../../api/models/result';
 
 const initialState: AuthState = {
 	user: null,
@@ -51,19 +50,15 @@ export const AuthStore = signalStore(
 		return {
 			signUp(user: User): void {
 				authApiService.signUp(user).subscribe({
-					next: (response: Result<AuthResponse>) => {
-						if (response.isSuccess && response.value) {
-							this._handleAuthentication(response.value);
-						}
+					next: (response: AuthResponse) => {
+						this._handleAuthentication(response);
 					},
 				});
 			},
 			signIn(email: string, password: string): void {
 				authApiService.signIn(email, password).subscribe({
-					next: (response: Result<AuthResponse>) => {
-						if (response.isSuccess && response.value) {
-							this._handleAuthentication(response.value);
-						}
+					next: (response: AuthResponse) => {
+						this._handleAuthentication(response);
 					},
 				});
 			},
@@ -96,7 +91,6 @@ export const AuthStore = signalStore(
 
 				patchState(store, initialState);
 			},
-			// 👇 private method
 			_handleAuthentication(response: AuthResponse): void {
 				const { user, token, expiresIn } = response;
 				patchState(store, { user, token, expiresIn: new Date(expiresIn) });

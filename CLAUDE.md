@@ -11,7 +11,6 @@ The canonical project specification lives at `.specs/project-specs.md`. Treat it
 - `npm start` — dev server at `http://localhost:4200`
 - `npm run build` — production build to `dist/bike-club`
 - `npm test` — Karma/Jasmine unit tests
-- `npm run e2e` — Protractor end-to-end tests
 - `npm run lint` — TSLint (legacy, still wired into `ng lint`)
 - Single test: `ng test --include=src/app/path/to/file.spec.ts` (Karma)
 

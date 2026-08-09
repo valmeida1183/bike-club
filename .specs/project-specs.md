@@ -20,7 +20,6 @@ BikeClub is an e-commerce application for bikes built with a modern version of A
 - **TSLint & Codelyzer:** Employed for code linting to maintain quality and enforce Angular-specific best practices (note: TSLint is deprecated in newer Angular versions, but still present in this project's configuration).
 - **Prettier:** Ensures consistent code formatting across the project.
 - **Karma & Jasmine:** Used for comprehensive unit testing.
-- **Protractor:** Utilized for end-to-end testing (note: Protractor is deprecated and might be replaced in future Angular versions).
 
 ## Architecture
 
@@ -117,7 +116,6 @@ The primary data models are located in `src/app/models/` and its subdirectories:
 - **Run Development Server:** `npm start` or `ng serve` (access at `http://localhost:4200`)
 - **Build for Production:** `npm run build` or `ng build` (output to `dist/bike-club`)
 - **Run Unit Tests:** `npm test` or `ng test` (executes tests via Karma/Jasmine)
-- **Run End-to-End Tests:** `npm run e2e` or `ng e2e` (executes tests via Protractor)
 - **Lint Code:** `npm run lint` or `ng lint` (runs TSLint checks)
 
 ## File Naming Conventions
@@ -143,7 +141,7 @@ The primary data models are located in `src/app/models/` and its subdirectories:
 ## Testing
 
 - **Unit Tests:** Located in `*.spec.ts` files, mirroring the component structure. Executed via Karma with Jasmine syntax (`describe`, `it`, `expect`).
-- **End-to-End Tests:** Defined in the `e2e/` directory and run via Protractor.
+- **End-to-End Tests:** None currently in the project. Protractor was removed; Playwright is planned for future adoption.
 
 ## Environment Configuration
 

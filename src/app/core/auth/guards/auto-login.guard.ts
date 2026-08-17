@@ -13,7 +13,7 @@ export const autoLoginGuard: CanActivateFn = (
 		authStore.isAuthenticated() &&
 		(state.url === '/account/login' || state.url === '/account/register')
 	) {
-		return router.createUrlTree(['/shopping']);
+		return router.createUrlTree(['/home']);
 	}
 
 	return true;

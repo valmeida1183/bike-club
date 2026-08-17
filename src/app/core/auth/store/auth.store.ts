@@ -77,7 +77,9 @@ export const AuthStore = signalStore(
 					localstoredUserData.expiresIn &&
 					new Date() < new Date(localstoredUserData.expiresIn)
 				) {
-					this._handleAuthentication(localstoredUserData);
+					// Restoring a session must not navigate — it would clobber whatever
+					// route the user cold-booted into.
+					this._handleAuthentication(localstoredUserData, false);
 				} else {
 					localStorage.removeItem('bikeClubAuthUserData');
 				}
@@ -89,16 +91,26 @@ export const AuthStore = signalStore(
 					clearTimeout(timerId);
 				}
 
+				// Clear state before navigating so autoLoginGuard sees an
+				// unauthenticated store and lets /account/login through.
 				patchState(store, initialState);
+				router.navigate(['/account/login']);
 			},
-			_handleAuthentication(response: AuthResponse): void {
+			_handleAuthentication(
+				response: AuthResponse,
+				navigateHome = true,
+			): void {
 				const { user, token, expiresIn } = response;
 				patchState(store, { user, token, expiresIn: new Date(expiresIn) });
+
+				if (navigateHome) {
+					router.navigate(['/home']);
+				}
 			},
 		};
 	}),
 	withHooks({
-		onInit({ authApiService, router, ...store }) {
+		onInit(store) {
 			store.autoSignIn();
 
 			effect((onCleanup) => {
@@ -125,6 +137,10 @@ export const AuthStore = signalStore(
 				}
 			});
 
+			// Keeps localStorage in sync with auth state. Navigation deliberately
+			// lives at the transition points (_handleAuthentication / logout) instead:
+			// this effect also runs on store init, so navigating here hijacked any
+			// cold deep-link into the app.
 			effect(() => {
 				if (store.isAuthenticated()) {
 					untracked(() => {
@@ -137,10 +153,7 @@ export const AuthStore = signalStore(
 							}),
 						);
 					});
-
-					router.navigate(['/home']);
 				} else {
-					router.navigate(['/account/login']);
 					localStorage.removeItem('bikeClubAuthUserData');
 				}
 			});

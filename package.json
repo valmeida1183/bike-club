@@ -8,6 +8,7 @@
 		"test": "ng test",
 		"test:e2e": "playwright test",
 		"test:e2e-headed": "playwright test --headed",
+		"test:e2e-no-register": "playwright test --grep-invert \"Register Page|@cart-shared\" && playwright test --grep \"@cart-shared\" --workers=1",
 		"lint": "ng lint"
 	},
 	"private": true,

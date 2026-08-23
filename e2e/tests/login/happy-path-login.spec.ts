@@ -2,6 +2,7 @@
 // seed: e2e/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
+import { CYCLIST_CREDENTIALS } from '../../auth/credentials';
 
 test.describe('Login Page', () => {
 	test('Happy path: valid credentials log the user in and land on /home', async ({ page }) => {
@@ -19,9 +20,9 @@ test.describe('Login Page', () => {
 		await expect(loginButton).toBeDisabled();
 		expect(await page.evaluate(() => localStorage.getItem('bikeClubAuthUserData'))).toBeNull();
 
-		// 2. Fill Email with 'test3@gmail.com' and Password with '123456'.
-		await emailInput.fill('test3@gmail.com');
-		await passwordInput.fill('123456');
+		// 2. Fill Email and Password with the Cyclist E2E account credentials.
+		await emailInput.fill(CYCLIST_CREDENTIALS.email);
+		await passwordInput.fill(CYCLIST_CREDENTIALS.password);
 		await expect(loginButton).toBeEnabled();
 
 		// 3. Click the Login button.
@@ -46,7 +47,7 @@ test.describe('Login Page', () => {
 		});
 
 		expect(authData).not.toBeNull();
-		expect(authData.user.email).toBe('test3@gmail.com');
+		expect(authData.user.email).toBe(CYCLIST_CREDENTIALS.email);
 		expect(typeof authData.token).toBe('string');
 		expect(authData.token.length).toBeGreaterThan(0);
 		expect(authData.expiresIn).toBeTruthy();

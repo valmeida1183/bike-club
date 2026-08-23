@@ -2,6 +2,7 @@
 // seed: e2e/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
+import { CYCLIST_CREDENTIALS } from '../../auth/credentials';
 
 test.describe('Login Page', () => {
 	test('Invalid credentials show a global error dialog and persist no session', async ({ page }) => {
@@ -19,8 +20,8 @@ test.describe('Login Page', () => {
 		await expect(loginButton).toBeDisabled();
 		expect(await page.evaluate(() => localStorage.getItem('bikeClubAuthUserData'))).toBeNull();
 
-		// 2. Fill Email with 'test3@gmail.com' (well-formed, valid domain) and Password with a wrong but 6+ character value, e.g. 'wrongpass'.
-		await emailInput.fill('test3@gmail.com');
+		// 2. Fill Email with the Cyclist E2E account's email (well-formed, valid domain) and Password with a wrong but 6+ character value, e.g. 'wrongpass'.
+		await emailInput.fill(CYCLIST_CREDENTIALS.email);
 		await passwordInput.fill('wrongpass');
 		await expect(loginButton).toBeEnabled();
 
@@ -48,7 +49,7 @@ test.describe('Login Page', () => {
 		await closeButton.click();
 		await expect(dialog).not.toBeVisible();
 
-		await expect(emailInput).toHaveValue('test3@gmail.com');
+		await expect(emailInput).toHaveValue(CYCLIST_CREDENTIALS.email);
 		await expect(passwordInput).toHaveValue('wrongpass');
 		await expect(page.getByRole('button', { name: 'Login' })).toBeEnabled();
 

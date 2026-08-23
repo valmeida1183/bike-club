@@ -2,6 +2,7 @@
 // seed: e2e/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
+import { CYCLIST_CREDENTIALS } from '../../auth/credentials';
 
 test.describe('Register Page', () => {
 	test('An already-authenticated user hard-navigating to /account/register is redirected to /home', async ({ page }) => {
@@ -18,13 +19,13 @@ test.describe('Register Page', () => {
 		await expect(registerButton).toBeDisabled();
 		await expect(page).toHaveURL('http://localhost:4200/account/register');
 
-		// 3. Navigate to http://localhost:4200/account/login and log in with the existing, already-registered account 'test3@gmail.com' / '123456'.
+		// 3. Navigate to http://localhost:4200/account/login and log in with the existing, already-registered Cyclist E2E account.
 		await page.goto('http://localhost:4200/account/login');
 		const emailInput = page.getByRole('textbox', { name: 'Email' });
 		const passwordInput = page.getByRole('textbox', { name: 'Password' });
 		const loginButton = page.getByRole('button', { name: 'Login' });
-		await emailInput.fill('test3@gmail.com');
-		await passwordInput.fill('123456');
+		await emailInput.fill(CYCLIST_CREDENTIALS.email);
+		await passwordInput.fill(CYCLIST_CREDENTIALS.password);
 		await loginButton.click();
 		await expect(page).toHaveURL('http://localhost:4200/home');
 

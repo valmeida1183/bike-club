@@ -2,6 +2,7 @@
 // seed: e2e/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
+import { CYCLIST_CREDENTIALS } from '../../auth/credentials';
 
 test.describe('Register Page', () => {
 	test("Registering with an already-used email shows a global 'Error' dialog and persists no session", async ({ page }) => {
@@ -25,15 +26,15 @@ test.describe('Register Page', () => {
 		await expect(registerButton).toBeDisabled();
 		expect(await page.evaluate(() => localStorage.getItem('bikeClubAuthUserData'))).toBeNull();
 
-		// 2. Fill the form with a well-formed but already-registered email — use 'test3@gmail.com' (the account documented in login.spec.md) —
-		// plus valid values for all other fields: Password '123456', Confirm Password '123456', Name 'Dup', Last Name 'Test',
+		// 2. Fill the form with a well-formed but already-registered email — use the Cyclist E2E account (already registered) —
+		// plus valid values for all other fields: same password for Password/Confirm Password, Name 'Dup', Last Name 'Test',
 		// Gender 'Male' (exact-name option locator), Phone '(11) 91234-5678'.
 		await emailInput.click();
-		await emailInput.fill('test3@gmail.com');
+		await emailInput.fill(CYCLIST_CREDENTIALS.email);
 		await passwordInput.click();
-		await passwordInput.fill('123456');
+		await passwordInput.fill(CYCLIST_CREDENTIALS.password);
 		await confirmPasswordInput.click();
-		await confirmPasswordInput.fill('123456');
+		await confirmPasswordInput.fill(CYCLIST_CREDENTIALS.password);
 		await nameInput.click();
 		await nameInput.fill('Dup');
 		await lastNameInput.click();
@@ -62,9 +63,9 @@ test.describe('Register Page', () => {
 		await closeButton.click();
 		await expect(dialog).not.toBeVisible();
 
-		await expect(emailInput).toHaveValue('test3@gmail.com');
-		await expect(passwordInput).toHaveValue('123456');
-		await expect(confirmPasswordInput).toHaveValue('123456');
+		await expect(emailInput).toHaveValue(CYCLIST_CREDENTIALS.email);
+		await expect(passwordInput).toHaveValue(CYCLIST_CREDENTIALS.password);
+		await expect(confirmPasswordInput).toHaveValue(CYCLIST_CREDENTIALS.password);
 		await expect(nameInput).toHaveValue('Dup');
 		await expect(lastNameInput).toHaveValue('Test');
 		await expect(genderCombobox).toHaveText('Male');

@@ -1,17 +1,15 @@
 // spec: e2e/specs/shopping.spec.md
-// seed: e2e/seed.authenticated.spec.ts
+// auth: cyclist (see e2e/auth/cyclist.setup.ts)
 
 import { test, expect } from '@playwright/test';
+import { CYCLIST_STORAGE_STATE } from '../../auth/storage-state';
+
+test.use({ storageState: CYCLIST_STORAGE_STATE });
 
 test.describe('Shopping Page Search', () => {
 	test('Filtering by a Category with no matching bikes shows an empty results grid', async ({ page }) => {
-		// 1. Navigate to http://localhost:4200/account/login, clear localStorage via page.evaluate, reload, then fill Email and Password and click Login.
-		await page.goto('http://localhost:4200/account/login');
-		await page.evaluate(() => localStorage.clear());
-		await page.goto('http://localhost:4200/account/login');
-		await page.getByRole('textbox', { name: 'Email' }).fill('test3@gmail.com');
-		await page.getByRole('textbox', { name: 'Password' }).fill('123456');
-		await page.getByRole('button', { name: 'Login' }).click();
+		// 1. Start already authenticated as Cyclist (see e2e/auth/cyclist.setup.ts) and land on /home.
+		await page.goto('http://localhost:4200/home');
 		await expect(page).toHaveURL('http://localhost:4200/home');
 
 		// 2. Click the 'Shop' nav link.

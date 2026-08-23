@@ -2,6 +2,7 @@
 // seed: e2e/seed.spec.ts
 
 import { test, expect } from '@playwright/test';
+import { CYCLIST_CREDENTIALS } from '../../auth/credentials';
 
 test.describe('Login Page', () => {
 	test('autoLoginGuard redirects an already-authenticated user away from /account/login', async ({ page }) => {
@@ -18,9 +19,9 @@ test.describe('Login Page', () => {
 		await expect(passwordInput).toBeVisible();
 		await expect(loginButton).toBeDisabled();
 
-		// 2. Fill Email with 'test3@gmail.com' and Password with '123456', then click Login to perform a genuine login.
-		await emailInput.fill('test3@gmail.com');
-		await passwordInput.fill('123456');
+		// 2. Fill Email and Password with the Cyclist E2E account credentials, then click Login to perform a genuine login.
+		await emailInput.fill(CYCLIST_CREDENTIALS.email);
+		await passwordInput.fill(CYCLIST_CREDENTIALS.password);
 		await loginButton.click();
 		await expect(page).toHaveURL('http://localhost:4200/home');
 

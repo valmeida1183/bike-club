@@ -9,5 +9,5 @@ import { BikeTagComponent } from '../bike-tag/bike-tag.component';
 	styleUrl: './bike-description-panel.component.scss',
 })
 export class BikeDescriptionPanelComponent {
-	bike = input.required<Bike>();
+	bike = input<Bike | null>(null);
 }

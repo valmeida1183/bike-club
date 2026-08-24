@@ -10,7 +10,7 @@ import { ShopCart } from '../../../models/shopCart.model';
 	styleUrl: './cart-summary.component.scss',
 })
 export class CartSummaryComponent implements OnInit {
-	shopCart = input<ShopCart>(null);
+	shopCart = input<ShopCart | null>(null);
 	openAddressDialog = output<void>();
 	buyNow = output<void>();
 
@@ -19,7 +19,7 @@ export class CartSummaryComponent implements OnInit {
 	isBuyNowDisabled = computed(() => {
 		const cart = this.shopCart();
 
-		return !cart.address || cart.purchases.length === 0;
+		return !cart?.address || cart.purchases.length === 0;
 	});
 
 	ngOnInit(): void {

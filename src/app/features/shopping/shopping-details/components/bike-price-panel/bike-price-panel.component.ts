@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 	styleUrl: './bike-price-panel.component.scss',
 })
 export class BikePricePanelComponent {
-	price = input.required<number>();
+	price = input<number>(0);
 
 	changeAddress = output<void>();
 	addToCart = output<number>();

@@ -8,6 +8,6 @@ import { environment } from 'src/environments/environment';
 	styleUrl: './bike-image-panel.component.scss',
 })
 export class BikeImagePanelComponent {
-	imageName = input.required<string>();
+	imageName = input<string>();
 	imagePath = computed(() => `${environment.imageResource}${this.imageName()}`);
 }

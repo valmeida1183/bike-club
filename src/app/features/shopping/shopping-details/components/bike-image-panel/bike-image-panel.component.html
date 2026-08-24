@@ -1,3 +1,7 @@
 <div class="bike-image-content">
-	<img class="img-responsive" [src]="imagePath()" [alt]="imageName()" />
+	@if (imageName()) {
+		<img class="img-responsive" [src]="imagePath()" [alt]="imageName()" />
+	} @else {
+		<p>No image available</p>
+	}
 </div>

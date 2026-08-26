@@ -19,8 +19,6 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class BikePricePanelComponent {
 	price = input<number>(0);
-
-	changeAddress = output<void>();
 	addToCart = output<number>();
 	buyNow = output<number>();
 
@@ -29,15 +27,7 @@ export class BikePricePanelComponent {
 		validators: [Validators.min(1), Validators.max(20)],
 	});
 
-	onChangeAddress(): void {
-		this.changeAddress.emit();
-	}
-
 	onAddToCart(): void {
 		this.addToCart.emit(this.quantity.value);
-	}
-
-	onBuyNow(): void {
-		this.buyNow.emit(this.quantity.value);
 	}
 }

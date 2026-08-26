@@ -1,6 +1,10 @@
 <div class="cart-item-container">
 	<div class="cart-item-image">
-		<img class="img-responsive" [src]="imagePath()" alt="{{ bike()?.name }}" />
+		<img
+			class="img-responsive"
+			[src]="imagePath()"
+			alt="{{ bike()?.description }}"
+		/>
 	</div>
 	<div class="cart-item-details">
 		<h2>{{ bike()?.model }}</h2>

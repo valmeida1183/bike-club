@@ -1,18 +1,10 @@
 <div class="bike-price-content">
 	<h1>{{ price() | currency }}</h1>
 	<p>
-		Delivery will be to the address registered in your account. If you want to
-		change the address, click here.
+		Delivery will be to the address registered in your account. If you don't have
+		an address registered, please add one in your account settings.
 	</p>
-	<button
-		class="form-button secondary"
-		mat-button
-		mat-raised-button
-		color="accent"
-		(click)="onChangeAddress()"
-	>
-		Change Address
-	</button>
+	<hr />
 	<p>You can add this bicycle to your cart or buy it right now.</p>
 	<mat-form-field class="form-field">
 		<mat-label>Quantity</mat-label>
@@ -33,15 +25,5 @@
 		(click)="onAddToCart()"
 	>
 		Add to Cart
-	</button>
-	<button
-		class="form-button"
-		mat-button
-		mat-raised-button
-		color="primary"
-		[disabled]="quantity.invalid"
-		(click)="onBuyNow()"
-	>
-		Buy Now
 	</button>
 </div>

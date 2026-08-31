@@ -1,4 +1,7 @@
-<bc-title title="Shopping Cart" [backLink]="layoutStore.previousUrl() || '/'"></bc-title>
+<bc-title
+	title="Shopping Cart"
+	[backLink]="layoutStore.previousUrl() || '/'"
+></bc-title>
 
 <div class="cart-container">
 	<div>
@@ -10,7 +13,7 @@
 	<bc-cart-summary
 		[shopCart]="store.shopCart()"
 		(openAddressDialog)="onOpenAddressDialog()"
-		(onBuyNow)="onBuyNow()"
+		(buyNow)="onBuyNow()"
 	>
 	</bc-cart-summary>
 </div>

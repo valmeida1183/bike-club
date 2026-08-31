@@ -40,6 +40,9 @@ Registered in `app.config.ts` in this exact order — order matters:
 2. `authInterceptor` — adds `Authorization: Bearer <token>` when `AuthStore.isAuthenticated()` is true
 3. `loadingInterceptor` — drives the global spinner state
 4. `errorHandlingInterceptor` — catches errors, opens a message dialog via `LayoutStore.openMessageDialog`, and re-throws. Set the `X-Skip-Error-Handling` header on a request to bypass it.
+5. `resultUnwrapInterceptor` (`core/api/interceptors/result-unwrap.interceptor.ts`) — the backend always sends back the `Result<T>` envelope (see `core/api/models/result.ts`), but this interceptor unwraps it transparently: on a response whose body looks like `{ value, isSuccess, isFailure }` with `isSuccess === true`, it clones the `HttpResponse` with `body: body.value`. This runs **after** `errorHandlingInterceptor`, so it only ever sees success bodies — failure envelopes surface as HTTP error statuses (400/404/409, per the backend's `ToIResult()` mapping) and are caught upstream instead. Set the `X-Skip-Result-Unwrap` header on a request to bypass it and receive the raw envelope.
+
+Net effect: API services and stores work with the **unwrapped payload**, not `Result<T>` — see API service pattern below.
 
 ### State management — NgRx Signals pattern
 
@@ -52,7 +55,9 @@ Stores follow this shape (see `core/auth/store/auth.store.ts` for the canonical 
 
 ### API service pattern
 
-Each feature has a `*.api.service.ts` (e.g., `shopping-list.api.service.ts`, `auth.api.service.ts`). Services use `inject(HttpClient)`, return `Observable<Result<T>>` for endpoints that wrap responses, and read `environment.baseApiUrl` / `environment.imageResource` for URLs.
+Each feature has a `*.api.service.ts` (e.g., `shopping-list.api.service.ts`, `auth.api.service.ts`). Services use `inject(HttpClient)` and read `environment.baseApiUrl` / `environment.imageResource` for URLs.
+
+Because `resultUnwrapInterceptor` (see HTTP interceptor chain above) strips the `Result<T>` envelope before the response reaches app code, services type their `HttpClient` calls with the **plain payload type**, not `Result<T>` — e.g. `getBike(id): Observable<Bike>`, `getBikes(filter): Observable<Bike[]>`, `signIn(...): Observable<AuthResponse>`. Stores then `patchState` directly from the response with no `.value` unwrap or `isSuccess` check needed. The one exception is `payment.api.service.ts`'s `createPaymentIntent`, which is typed `Observable<Result<PaymentIntentResponse>>` and is currently dead code (nothing calls it) — it predates or was written without the interceptor in mind. Don't copy that pattern for new services; follow the plain-payload convention above instead.
 
 ### Smart vs. Dumb components (strict)
 
@@ -73,4 +78,4 @@ Each feature has a `*.api.service.ts` (e.g., `shopping-list.api.service.ts`, `au
 
 - Adding a feature: create `features/<name>/` with its own `<name>.routes.ts`, smart component(s) in `containers/`, dumb components in `components/`, services in `services/`, and store files in `store/`. Wire it in via `loadChildren` in the parent routes file.
 - Adding an authenticated screen: inject `AuthStore`, gate the route with `authGuard`, and read `authStore.isAuthenticated()` / `authStore.userRole()` directly in templates.
-- New API call: add a method on the feature's `*.api.service.ts` returning `Observable<Result<T>>`, then call it from the feature store's `withMethods` block and `patchState` on success.
+- New API call: add a method on the feature's `*.api.service.ts` returning `Observable<TPayload>` (the plain payload type — `resultUnwrapInterceptor` already strips the `Result<T>` envelope, see HTTP interceptor chain above), then call it from the feature store's `withMethods` block and `patchState` on success.

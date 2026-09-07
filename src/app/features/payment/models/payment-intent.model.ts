@@ -1,4 +1,4 @@
-export interface PaymentIntentResponse {
+export interface PaymentIntent {
 	clientSecret: string;
 	amount: number;
 }

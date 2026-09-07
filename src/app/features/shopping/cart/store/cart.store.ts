@@ -10,12 +10,21 @@ import {
 import { Bike } from 'src/app/features/shopping/models/bike.model';
 import { Purchase } from 'src/app/features/shopping/models/purchase.model';
 import { ShopCart } from 'src/app/features/shopping/models/shopCart.model';
+import { Address } from 'src/app/shared/models/address.model';
 import { ShopCartApiService } from '../services/shop-cart.api.service';
 import { CartState } from './cart.state';
-import { Address } from 'src/app/shared/models/address.model';
 
 const initialState: CartState = {
-	shopCart: new ShopCart(),
+	shopCart: {
+		id: null,
+		purchaseDate: null,
+		totalAmount: null,
+		userId: null,
+		addressId: null,
+		purchases: [],
+		user: null,
+		address: null,
+	} as ShopCart,
 };
 
 export const CartStore = signalStore(
@@ -45,7 +54,7 @@ export const CartStore = signalStore(
 
 			updateQuantityPurchaseInCart(bikeId: number, quantity: number): void {
 				const { shopCartApiService } = store;
-				const currentCart = store.shopCart();
+				const currentCart = store.shopCart()!;
 				const purchase = currentCart.purchases.find((p) => p.bikeId === bikeId);
 
 				if (!currentCart || !purchase) {
@@ -102,11 +111,7 @@ export const CartStore = signalStore(
 			},
 
 			_createPurchase(bike: Bike, quantity: number, shopCartId: number): Purchase {
-				const purchase = new Purchase();
-
-				purchase.shopCartId = shopCartId;
-				purchase.bikeId = bike.id;
-				purchase.quantity = quantity;
+				const purchase = new Purchase(shopCartId, bike.id, quantity);
 
 				return purchase;
 			},
@@ -115,7 +120,7 @@ export const CartStore = signalStore(
 	withComputed((store) => ({
 		cartCounter: computed(() => {
 			return store
-				.shopCart()
+				.shopCart()!
 				.purchases.reduce((total, purchase) => total + purchase.quantity, 0);
 		}),
 	})),

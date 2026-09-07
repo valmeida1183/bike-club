@@ -1,4 +1,10 @@
-import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
+import {
+	patchState,
+	signalStore,
+	withHooks,
+	withMethods,
+	withState,
+} from '@ngrx/signals';
 import { LayoutState } from './layout.state';
 import { inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -49,7 +55,7 @@ export const LayoutStore = signalStore(
 					return;
 				}
 
-				dialogConfig.panelClass = [simpleDialogCssClass, typeDialogCssClass];
+				dialogConfig.panelClass = [simpleDialogCssClass, typeDialogCssClass!];
 				dialogConfig.data = {
 					type,
 					title,
@@ -66,7 +72,9 @@ export const LayoutStore = signalStore(
 			patchState(store, { currentUrl: router.url });
 
 			router.events
-				.pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+				.pipe(
+					filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+				)
 				.subscribe((event: NavigationEnd) => {
 					patchState(store, {
 						previousUrl: store.currentUrl(),

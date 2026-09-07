@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<hr />
+<mat-dialog-content>
+	<p>Please fill in the fields below make a payment.</p>
+	<div #paymentElement></div>
+
+	@if (paymentError()) {
+		<p class="payment-error">{{ paymentError() }}</p>
+	}
+
+	<mat-dialog-actions align="end">
+		<button
+			class="form-button secondary"
+			mat-raised-button
+			color="accent"
+			(click)="onCancel()"
+		>
+			Cancel
+		</button>
+		<button
+			class="form-button"
+			mat-button
+			mat-raised-button
+			color="primary"
+			[disabled]="isConfirming()"
+			(click)="onConfirmPayment()"
+		>
+			Pay
+		</button>
+	</mat-dialog-actions>
+</mat-dialog-content>

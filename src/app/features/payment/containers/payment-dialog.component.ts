@@ -14,7 +14,6 @@ import {
 } from '@angular/material/dialog';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { environment } from 'src/environments/environment.prod';
-import { PaymentIntent } from '../models/payment-intent.model';
 
 @Component({
 	selector: 'bc-payment-dialog',
@@ -79,6 +78,7 @@ export class PaymentDialogComponent implements AfterViewInit {
 
 		if (paymentIntent && paymentIntent.status === 'succeeded') {
 			console.info('Payment succeeded:', paymentIntent.id);
+			console.log('PaymentId length:', paymentIntent.id.length);
 			this.dialogRef.close(paymentIntent.id);
 		}
 	}

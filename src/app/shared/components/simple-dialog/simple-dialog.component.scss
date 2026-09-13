@@ -24,6 +24,16 @@
 	}
 }
 
+.success-dialog {
+	.mat-mdc-dialog-container {
+		border-color: _var.$success;
+
+		.mat-icon {
+			color: _var.$success;
+		}
+	}
+}
+
 .error-dialog {
 	.mat-mdc-dialog-container {
 		border-color: _var.$warn;

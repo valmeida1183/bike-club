@@ -21,7 +21,7 @@ const initialState: LayoutState = {
 		[DialogTypeEnum.ERROR, 'error-dialog'],
 		[DialogTypeEnum.WARN, 'warning-dialog'],
 		[DialogTypeEnum.INFO, 'info-dialog'],
-		[DialogTypeEnum.SUCCESS, 'info-dialog'],
+		[DialogTypeEnum.SUCCESS, 'success-dialog'],
 	]),
 };
 

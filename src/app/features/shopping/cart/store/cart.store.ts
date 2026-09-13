@@ -99,11 +99,26 @@ export const CartStore = signalStore(
 				const { shopCartApiService } = store;
 				const currentCart = store.shopCart();
 
-				if (!currentCart) {
+				if (!currentCart || !currentCart.id) {
 					return;
 				}
 
 				shopCartApiService.updateAddressCart(currentCart.id, address).subscribe({
+					next: (response: ShopCart) => {
+						patchState(store, { shopCart: response });
+					},
+				});
+			},
+
+			deactivateCart(): void {
+				const { shopCartApiService } = store;
+				const currentCart = store.shopCart();
+
+				if (!currentCart || !currentCart.id) {
+					return;
+				}
+
+				shopCartApiService.deactivateCart(currentCart.id).subscribe({
 					next: (response: ShopCart) => {
 						patchState(store, { shopCart: response });
 					},

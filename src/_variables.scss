@@ -7,13 +7,14 @@ $warn: #dc322c;
 /* especial color variables */
 $light-red: #fff7fa;
 $warning: #e4c614;
+$success: #2e7d32;
 $light-background: #fdfcf2;
 
 /* Main shadow variables */
 $container-shadow:
-  0 3px 5px -1px rgba(0, 0, 0, 0.2),
-  0 6px 10px 0 rgba(0, 0, 0, 0.14),
-  0 1px 18px 0 rgba(0, 0, 0, 0.12);
+	0 3px 5px -1px rgba(0, 0, 0, 0.2),
+	0 6px 10px 0 rgba(0, 0, 0, 0.14),
+	0 1px 18px 0 rgba(0, 0, 0, 0.12);
 
 $logo-shadow: drop-shadow(0 0 0.35rem #222);
 
@@ -28,8 +29,8 @@ $dotted-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'
 
 // A map of breakpoints.
 $breakpoints: (
-  xs: 576px,
-  sm: 768px,
-  md: 992px,
-  lg: 1200px,
+	xs: 576px,
+	sm: 768px,
+	md: 992px,
+	lg: 1200px,
 );

@@ -10,7 +10,7 @@ import { Address } from 'src/app/shared/models/address.model';
 import { CartItemComponent } from '../components/cart-item/cart-item.component';
 import { CartSummaryComponent } from '../components/cart-summary/cart-summary.component';
 import { CartStore } from '../store/cart.store';
-
+import { Router } from '@angular/router';
 @Component({
 	selector: 'bc-cart',
 	imports: [TitleComponent, CartSummaryComponent, CartItemComponent],
@@ -24,6 +24,7 @@ export class CartComponent {
 	paymentStore = inject(PaymentStore);
 	injectorContext = inject(Injector);
 	layoutStore = inject(LayoutStore);
+	router = inject(Router);
 
 	constructor() {
 		effect((onCleanup) => {
@@ -34,15 +35,21 @@ export class CartComponent {
 			}
 
 			const paymentDialogRef = this.paymentStore.openPaymentDialog('Payment');
+
 			const subscription = paymentDialogRef.afterClosed().subscribe({
 				next: (paymentIntentId: string | undefined) => {
-					if (paymentIntentId) {
-						this.layoutStore.openMessageDialog(
-							DialogTypeEnum.SUCCESS,
-							'Payment Successful',
-							`Your Payment order was successful. When the order is shipped, you will receive a confirmation email with the tracking number.`,
-						);
+					if (!paymentIntentId) {
+						return;
 					}
+
+					this.layoutStore.openMessageDialog(
+						DialogTypeEnum.SUCCESS,
+						'Payment Order was sent with success',
+						`Your Payment order was successful. When the order is shipped, you will receive a confirmation email with the tracking number.`,
+					);
+
+					//this.store.deactivateCart(); // TODO implement the orderStatus in backend will be implemented in the future, so deactive the cart will be not necessary for now.
+					this.router.navigate(['/home']);
 				},
 			});
 

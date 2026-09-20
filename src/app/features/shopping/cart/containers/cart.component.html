@@ -5,13 +5,13 @@
 
 <div class="cart-container">
 	<div>
-		@for (purchase of store.shopCart()?.purchases; track purchase.bikeId) {
+		@for (purchase of cartStore.shopCart()?.purchases; track purchase.bikeId) {
 			<bc-cart-item [purchase]="purchase"></bc-cart-item>
 		}
 	</div>
 
 	<bc-cart-summary
-		[shopCart]="store.shopCart()"
+		[shopCart]="cartStore.shopCart()"
 		(openAddressDialog)="onOpenAddressDialog()"
 		(buyNow)="onBuyNow()"
 	>

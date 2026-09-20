@@ -110,21 +110,6 @@ export const CartStore = signalStore(
 				});
 			},
 
-			deactivateCart(): void {
-				const { shopCartApiService } = store;
-				const currentCart = store.shopCart();
-
-				if (!currentCart || !currentCart.id) {
-					return;
-				}
-
-				shopCartApiService.deactivateCart(currentCart.id).subscribe({
-					next: (response: ShopCart) => {
-						patchState(store, { shopCart: response });
-					},
-				});
-			},
-
 			_createPurchase(bike: Bike, quantity: number, shopCartId: number): Purchase {
 				const purchase = new Purchase(shopCartId, bike.id, quantity);
 

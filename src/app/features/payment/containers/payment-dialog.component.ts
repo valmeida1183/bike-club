@@ -13,7 +13,7 @@ import {
 	MatDialogRef,
 } from '@angular/material/dialog';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'bc-payment-dialog',

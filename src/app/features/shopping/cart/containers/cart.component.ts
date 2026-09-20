@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 	providers: [AddressStore, PaymentStore, AddressApiService, PaymentApiService],
 })
 export class CartComponent {
-	store = inject(CartStore);
+	cartStore = inject(CartStore);
 	addressStore = inject(AddressStore);
 	paymentStore = inject(PaymentStore);
 	injectorContext = inject(Injector);
@@ -48,7 +48,6 @@ export class CartComponent {
 						`Your Payment order was successful. When the order is shipped, you will receive a confirmation email with the tracking number.`,
 					);
 
-					//this.store.deactivateCart(); // TODO implement the orderStatus in backend will be implemented in the future, so deactive the cart will be not necessary for now.
 					this.router.navigate(['/home']);
 				},
 			});
@@ -60,7 +59,7 @@ export class CartComponent {
 	}
 
 	onOpenAddressDialog(): void {
-		const shopCart = this.store.shopCart();
+		const shopCart = this.cartStore.shopCart();
 		const currentAddress = shopCart ? shopCart.address! : undefined;
 
 		const addressDialogRef = this.addressStore.openAddressDialog(currentAddress);
@@ -68,14 +67,14 @@ export class CartComponent {
 		addressDialogRef.afterClosed().subscribe({
 			next: (address: Address | undefined) => {
 				if (address) {
-					this.store.updateCartAddress(address);
+					this.cartStore.updateCartAddress(address);
 				}
 			},
 		});
 	}
 
 	onBuyNow(): void {
-		const shopCart = this.store.shopCart();
+		const shopCart = this.cartStore.shopCart();
 
 		if (!shopCart || !shopCart.id) {
 			console.error(

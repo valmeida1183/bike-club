@@ -47,11 +47,4 @@ export class ShopCartApiService {
 			adress,
 		);
 	}
-
-	deactivateCart(shopCartId: number): Observable<ShopCart> {
-		return this.http.patch<ShopCart>(
-			`${this.shopCartsEndpointUrl}/${shopCartId}/deactivate`,
-			{},
-		);
-	}
 }
